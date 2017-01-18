@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.myMates){
                     nextFrag(new MyMatesFragment());
                 }
-                return trueee;
+                return true;
             }
         });
         View view = mBottomNav.findViewById(R.id.find);
