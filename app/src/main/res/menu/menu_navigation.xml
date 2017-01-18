@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/myMates"
+        android:title="@string/MyMates"
+        android:icon="@drawable/ic_mine" />
+
+    <item
+        android:id="@+id/find"
+        android:title="@string/Find"
+        android:icon="@drawable/ic_find" />
+    <item
+
+        android:id="@+id/map"
+        android:title="@string/Map"
+        android:icon="@drawable/ic_aspect_ratio_black_24dp" />
+
+</menu>
