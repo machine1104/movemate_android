@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNav;
+    private int mSelectedItem;
 
 
     @Override
@@ -42,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //SOLO PER MENU
+    //IMPLEMENTARE ONBACKPRESSED SE NECESSARIO IN SEGUITO
     public void nextFrag(Fragment frag){
         FragmentManager fragmentManager = getFragmentManager();
         android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, frag).addToBackStack(null);
-        InputMethodManager imm = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        fragmentTransaction.replace(R.id.container, frag);
         fragmentTransaction.commit();
     }
+
+
 
 }
