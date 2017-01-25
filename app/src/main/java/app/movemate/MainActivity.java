@@ -28,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.find){
                     nextFrag(new FindMateFragment());
+                    setTitle("Find");
                 }
                 if (item.getItemId() == R.id.map){
                     nextFrag(new MapFragment());
+                    setTitle("Map");
                 }
                 if (item.getItemId() == R.id.myMates){
                     nextFrag(new MyMatesFragment());
+                    setTitle("My Mates");
                 }
                 return true;
             }

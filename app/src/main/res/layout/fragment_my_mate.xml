@@ -5,11 +5,10 @@
     tools:context="app.movemate.MyMatesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textColor="@color/Black"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/matesList"
         android:layout_width="match_parent"
-        android:layout_height="561dp"
-        android:text="@string/MyMates"
-        android:id="@+id/textView" />
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

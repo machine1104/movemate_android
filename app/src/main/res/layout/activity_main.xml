@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/Cyan50">
+        android:background="@color/transparent">
     </FrameLayout>
 
 
@@ -29,6 +29,9 @@
         design:itemIconTint="@color/White"
         design:itemTextColor="@color/White"
         design:itemBackground="@drawable/navigation_selected_item"/>
+
+
+
 
 
 </LinearLayout>
