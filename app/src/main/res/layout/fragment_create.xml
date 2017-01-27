@@ -1,0 +1,138 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.movemate.CreateFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_group_name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_group_name"
+                android:inputType="text"
+                android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_vehicle"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:id="@+id/car"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_car"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="5dp">
+
+
+                        <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="7"
+                        android:layout_below="@+id/text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_avaible"
+                            android:id="@+id/text"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text2"
+                            android:layout_toEndOf="@+id/text"
+                            android:layout_marginStart="5dp"
+                            android:gravity="top"/>
+
+                        <!-- TODO: Update blank fragment layout
+                        <com.appyvet.rangebar.RangeBar
+                            xmlns:custom="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/rangebar"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            custom:rangeBar="false"
+                            custom:tickStart="1"
+                            custom:tickInterval="1"
+                            custom:tickEnd="4"
+                            custom:pinMaxFont="10dp"/>
+                            -->
+
+
+
+
+                    </RelativeLayout>
+
+                    <RadioButton
+                        android:id="@+id/moto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_moto"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+                    <RadioButton
+                        android:id="@+id/public_transport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_public_transport"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+
+                    <RadioButton
+                        android:id="@+id/train"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_train"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="5dp"/>
+
+                </RadioGroup>
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
