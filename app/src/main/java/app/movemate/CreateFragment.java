@@ -79,7 +79,7 @@ public class CreateFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (progress == 0){
-                    price.setText("FREE");
+                    price.setText("FREE4");
                 }
                 else{
                     price.setText(progress+"€");
