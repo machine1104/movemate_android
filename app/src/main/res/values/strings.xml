@@ -15,4 +15,10 @@
     <string name="create_public_transport">Mezzi Pubblici</string>
     <string name="create_train">Treno</string>
     <string name="create_avaible">Posti disponibili</string>
+    <string name="create_from">Partenza</string>
+    <string name="create_to">Destinazione</string>
+    <string name="hint_from">Indirizzo di partenza</string>
+    <string name="hint_to">Indirizzo arrivo</string>
+    <string name="create_create">Crea</string>
+    <string name="create_price">Prezzo</string>
 </resources>

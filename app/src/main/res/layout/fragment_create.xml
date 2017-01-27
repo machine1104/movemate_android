@@ -43,7 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/vehicles">
 
                     <RadioButton
                         android:id="@+id/car"
@@ -51,7 +52,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/create_car"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_marginBottom="5dp"/>
+                        android:layout_marginBottom="5dp"
+                        android:checked="true"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -62,11 +64,11 @@
 
 
                         <SeekBar
-                        android:id="@+id/seekBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:max="7"
-                        android:layout_below="@+id/text"/>
+                            android:id="@+id/seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="6"
+                            android:layout_below="@+id/text"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -81,23 +83,6 @@
                             android:layout_toEndOf="@+id/text"
                             android:layout_marginStart="5dp"
                             android:gravity="top"/>
-
-                        <!-- TODO: Update blank fragment layout
-                        <com.appyvet.rangebar.RangeBar
-                            xmlns:custom="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rangebar"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            custom:rangeBar="false"
-                            custom:tickStart="1"
-                            custom:tickInterval="1"
-                            custom:tickEnd="4"
-                            custom:pinMaxFont="10dp"/>
-                            -->
-
-
-
-
                     </RelativeLayout>
 
                     <RadioButton
@@ -125,13 +110,80 @@
 
                 </RadioGroup>
 
-
-
-
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_from"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="10dp"/>
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_from"
+                android:id="@+id/from"
+                android:maxLines="1"
+                android:inputType="text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_to"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_to"
+                android:id="@+id/to"
+                android:maxLines="1"
+                android:inputType="text"/>
+
+            <RelativeLayout
+                android:id="@+id/price_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="10dp">
+
+
+                <SeekBar
+                    android:id="@+id/seekBar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:layout_below="@+id/price_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_price"
+                    android:id="@+id/price_title"
+                    android:layout_marginBottom="5dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price"
+                    android:layout_toEndOf="@+id/price_title"
+                    android:layout_marginStart="5dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            </RelativeLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/create_create"
+                android:textColor="@color/White"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
         </LinearLayout>
+
 
     </ScrollView>
 
