@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="facebook_app_id">256934444739950</string>
+
     <string name="app_name">Move Mate</string>
     <string name="Find">Find</string>
     <string name="Map">Map</string>
