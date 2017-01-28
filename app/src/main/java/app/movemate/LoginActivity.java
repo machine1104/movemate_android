@@ -3,20 +3,20 @@ package app.movemate;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends Activity {
     CallbackManager callbackManager;
+    LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,7 @@ public class LoginActivity extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -35,12 +35,12 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onCancel() {
-                Log.d("deb","errore");
+
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Log.d("deb","fallito");
+                makeText("Errore "+exception);
             }
         });
 
@@ -50,6 +50,14 @@ public class LoginActivity extends Activity {
             finish();
         }
 
+        ImageButton btn = (ImageButton)findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginButton.performClick();
+            }
+        });
+
 
     }
 
@@ -58,8 +66,13 @@ public class LoginActivity extends Activity {
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 
+
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
+    }
+
+    public void makeText(String s){
+        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
 }
