@@ -20,8 +20,14 @@
     <string name="create_avaible">Posti disponibili</string>
     <string name="create_from">Partenza</string>
     <string name="create_to">Destinazione</string>
-    <string name="hint_from">Indirizzo di partenza</string>
-    <string name="hint_to">Indirizzo arrivo</string>
+    <string name="hint_from">Indirizzo / Sede di partenza</string>
+    <string name="hint_to">Indirizzo / Sede di arrivo</string>
     <string name="create_create">Crea</string>
     <string name="create_price">Prezzo</string>
+    <string name="create_helmet">Casco disponibile per passeggero</string>
+    <string name="train">Treno</string>
+    <string name="metro">Metro</string>
+    <string name="tram">Tram</string>
+    <string name="bus">Autobus</string>
+    <string name="create_desc">Breve descrizione del viaggio</string>
 </resources>

@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.movemate.CreateFragment">
+    tools:context="app.movemate.CreateFragment"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -26,7 +27,71 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_group_name"
                 android:inputType="text"
+                android:textColor="@color/colorPrimary"
                 android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_from"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_from"
+                    android:id="@+id/from"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"/>
+                <ImageButton
+                    android:id="@+id/my_location_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_my_location"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_to"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_to"
+                    android:id="@+id/to"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/my_location_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_my_location"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"/>
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,37 +117,72 @@
                         android:layout_height="wrap_content"
                         android:text="@string/create_car"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_marginBottom="5dp"
-                        android:checked="true"/>
+                        android:layout_marginBottom="5dp"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginStart="5dp"
-                        android:layout_marginBottom="5dp">
-
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/car_avaible_layout">
 
                         <SeekBar
-                            android:id="@+id/seekBar"
+                            android:id="@+id/car_avaible_seekBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:max="6"
-                            android:layout_below="@+id/text"/>
+                            android:max="3"
+                            android:layout_below="@+id/car_avaible_title"
+                            android:layout_marginBottom="5dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/create_avaible"
-                            android:id="@+id/text"/>
+                            android:id="@+id/car_avaible_title"
+                            android:layout_marginBottom="5dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/text2"
-                            android:layout_toEndOf="@+id/text"
+                            android:id="@+id/car_avaible"
+                            android:layout_toEndOf="@+id/car_avaible_title"
                             android:layout_marginStart="5dp"
-                            android:gravity="top"/>
+                            android:gravity="top"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/car_price_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="10dp">
+
+                        <SeekBar
+                            android:id="@+id/car_price_seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="10"
+                            android:layout_below="@+id/car_price_title"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_price"
+                            android:id="@+id/car_price_title"
+                            android:layout_marginBottom="5dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/car_price"
+                            android:layout_toEndOf="@+id/car_price_title"
+                            android:layout_marginStart="5dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
                     </RelativeLayout>
 
                     <RadioButton
@@ -92,6 +192,48 @@
                         android:text="@string/create_moto"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_marginBottom="5dp"/>
+
+                    <RelativeLayout
+                        android:id="@+id/moto_price_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="10dp">
+
+                        <SeekBar
+                            android:id="@+id/moto_price_seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="10"
+                            android:layout_below="@+id/moto_price_title"
+                            android:layout_marginBottom="5dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_price"
+                            android:id="@+id/moto_price_title"
+                            android:layout_marginBottom="5dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/moto_price"
+                            android:layout_toEndOf="@+id/moto_price_title"
+                            android:layout_marginStart="5dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/moto_price_seekBar"
+                            android:text="@string/create_helmet"/>
+
+                    </RelativeLayout>
+
+
                     <RadioButton
                         android:id="@+id/public_transport"
                         android:layout_width="wrap_content"
@@ -100,80 +242,77 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_marginBottom="5dp"/>
 
-                    <RadioButton
-                        android:id="@+id/train"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/create_train"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:layout_marginBottom="5dp"/>
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/public_transport_layout"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="0.5"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/train"
+                                    android:id="@+id/train"/>
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/metro"
+                                    android:id="@+id/metro"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="0.5">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tram"
+                                    android:id="@+id/tram"/>
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/bus"
+                                    android:id="@+id/bus" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <ScrollView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/create_desc"/>
+                        </ScrollView>
+
+
+
+
+                    </LinearLayout>
 
                 </RadioGroup>
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/create_from"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_marginTop="10dp"/>
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_from"
-                android:id="@+id/from"
-                android:maxLines="1"
-                android:inputType="text"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/create_to"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_to"
-                android:id="@+id/to"
-                android:maxLines="1"
-                android:inputType="text"/>
-
-            <RelativeLayout
-                android:id="@+id/price_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="10dp">
 
 
-                <SeekBar
-                    android:id="@+id/seekBar2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="10"
-                    android:layout_below="@+id/price_title"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create_price"
-                    android:id="@+id/price_title"
-                    android:layout_marginBottom="5dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/price"
-                    android:layout_toEndOf="@+id/price_title"
-                    android:layout_marginStart="5dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-            </RelativeLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
