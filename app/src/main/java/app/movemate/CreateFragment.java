@@ -1,17 +1,15 @@
 package app.movemate;
 
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +24,9 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
@@ -207,30 +205,24 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
         to.setOnItemClickListener(mAutocompleteClickListener);
         to.setAdapter(mPlaceArrayAdapter);
 
-
-
-        ImageButton imageButtonFrom = (ImageButton)v.findViewById(R.id.my_location_from);
-        imageButtonFrom.setOnClickListener(new View.OnClickListener() {
+        ImageButton from_delete = (ImageButton)v.findViewById(R.id.from_delete);
+        from_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                from.setText("Posizione Attuale");
-
-
+                from.setText("");
             }
         });
-        ImageButton imageButtonTo = (ImageButton)v.findViewById(R.id.my_location_to);
-        imageButtonTo.setOnClickListener(new View.OnClickListener() {
+
+        ImageButton to_delete = (ImageButton)v.findViewById(R.id.to_delete);
+        to_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                to.setText("Posizione Attuale");
-
-
+                to.setText("");
             }
         });
+
 
         //------------------------------------
-
-
 
         //IMPLEMENTARE .SHOW() ONBACKPRESSED
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -266,6 +258,19 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             in.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
+
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            // FUNZIONE GET PLACE BY ID - SALVARE SOLO ID NEL DATABASE
+            /* Creare GoogleApiClient
+             * Creare PlaceBuffer by ID
+             * Prendere il primo elemento
+             * Prendere le info tramite getName() ecc*/
+
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
         }
     };
 
@@ -292,5 +297,14 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             }*/
         }
     };
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage((FragmentActivity)getActivity());
+            mGoogleApiClient.disconnect();
+        }
+    }
 }
 

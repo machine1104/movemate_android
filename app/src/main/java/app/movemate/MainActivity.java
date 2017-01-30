@@ -1,25 +1,21 @@
 package app.movemate;
 
 
-import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 public class MainActivity extends FragmentActivity {
     private BottomNavigationView mBottomNav;
+
 
 
     @Override
@@ -42,6 +38,7 @@ public class MainActivity extends FragmentActivity {
                     setTitle("Find");
 
 
+
                 }
                 if (item.getItemId() == R.id.map){
                     FragmentManager fm = getFragmentManager();
@@ -52,6 +49,7 @@ public class MainActivity extends FragmentActivity {
                     setTitle("Map");
 
 
+
                 }
                 if (item.getItemId() == R.id.myMates){
                     FragmentManager fm = getFragmentManager();
@@ -60,6 +58,7 @@ public class MainActivity extends FragmentActivity {
                     }
                     changeTab(new MyMatesFragment());
                     setTitle("My Mates");
+
 
                 }
                 return true;
