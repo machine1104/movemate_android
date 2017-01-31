@@ -28,7 +28,73 @@
                 android:hint="@string/hint_group_name"
                 android:inputType="text"
                 android:textColor="@color/colorPrimary"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:id="@+id/group_name"/>
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_start_date"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/date_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_start_time"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/time_title"
+                    android:layout_alignStart="@+id/group_time"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_group_time"
+                    android:inputType="time"
+                    android:textColor="@color/colorPrimary"
+                    android:maxLines="1"
+                    android:id="@+id/group_time"
+                    android:layout_marginStart="11dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/date_btn" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_access_time_grey_600_24dp"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/group_time"
+                    android:id="@+id/time_btn" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date"
+                    android:id="@+id/date_btn"
+                    android:backgroundTint="@color/transparent"
+                    android:layout_alignTop="@+id/group_date"
+                    android:layout_toEndOf="@+id/group_date" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_group_date"
+                    android:inputType="date"
+                    android:textColor="@color/colorPrimary"
+                    android:maxLines="1"
+                    android:id="@+id/group_date"
+                    android:layout_below="@+id/date_title"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+
+
 
             <TextView
                 android:layout_width="match_parent"

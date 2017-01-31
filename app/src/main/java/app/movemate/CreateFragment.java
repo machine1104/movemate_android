@@ -1,15 +1,13 @@
 package app.movemate;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -33,9 +33,12 @@ import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
 
 public class CreateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks {
+        GoogleApiClient.ConnectionCallbacks{
     private SeekBar avaible_bar, car_price_bar, moto_price_bar;
     private TextView avaible, car_price, moto_price;
     private RadioGroup vehicles;
@@ -45,6 +48,9 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS = new LatLngBounds(
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
+
+    private String fromPlaceId;
+    private String toPlaceId;
     View v;
 
 
@@ -197,12 +203,12 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
                 BOUNDS, null);
 
         from.setThreshold(3);
-        from.setOnItemClickListener(mAutocompleteClickListener);
+        from.setOnItemClickListener(mAutocompleteFromClickListener);
         from.setAdapter(mPlaceArrayAdapter);
 
 
         to.setThreshold(3);
-        to.setOnItemClickListener(mAutocompleteClickListener);
+        to.setOnItemClickListener(mAutocompleteToClickListener);
         to.setAdapter(mPlaceArrayAdapter);
 
         ImageButton from_delete = (ImageButton)v.findViewById(R.id.from_delete);
@@ -221,6 +227,29 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             }
         });
 
+        //-------------------------Set Data e Ora
+
+        ImageButton date_btn = (ImageButton)v.findViewById(R.id.date_btn);
+        ImageButton time_btn = (ImageButton)v.findViewById(R.id.time_btn);
+
+        date_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePicker = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        EditText date= (EditText) v.findViewById(R.id.group_date);
+                        int month = monthOfYear+1;
+                        date.setText(dayOfMonth+"/"+month+"/"+year);
+                    }
+                },year,month,day);
+                datePicker.show(getFragmentManager(),"");
+            }
+        });
 
         //------------------------------------
 
@@ -252,7 +281,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
                 connectionResult.getErrorCode(),Toast.LENGTH_LONG).show();
     }
 
-    private AdapterView.OnItemClickListener mAutocompleteClickListener
+    private AdapterView.OnItemClickListener mAutocompleteFromClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -261,13 +290,25 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
 
             final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
             final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Selected: " + item.description);
-            // FUNZIONE GET PLACE BY ID - SALVARE SOLO ID NEL DATABASE
-            /* Creare GoogleApiClient
-             * Creare PlaceBuffer by ID
-             * Prendere il primo elemento
-             * Prendere le info tramite getName() ecc*/
+            fromPlaceId = placeId;
+            Log.i(LOG_TAG, fromPlaceId);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+        }
+    };
 
+    private AdapterView.OnItemClickListener mAutocompleteToClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            in.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
+
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            toPlaceId = placeId;
+            Log.i(LOG_TAG, toPlaceId);
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
@@ -306,5 +347,12 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             mGoogleApiClient.disconnect();
         }
     }
+
+
+    // FUNZIONE GET PLACE BY ID - SALVARE SOLO ID NEL DATABASE
+            /* Creare GoogleApiClient
+             * Creare PlaceBuffer by ID
+             * Prendere il primo elemento
+             * Prendere le info tramite getName() ecc*/
 }
 

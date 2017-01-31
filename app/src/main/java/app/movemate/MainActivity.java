@@ -7,13 +7,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
     private BottomNavigationView mBottomNav;
 
 
