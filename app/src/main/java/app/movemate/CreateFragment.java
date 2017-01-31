@@ -34,8 +34,14 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks{
@@ -236,18 +242,47 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
+                final int yearToday = c.get(Calendar.YEAR);
+                final int monthToday = c.get(Calendar.MONTH);
+                final int dayToday = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePicker = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                         EditText date= (EditText) v.findViewById(R.id.group_date);
                         int month = monthOfYear+1;
-                        date.setText(dayOfMonth+"/"+month+"/"+year);
+                        if(year > yearToday){
+                            date.setText(dayOfMonth+"/"+month+"/"+year);
+                        }
+                        else if(monthOfYear > monthToday && year >= yearToday){
+                            date.setText(dayOfMonth+"/"+month+"/"+year);
+                        }
+                        else if(dayOfMonth >= dayToday && monthOfYear >= monthToday && year >= yearToday){
+                            date.setText(dayOfMonth+"/"+month+"/"+year);
+                        }
                     }
-                },year,month,day);
+                },yearToday,monthToday,dayToday);
                 datePicker.show(getFragmentManager(),"");
+            }
+        });
+
+        time_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                TimePickerDialog timePicker = TimePickerDialog.newInstance(new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+                        EditText time= (EditText) v.findViewById(R.id.group_time);
+                        String minuti = minute+"";
+                        if (minuti.length()==1){
+                            minuti = "0"+minuti;
+                        }
+                        time.setText(hourOfDay+":"+minuti);
+                    }
+                },hour,minute,true);
+                timePicker.show(getFragmentManager(),"");
             }
         });
 
