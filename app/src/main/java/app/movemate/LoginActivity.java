@@ -3,6 +3,8 @@ package app.movemate;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -28,8 +30,10 @@ public class LoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                //inviare token al server e ricevere quello vero (token+secret+appid)
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
+
                 finish();
             }
 
@@ -45,6 +49,7 @@ public class LoginActivity extends Activity {
         });
 
         if (isLoggedIn()){
+            //inviare token al server e ricevere quello vero (token+secret+appid)
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
             finish();
@@ -69,7 +74,14 @@ public class LoginActivity extends Activity {
 
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
+        if(accessToken != null){
+            if (!accessToken.isExpired()){
+                return true;
+            }
+            return false;
+        }
+
+        return false;
     }
 
     public void makeText(String s){
