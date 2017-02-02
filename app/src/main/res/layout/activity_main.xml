@@ -9,6 +9,7 @@
     android:orientation="vertical"
     android:layout_weight="1">
 
+
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -39,10 +40,13 @@
             design:itemIconTint="@color/White"
             design:itemTextColor="@color/White"
             design:itemBackground="@drawable/navigation_selected_item"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            />
 
 
     </RelativeLayout>
+
+
 
 
     <android.support.design.widget.NavigationView
@@ -50,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        design:menu="@menu/menu_navigation"/>
+        design:menu="@menu/drawer"
+        design:headerLayout="@layout/header"/>
 
 
 

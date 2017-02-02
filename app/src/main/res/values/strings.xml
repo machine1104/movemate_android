@@ -34,4 +34,6 @@
     <string name="hint_group_date">Inserire Data</string>
     <string name="create_start_time">Ora</string>
     <string name="hint_group_time">Inserire Orario</string>
+    <string name="profile">Profilo</string>
+    <string name="settings">Impostazioni</string>
 </resources>
