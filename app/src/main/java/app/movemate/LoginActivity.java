@@ -30,7 +30,6 @@ public class LoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                //inviare token al server e ricevere quello vero (token+secret+appid)
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
 
