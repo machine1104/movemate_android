@@ -1,24 +1,15 @@
 package app.movemate;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,36 +24,15 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.security.acl.Group;
-import java.util.HashMap;
-import java.util.Map;
-
 public class LoginActivity extends Activity {
     CallbackManager callbackManager;
     LoginButton loginButton;
     String checkUrl = "http://movemate-api.azurewebsites.net/api/students/getregisteredstudent?facebookId=";
     Context ctx = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -72,11 +42,7 @@ public class LoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                try {
-                    check();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                new Load().execute();
             }
 
             @Override
@@ -86,40 +52,33 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(LoginActivity.this,"Errore: "+exception,Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Errore: " + exception, Toast.LENGTH_LONG).show();
             }
         });
 
-        if (isLoggedIn()){
-            try {
-                check();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        if (isLoggedIn()) {
+            new Load().execute();
         }
 
-        ImageButton btn = (ImageButton)findViewById(R.id.btn);
+        ImageButton btn = (ImageButton) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginButton.performClick();
             }
         });
-
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if(accessToken != null){
-            if (!accessToken.isExpired()){
+        if (accessToken != null) {
+            if (!accessToken.isExpired()) {
                 return true;
             }
             return false;
@@ -128,38 +87,56 @@ public class LoginActivity extends Activity {
         return false;
     }
 
+    class Load extends AsyncTask<String, String, String> {
+        ProgressDialog progDialog = new ProgressDialog(ctx);
 
+        @Override
+        protected void onPreExecute() {
+            progDialog.setMessage("Loading...");
+            progDialog.show();
+        }
 
-   private void check() throws JSONException {
-        RequestQueue queue = Volley.newRequestQueue(ctx);
-        String url = checkUrl+AccessToken.getCurrentAccessToken().getUserId();
+        @Override
+        protected String doInBackground(String... aurl) {
+            RequestQueue queue = Volley.newRequestQueue(ctx);
+            String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //codice 200
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            // Request a string response from the provided URL.
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            //codice 200
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //codice 404
+
+                    if (error.networkResponse.statusCode == 404) {
+                        Intent i = new Intent(LoginActivity.this, CheckActivity.class);
                         startActivity(i);
-                        finish();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //codice 404
-                if (error.networkResponse.statusCode == 404){
-                    Intent i = new Intent(LoginActivity.this, CheckActivity.class);
-                    startActivity(i);
-                    finish();
                 }
-
-
+            });
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+            return null;
+        }
 
+        @Override
+        protected void onPostExecute(String unused) {
+            super.onPostExecute(unused);
+            progDialog.dismiss();
+            LoginActivity.this.finish();
+        }
     }
 
 }

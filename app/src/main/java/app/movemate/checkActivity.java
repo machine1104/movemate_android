@@ -52,7 +52,7 @@ public class CheckActivity extends Activity {
 
                 EditText edit_email = (EditText)findViewById(R.id.email);
                 String email = edit_email.getText().toString();
-                if (email.contains("@studenti.uniroma1.it") || email.contains("@stud.uniroma3.it")){
+                if (email.contains("@studenti.uniroma1.it") || email.contains("@stud.uniroma3.it") || email.contains("students.uniroma2.eu")){
                     confirmed_email = email;
                     Bundle params = new Bundle();
                     params.putString("fields", "id,first_name,last_name");
@@ -78,10 +78,6 @@ public class CheckActivity extends Activity {
 
             }
         });
-
-
-
-
     }
 
     private void sendCode(){
@@ -93,6 +89,7 @@ public class CheckActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
 
                     }
                 }, new Response.ErrorListener() {
