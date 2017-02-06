@@ -36,6 +36,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.wdullaer:materialdatetimepicker:2.2.0'
+    compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
 
 

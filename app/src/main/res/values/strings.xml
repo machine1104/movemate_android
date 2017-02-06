@@ -36,4 +36,8 @@
     <string name="hint_group_time">Inserire Orario</string>
     <string name="profile">Profilo</string>
     <string name="settings">Impostazioni</string>
+    <string name="insert_code">Inserire codice di verifica</string>
+    <string name="send_code">Invia codice verifica</string>
+    <string name="insert_email">Inserire una mail universitaria</string>
+    <string name="verify">Verifica</string>
 </resources>
