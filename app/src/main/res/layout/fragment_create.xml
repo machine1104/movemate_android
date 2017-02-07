@@ -94,84 +94,150 @@
 
             </RelativeLayout>
 
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/create_from"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <RelativeLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_address"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
-                    <AutoCompleteTextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_from"
-                        android:id="@+id/from"
-                        android:maxLines="1"
-                        android:inputType="text"
-                        android:textColor="@color/colorPrimary"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/from_delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_delete"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/White"
-                        android:layout_centerVertical="true"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                </RelativeLayout>
+                        <AutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_address"
+                            android:id="@+id/address"
+                            android:maxLines="1"
+                            android:inputType="text"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <ImageButton
+                            android:id="@+id/address_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_delete"
+                            android:layout_alignParentEnd="true"
+                            android:background="@color/White"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_venue"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/textView3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_venue"
+                            android:id="@+id/venue"
+                            android:maxLines="1"
+                            android:inputType="text"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <ImageButton
+                            android:id="@+id/venue_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_delete"
+                            android:layout_alignParentEnd="true"
+                            android:background="@color/White"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
 
 
             </LinearLayout>
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/create_to"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_swap"
+                    android:background="@color/White"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/swap" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/routing"
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_to"
-                        android:id="@+id/to"
-                        android:maxLines="1"
-                        android:inputType="text"
-                        android:textColor="@color/colorPrimary"/>
+                        android:id="@+id/layout_from">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_from"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:gravity="center"/>
 
-                    <ImageButton
-                        android:id="@+id/to_delete"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/routing_from"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:layout_marginStart="20dp"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_delete"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/White"
-                        android:layout_centerVertical="true"/>
+                        android:id="@+id/layout_to">
 
-                </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_to"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/routing_to"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:layout_marginStart="20dp"/>
+
+                    </LinearLayout>
 
 
-
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -181,6 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_vehicle"
+                android:layout_marginTop="10dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
             <LinearLayout

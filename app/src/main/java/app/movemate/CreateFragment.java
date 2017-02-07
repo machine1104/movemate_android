@@ -7,7 +7,8 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -37,11 +37,8 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 
 public class CreateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks{
@@ -57,6 +54,8 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
 
     private String fromPlaceId;
     private String toPlaceId;
+    private String final_venue,final_address;
+    private boolean fromAtoV = true;
     View v;
 
 
@@ -196,8 +195,10 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
 
 
         //-------------------------Autocomplete
-        final AutoCompleteTextView from = (AutoCompleteTextView) v.findViewById(R.id.from);
-        final AutoCompleteTextView to = (AutoCompleteTextView) v.findViewById(R.id.to);
+        final AutoCompleteTextView address = (AutoCompleteTextView) v.findViewById(R.id.address);
+        final AutoCompleteTextView venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
+        final TextView tx1 = (TextView)v.findViewById(R.id.routing_from);
+        final TextView tx2 = (TextView)v.findViewById(R.id.routing_to);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
@@ -208,30 +209,108 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
         mPlaceArrayAdapter = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 BOUNDS, null);
 
-        from.setThreshold(3);
-        from.setOnItemClickListener(mAutocompleteFromClickListener);
-        from.setAdapter(mPlaceArrayAdapter);
+        address.setThreshold(3);
+        address.setOnItemClickListener(mAutocompleteFromClickListener);
+        address.setAdapter(mPlaceArrayAdapter);
 
 
-        to.setThreshold(3);
-        to.setOnItemClickListener(mAutocompleteToClickListener);
-        to.setAdapter(mPlaceArrayAdapter);
+        venue.setThreshold(3);
+        venue.setOnItemClickListener(mAutocompleteToClickListener);
+        venue.setAdapter(mPlaceArrayAdapter);
 
-        ImageButton from_delete = (ImageButton)v.findViewById(R.id.from_delete);
-        from_delete.setOnClickListener(new View.OnClickListener() {
+        ImageButton address_delete = (ImageButton)v.findViewById(R.id.address_delete);
+        address_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                from.setText("");
+                address.setText("");
+                if (fromAtoV){
+                    tx1.setText("");
+
+                }else{
+                    tx2.setText("");
+                }
             }
         });
 
-        ImageButton to_delete = (ImageButton)v.findViewById(R.id.to_delete);
-        to_delete.setOnClickListener(new View.OnClickListener() {
+        ImageButton venue_delete = (ImageButton)v.findViewById(R.id.venue_delete);
+        venue_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                to.setText("");
+                venue.setText("");
+                if (fromAtoV){
+                    tx2.setText("");
+                }else{
+                    tx1.setText("");
+                }
             }
         });
+
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if (fromAtoV) {
+                        tx1.setText(s);
+
+                    } else {
+                        tx2.setText(s);
+                    }
+                    final_address = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        venue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if (fromAtoV){
+                        tx2.setText(s);
+                    }else{
+                        tx1.setText(s);
+                    }
+
+                    final_venue = venue.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ImageButton swap = (ImageButton)v.findViewById(R.id.swap);
+        swap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fromAtoV){
+                    fromAtoV = false;
+                    String temp = tx1.getText().toString();
+                    tx1.setText(tx2.getText());
+                    tx2.setText(temp);
+                }else{
+                    fromAtoV = true;
+                    String temp = tx1.getText().toString();
+                    tx1.setText(tx2.getText());
+                    tx2.setText(temp);
+                }
+            }
+        });
+
 
         //-------------------------Set Data e Ora
 
@@ -286,7 +365,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             }
         });
 
-        //------------------------------------
+
 
         //IMPLEMENTARE .SHOW() ONBACKPRESSED
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();

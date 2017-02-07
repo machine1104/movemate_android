@@ -29,6 +29,7 @@ public class LoginActivity extends Activity {
     LoginButton loginButton;
     String checkUrl = "http://movemate-api.azurewebsites.net/api/students/getregisteredstudent?facebookId=";
     Context ctx = this;
+    ProgressDialog progDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class LoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                new Load().execute();
+                check();
             }
 
             @Override
@@ -57,7 +58,7 @@ public class LoginActivity extends Activity {
         });
 
         if (isLoggedIn()) {
-            new Load().execute();
+            check();
         }
 
         ImageButton btn = (ImageButton) findViewById(R.id.btn);
@@ -87,56 +88,39 @@ public class LoginActivity extends Activity {
         return false;
     }
 
-    class Load extends AsyncTask<String, String, String> {
-        ProgressDialog progDialog = new ProgressDialog(ctx);
+    private void check() {
+        progDialog = new ProgressDialog(ctx);
+        progDialog.setMessage("Loading...");
+        progDialog.show();
+        RequestQueue queue = Volley.newRequestQueue(ctx);
+        String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
 
-        @Override
-        protected void onPreExecute() {
-            progDialog.setMessage("Loading...");
-            progDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... aurl) {
-            RequestQueue queue = Volley.newRequestQueue(ctx);
-            String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
-
-            // Request a string response from the provided URL.
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            //codice 200
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(i);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //codice 404
-
-                    if (error.networkResponse.statusCode == 404) {
-                        Intent i = new Intent(LoginActivity.this, CheckActivity.class);
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //codice 200
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
+                        progDialog.dismiss();
+                        LoginActivity.this.finish();
                     }
-                }
-            });
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //codice 404
 
-        @Override
-        protected void onPostExecute(String unused) {
-            super.onPostExecute(unused);
-            progDialog.dismiss();
-            LoginActivity.this.finish();
-        }
+                if (error.networkResponse.statusCode == 404) {
+                    Intent i = new Intent(LoginActivity.this, CheckActivity.class);
+                    startActivity(i);
+                    progDialog.dismiss();
+                    LoginActivity.this.finish();
+                }
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
 }
