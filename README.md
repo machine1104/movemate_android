@@ -5,7 +5,7 @@ MoveMate is an application made for university students that will allow to get i
 
 
 ###MILESTONE 1
-* [Slides](https://github.com/movers-gcw/movemate/blob/master/Milestone%201.pptx)
+* [Slides](https://1drv.ms/p/s!Arh0UdVHsGBcoE9vPJzfm2qYVc80)
 * Screenshots
 </br><img src="https://github.com/movers-gcw/movemate/blob/master/protoio-MoveMate-screenshots/1.1-Login%20screen.png" width="200">
 <img src="https://github.com/movers-gcw/movemate/blob/master/protoio-MoveMate-screenshots/2.1-Home%20screen-State%201.png" width="200">
