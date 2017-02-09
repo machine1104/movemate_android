@@ -66,20 +66,11 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_access_time_grey_600_24dp"
-                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/ic_time"
+                    android:backgroundTint="@color/colorAccent"
                     android:layout_alignParentBottom="true"
                     android:layout_toEndOf="@+id/group_time"
                     android:id="@+id/time_btn" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_date"
-                    android:id="@+id/date_btn"
-                    android:backgroundTint="@color/transparent"
-                    android:layout_alignTop="@+id/group_date"
-                    android:layout_toEndOf="@+id/group_date" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -91,6 +82,15 @@
                     android:id="@+id/group_date"
                     android:layout_below="@+id/date_title"
                     android:layout_alignParentStart="true" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date"
+                    android:id="@+id/date_btn"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/group_date" />
 
             </RelativeLayout>
 
@@ -128,8 +128,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_delete"
-                            android:layout_alignParentEnd="true"
-                            android:background="@color/White"
+                            android:layout_alignEnd="@id/address"
+                            android:backgroundTint="@color/colorAccent"
                             android:layout_centerVertical="true"/>
 
                     </RelativeLayout>
@@ -170,8 +170,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_delete"
-                            android:layout_alignParentEnd="true"
-                            android:background="@color/White"
+                            android:layout_alignEnd="@+id/venue"
+                            android:backgroundTint="@color/colorAccent"
                             android:layout_centerVertical="true"/>
 
                     </RelativeLayout>
@@ -188,10 +188,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_swap"
-                    android:background="@color/White"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/swap" />
+                    android:id="@+id/swap"
+                    android:backgroundTint="@color/colorAccent"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

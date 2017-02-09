@@ -101,9 +101,9 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         //codice 200
+                        progDialog.dismiss();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-                        progDialog.dismiss();
                         LoginActivity.this.finish();
                     }
                 }, new Response.ErrorListener() {
@@ -112,9 +112,9 @@ public class LoginActivity extends Activity {
                 //codice 404
 
                 if (error.networkResponse.statusCode == 404) {
+                    progDialog.dismiss();
                     Intent i = new Intent(LoginActivity.this, CheckActivity.class);
                     startActivity(i);
-                    progDialog.dismiss();
                     LoginActivity.this.finish();
                 }
             }
