@@ -52,8 +52,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
     private static final LatLngBounds BOUNDS = new LatLngBounds(
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
 
-    private String fromPlaceId;
-    private String toPlaceId;
+    private String final_placeId;
     private String final_venue,final_address;
     private boolean fromAtoV = true;
     View v;
@@ -210,13 +209,11 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
                 BOUNDS, null);
 
         address.setThreshold(3);
-        address.setOnItemClickListener(mAutocompleteFromClickListener);
+        address.setOnItemClickListener(mAutocompleteClickListener);
         address.setAdapter(mPlaceArrayAdapter);
 
+        //AGGIUNGERE ADATTATORE PER LE SEDI
 
-        venue.setThreshold(3);
-        venue.setOnItemClickListener(mAutocompleteToClickListener);
-        venue.setAdapter(mPlaceArrayAdapter);
 
         ImageButton address_delete = (ImageButton)v.findViewById(R.id.address_delete);
         address_delete.setOnClickListener(new View.OnClickListener() {
@@ -365,10 +362,6 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
             }
         });
 
-
-
-        //IMPLEMENTARE .SHOW() ONBACKPRESSED
-        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         return v;
     }
 
@@ -395,7 +388,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
                 connectionResult.getErrorCode(),Toast.LENGTH_LONG).show();
     }
 
-    private AdapterView.OnItemClickListener mAutocompleteFromClickListener
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -404,30 +397,14 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
 
             final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
             final String placeId = String.valueOf(item.placeId);
-            fromPlaceId = placeId;
-            Log.i(LOG_TAG, fromPlaceId);
+            final_placeId = placeId;
+            Log.i(LOG_TAG, final_placeId);
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
         }
     };
 
-    private AdapterView.OnItemClickListener mAutocompleteToClickListener
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            InputMethodManager in = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            in.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
-
-            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            toPlaceId = placeId;
-            Log.i(LOG_TAG, toPlaceId);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
-        }
-    };
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
