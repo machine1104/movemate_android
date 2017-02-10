@@ -1,6 +1,7 @@
 package app.movemate;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,8 +38,10 @@ import java.net.URL;
 
 public class CheckActivity extends Activity {
     Context ctx = this;
-    String checkUrl = "http://movemate-api.azurewebsites.net/api/students/poststudent";
-    String name,surname,confirmed_email;
+    String sendUrl = "http://movemate-api.azurewebsites.net/api/students/poststudent";
+    String checkUrl = "http://movemate-api.azurewebsites.net/api/students/putstudentverification";
+    String name,surname,confirmed_email,confirmed_code;
+    ProgressDialog progDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,24 +81,37 @@ public class CheckActivity extends Activity {
 
             }
         });
+
+        Button btn_check_code = (Button)findViewById(R.id.btn_check_code);
+        btn_check_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText code = (EditText)findViewById(R.id.code);
+                confirmed_code = code.getText().toString();
+                checkCode();
+            }
+        });
     }
 
     private void sendCode(){
+        progDialog = new ProgressDialog(ctx);
+        progDialog.setMessage("Loading...");
+        progDialog.show();
         RequestQueue queue = Volley.newRequestQueue(ctx);
-        String url = checkUrl;
+        String url = sendUrl;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        progDialog.dismiss();
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progDialog.dismiss();
 
             }
         })
@@ -119,10 +135,40 @@ public class CheckActivity extends Activity {
 
         };
         // Add the request to the RequestQueue.
-
         queue.add(stringRequest);
 
 
+    }
+
+    private void checkCode(){
+        progDialog = new ProgressDialog(ctx);
+        progDialog.setMessage("Loading...");
+        progDialog.show();
+        RequestQueue queue = Volley.newRequestQueue(ctx);
+        String url = checkUrl+"?facebookId="+AccessToken.getCurrentAccessToken().getUserId()+"&code="+confirmed_code;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progDialog.dismiss();
+                        Intent i = new Intent(CheckActivity.this, MainActivity.class);
+                        startActivity(i);
+                        CheckActivity.this.finish();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progDialog.dismiss();
+                if (error.networkResponse.statusCode==412){
+                    Toast.makeText(CheckActivity.this,"Codice Errato",Toast.LENGTH_LONG);
+                }
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
 

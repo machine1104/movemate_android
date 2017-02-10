@@ -9,8 +9,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="create_group_name">Nome gruppo</string>
-    <string name="hint_group_name">Inserire Nome Gruppo</string>
+    <string name="create_group_name">Nome Percorso</string>
+    <string name="hint_group_name">Inserire Nome Percorso</string>
     <string name="create_vehicle">Mezzo di trasporto</string>
     <string name="create_car">Macchina</string>
     <string name="create_moto">Motorino/Moto</string>

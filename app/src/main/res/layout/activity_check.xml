@@ -55,6 +55,7 @@
         android:maxLength="6"
         android:inputType="number"
         android:textAlignment="center"
+        android:id="@+id/code"
         android:layout_gravity="center_horizontal"/>
 
     <Button
@@ -66,6 +67,6 @@
         android:textColor="@color/White"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_marginTop="20dp"
-        android:id="@+id/button2" />
+        android:id="@+id/btn_check_code" />
 
 </LinearLayout>
