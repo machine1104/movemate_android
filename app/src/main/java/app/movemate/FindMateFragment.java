@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 public class FindMateFragment extends Fragment {
 
@@ -19,7 +18,7 @@ public class FindMateFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).nextFrag(new CreateFragment());
+                ((MainActivity)getActivity()).nextFrag(new ChooseDirectionFragment());
             }
         });
         return v;

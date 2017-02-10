@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.movemate.ChooseDirectionFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorAccent"
+        android:text="@string/choose_to"
+        android:textColor="@color/White"
+        android:textSize="@dimen/cast_expanded_controller_control_toolbar_min_height"
+        android:id="@+id/to"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/choose_from"
+        android:textColor="@color/White"
+        android:textSize="@dimen/cast_expanded_controller_control_toolbar_min_height"
+        android:id="@+id/from"/>
+
+
+</LinearLayout>

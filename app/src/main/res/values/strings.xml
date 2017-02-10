@@ -17,7 +17,8 @@
     <string name="create_public_transport">Mezzi Pubblici</string>
     <string name="create_train">Treno</string>
     <string name="create_avaible">Posti disponibili</string>
-    <string name="create_address">Indirizzo Personale</string>
+    <string name="create_to_address">Indirizzo di partenza</string>
+    <string name="create_from_address">Indirizzo di arrivo</string>
     <string name="hint_venue">Cerca una Sede</string>
     <string name="hint_address">Cerca un Indirizzo</string>
     <string name="create_create">Crea</string>
@@ -38,7 +39,10 @@
     <string name="send_code">Invia codice verifica</string>
     <string name="insert_email">Inserire una mail universitaria</string>
     <string name="verify">Verifica</string>
-    <string name="create_venue">Sede</string>
+    <string name="create_to_venue">Sede di arrivo</string>
+    <string name="create_from_venue">Sede di partenza</string>
     <string name="create_from">Da:</string>
     <string name="create_to">A:</string>
+    <string name="choose_to">to university</string>
+    <string name="choose_from">from university</string>
 </resources>

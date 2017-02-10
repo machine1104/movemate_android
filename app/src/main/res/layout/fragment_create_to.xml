@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.movemate.CreateFragment"
+    tools:context="app.movemate.CreateToFragment"
     >
 
     <!-- TODO: Update blank fragment layout -->
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_address"
+                    android:text="@string/create_to_address"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
                 <LinearLayout
@@ -142,7 +142,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_venue"
+                    android:text="@string/create_to_venue"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:id="@+id/textView3" />
 
@@ -178,7 +178,7 @@
 
 
             </LinearLayout>
-
+            <!-- TODO: Update blank fragment layout
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
 
 
             </LinearLayout>
-
+            -->
 
             <TextView
                 android:layout_width="wrap_content"

@@ -40,7 +40,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
 
-public class CreateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
+public class CreateToFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks{
     private SeekBar avaible_bar, car_price_bar, moto_price_bar;
     private TextView avaible, car_price, moto_price;
@@ -62,7 +62,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_create, container, false);
+        v = inflater.inflate(R.layout.fragment_create_to, container, false);
 
         //-------------------------Barra posti disponibili Car
         avaible_bar = (SeekBar) v.findViewById(R.id.car_avaible_seekBar);
@@ -196,8 +196,8 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
         //-------------------------Autocomplete
         final AutoCompleteTextView address = (AutoCompleteTextView) v.findViewById(R.id.address);
         final AutoCompleteTextView venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
-        final TextView tx1 = (TextView)v.findViewById(R.id.routing_from);
-        final TextView tx2 = (TextView)v.findViewById(R.id.routing_to);
+        /*final TextView tx1 = (TextView)v.findViewById(R.id.routing_from);
+        final TextView tx2 = (TextView)v.findViewById(R.id.routing_to);*/
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
@@ -214,7 +214,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
 
         //AGGIUNGERE ADATTATORE PER LE SEDI
 
-
+        /*
         ImageButton address_delete = (ImageButton)v.findViewById(R.id.address_delete);
         address_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,7 +307,7 @@ public class CreateFragment extends Fragment implements GoogleApiClient.OnConnec
                 }
             }
         });
-
+        */
 
         //-------------------------Set Data e Ora
 
