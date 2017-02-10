@@ -178,67 +178,6 @@
 
 
             </LinearLayout>
-            <!-- TODO: Update blank fragment layout
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_swap"
-                    android:layout_marginEnd="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/swap"
-                    android:backgroundTint="@color/colorAccent"/>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/routing"
-                    android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/create_from"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:gravity="center"
-                            android:id="@+id/a"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/routing_from"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/a"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/create_to"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:id="@+id/b"
-                            android:layout_below="@+id/routing_from"
-                            android:layout_alignEnd="@+id/a"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/routing_to"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            android:layout_marginStart="20dp"
-                            android:layout_toEndOf="@+id/b"
-                            android:layout_alignBaseline="@+id/b"/>
-
-
-
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-            -->
 
             <TextView
                 android:layout_width="wrap_content"
