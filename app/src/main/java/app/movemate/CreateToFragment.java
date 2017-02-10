@@ -212,6 +212,23 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
         address.setOnItemClickListener(mAutocompleteClickListener);
         address.setAdapter(mPlaceArrayAdapter);
 
+
+        ImageButton address_delete = (ImageButton)v.findViewById(R.id.address_delete);
+        address_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                address.setText("");
+            }
+        });
+
+        ImageButton venue_delete = (ImageButton)v.findViewById(R.id.venue_delete);
+        venue_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                venue.setText("");
+            }
+        });
+
         //AGGIUNGERE ADATTATORE PER LE SEDI
 
         /*
