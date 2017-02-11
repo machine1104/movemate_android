@@ -4,6 +4,7 @@ package app.movemate;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -12,7 +13,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +38,7 @@ import java.net.URL;
 public class MainActivity extends ActionBarActivity {
     private BottomNavigationView mBottomNav;
     private ImageView imageView;
+    private ActionBarDrawerToggle mDrawerToggle;
 
 
 
@@ -114,6 +118,25 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }).executeAsync();
 
+        //----------------------DRAWER TOGGLE
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
+        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,0, 0){
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+
 
 
 
@@ -121,6 +144,31 @@ public class MainActivity extends ActionBarActivity {
         View view = mBottomNav.findViewById(R.id.find);
         view.performClick();
 
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
     }
 
 
