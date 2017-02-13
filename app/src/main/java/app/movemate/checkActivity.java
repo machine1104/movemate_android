@@ -3,18 +3,15 @@ package app.movemate;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,10 +28,7 @@ import com.facebook.HttpMethod;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import org.w3c.dom.Text;
 
 public class CheckActivity extends Activity {
     Context ctx = this;
@@ -52,29 +46,51 @@ public class CheckActivity extends Activity {
         btn_send_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 EditText edit_email = (EditText)findViewById(R.id.email);
-                String email = edit_email.getText().toString();
+                final String email = edit_email.getText().toString();
+
                 if (email.contains("@studenti.uniroma1.it") || email.contains("@stud.uniroma3.it") || email.contains("students.uniroma2.eu")){
-                    confirmed_email = email;
-                    Bundle params = new Bundle();
-                    params.putString("fields", "id,first_name,last_name");
-                    new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
-                            new GraphRequest.Callback() {
-                                @Override
-                                public void onCompleted(GraphResponse response) {
-                                    if (response != null) {
-                                        try {
-                                            JSONObject data = response.getJSONObject();
-                                            name = data.get("first_name").toString();
-                                            surname = data.get("last_name").toString();
-                                            sendCode();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
+
+
+                    LayoutInflater inflater = CheckActivity.this.getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.dialog_alert, null);
+                    TextView tv_email = (TextView) dialogView.findViewById(R.id.email);
+                    tv_email.setText(email);
+
+                    new AlertDialog.Builder(CheckActivity.this)
+                            .setView(dialogView)
+                            .setTitle(R.string.confirm)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    confirmed_email = email;
+                                    Bundle params = new Bundle();
+                                    params.putString("fields", "id,first_name,last_name");
+                                    new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                                            new GraphRequest.Callback() {
+                                                @Override
+                                                public void onCompleted(GraphResponse response) {
+                                                    if (response != null) {
+                                                        try {
+                                                            JSONObject data = response.getJSONObject();
+                                                            name = data.get("first_name").toString();
+                                                            surname = data.get("last_name").toString();
+                                                            sendCode();
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                }
+                                            }).executeAsync();
                                 }
-                            }).executeAsync();
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
                 }else{
                     Toast.makeText(CheckActivity.this,"Email errata",Toast.LENGTH_LONG).show();
                 }

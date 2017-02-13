@@ -45,4 +45,6 @@
     <string name="create_to">A:</string>
     <string name="choose_to">to university</string>
     <string name="choose_from">from university</string>
+    <string name="create_university">Università</string>
+    <string name="confirm">Conferma</string>
 </resources>

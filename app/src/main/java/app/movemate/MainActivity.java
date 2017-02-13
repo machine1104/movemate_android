@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
     private BottomNavigationView mBottomNav;
     private ImageView imageView;
     private ActionBarDrawerToggle mDrawerToggle;
+    private int tab_id;
 
 
 
@@ -56,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                tab_id = item.getItemId();
                 if (item.getItemId() == R.id.find){
                     FragmentManager fm = getFragmentManager();
                     for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
@@ -215,6 +217,25 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(Bitmap bit) {
             imageView.setImageBitmap(bit);
+
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
+        super.onBackPressed();
+        if(fm.getBackStackEntryCount()==0){
+            if (tab_id == R.id.find){
+                setTitle("Find");
+            }
+            if (tab_id == R.id.map){
+                setTitle("Map");
+            }
+            if (tab_id == R.id.myMates){
+                setTitle("My Mates");
+            }
 
         }
 

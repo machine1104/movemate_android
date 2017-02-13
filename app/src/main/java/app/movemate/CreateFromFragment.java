@@ -2,7 +2,9 @@ package app.movemate;
 
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,9 +23,17 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -50,10 +61,12 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS = new LatLngBounds(
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
-
+    private Spinner spinner_uni;
     private String final_placeId;
     private String final_venue,final_address;
     private boolean fromAtoV = true;
+
+    private AutoCompleteTextView venue;
     View v;
 
 
@@ -192,9 +205,9 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
         });
 
 
-        //-------------------------Autocomplete
+        //-------------------------INDIRIZZO
         final AutoCompleteTextView address = (AutoCompleteTextView) v.findViewById(R.id.address);
-        final AutoCompleteTextView venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
+        venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
@@ -225,7 +238,31 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             }
         });
 
-        //AGGIUNGERE ADATTATORE PER LE SEDI
+
+
+
+        //-------------------------Set Università e Sede
+
+
+        spinner_uni = (Spinner)v.findViewById(R.id.uni_spinner);
+        //getUni();
+
+        spinner_uni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String university = spinner_uni.getItemAtPosition(position).toString();
+                //getVenues(university);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+
+
 
 
 
@@ -349,6 +386,61 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             }*/
         }
     };
+
+
+    private void getUni() {
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = "url/api/uni";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //parsing
+                        String[] uni_list = new String[]{"1","2","3","2","3","2","3","2","3","2","3","2","3","2","3","2","3"};
+                        // creazione e assegnazione a spinner università
+                        spinner_uni.setAdapter(new ArrayAdapter<>(getActivity(),
+                                android.R.layout.simple_spinner_item, uni_list));
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    private void getVenues(String s) {
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = "url/api/uni"+s;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //parsing
+                        String[] venue_list = new String[]{"1","2","3","2","3","2","3","2","3","2","3","2","3","2","3","2","3"};
+                        // creazione e assegnazione a spinner università
+                        venue.setAdapter(new ArrayAdapter<>(getActivity(),
+                                android.R.layout.simple_spinner_item, venue_list));
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
 
     @Override
     public void onDestroyView() {

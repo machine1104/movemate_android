@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 public class FindMateFragment extends Fragment {
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class FindMateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).nextFrag(new ChooseDirectionFragment());
+                getActivity().setTitle("Crea");
             }
         });
         return v;

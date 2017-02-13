@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".CheckActivity"
-            android:theme="@android:style/Theme.Material.NoActionBar"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait">
 
         </activity>

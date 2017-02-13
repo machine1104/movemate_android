@@ -29,7 +29,6 @@ public class LoginActivity extends Activity {
     LoginButton loginButton;
     String checkUrl = "http://movemate-api.azurewebsites.net/api/students/getregisteredstudent?facebookId=";
     Context ctx = this;
-    ProgressDialog progDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +56,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-        if (isLoggedIn()) {
-            check();
-        }
-
         ImageButton btn = (ImageButton) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +63,14 @@ public class LoginActivity extends Activity {
                 loginButton.performClick();
             }
         });
+
+        if (isLoggedIn()) {
+            check();
+        }else{
+            btn.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     @Override
@@ -89,19 +92,14 @@ public class LoginActivity extends Activity {
     }
 
     private void check() {
-        progDialog = new ProgressDialog(ctx);
-        progDialog.setMessage("Loading...");
-        progDialog.show();
+
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
-
-        // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //codice 200
-                        progDialog.dismiss();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         LoginActivity.this.finish();
@@ -110,16 +108,16 @@ public class LoginActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //codice 404
-
                 if (error.networkResponse.statusCode == 404) {
-                    progDialog.dismiss();
                     Intent i = new Intent(LoginActivity.this, CheckActivity.class);
                     startActivity(i);
                     LoginActivity.this.finish();
                 }
+                else{
+                    Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
+                }
             }
         });
-        // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
 
