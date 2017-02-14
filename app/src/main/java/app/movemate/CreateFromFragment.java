@@ -47,6 +47,10 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 
@@ -63,8 +67,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
     private Spinner spinner_uni;
     private String final_placeId;
-    private String final_venue,final_address;
-    private boolean fromAtoV = true;
+    private String[] venue_list;
 
     private AutoCompleteTextView venue;
     View v;
@@ -245,13 +248,12 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
 
 
         spinner_uni = (Spinner)v.findViewById(R.id.uni_spinner);
-        //getUni();
+        getUni();
 
         spinner_uni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String university = spinner_uni.getItemAtPosition(position).toString();
-                //getVenues(university);
+                getVenues((int)id+1);
             }
 
             @Override
@@ -391,7 +393,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
     private void getUni() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "url/api/uni";
+        String url = "http://movemate-api.azurewebsites.net/api/universities/getuniversities";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -399,10 +401,24 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                     @Override
                     public void onResponse(String response) {
                         //parsing
-                        String[] uni_list = new String[]{"1","2","3","2","3","2","3","2","3","2","3","2","3","2","3","2","3"};
-                        // creazione e assegnazione a spinner università
-                        spinner_uni.setAdapter(new ArrayAdapter<>(getActivity(),
-                                android.R.layout.simple_spinner_item, uni_list));
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            String[] uni_list = new String[json.length()];
+                            for (int i = 0; i< uni_list.length;i++){
+                                JSONObject obj = new JSONObject(json.getString(i));
+                                uni_list[i] = obj.getString("UniversityName");
+
+
+                            }
+                            spinner_uni.setAdapter(new ArrayAdapter<>(getActivity(),
+                                    android.R.layout.simple_spinner_item, uni_list));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
 
                     }
                 }, new Response.ErrorListener() {
@@ -415,10 +431,11 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
         queue.add(stringRequest);
     }
 
-    private void getVenues(String s) {
+    private void getVenues(int s) {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "url/api/uni"+s;
+
+        String url = "http://movemate-api.azurewebsites.net/api/departments/getdepartments/"+s;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -426,10 +443,23 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                     @Override
                     public void onResponse(String response) {
                         //parsing
-                        String[] venue_list = new String[]{"1","2","3","2","3","2","3","2","3","2","3","2","3","2","3","2","3"};
-                        // creazione e assegnazione a spinner università
-                        venue.setAdapter(new ArrayAdapter<>(getActivity(),
-                                android.R.layout.simple_spinner_item, venue_list));
+
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            venue_list = new String[json.length()];
+                            //Log.d("json",json.toString());
+                            for (int i = 0;i<json.length();i++){
+                                venue_list[i] = new JSONObject(json.getString(i)).getString("DepartmentName")+", "+new JSONObject(json.getString(i)).getString("Address");
+                            }
+                            venue.setAdapter(new ArrayAdapter<>(getActivity(),
+                                    android.R.layout.simple_spinner_item, venue_list));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
 
                     }
                 }, new Response.ErrorListener() {

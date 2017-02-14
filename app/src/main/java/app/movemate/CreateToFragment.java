@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,8 +23,16 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -36,6 +45,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -53,8 +66,9 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
 
     private String final_placeId;
-    private String final_venue,final_address;
-    private boolean fromAtoV = true;
+    private Spinner spinner_uni;
+    private String[] venue_list;
+    private AutoCompleteTextView venue;
     View v;
 
 
@@ -195,9 +209,8 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
 
         //-------------------------Autocomplete
         final AutoCompleteTextView address = (AutoCompleteTextView) v.findViewById(R.id.address);
-        final AutoCompleteTextView venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
-        /*final TextView tx1 = (TextView)v.findViewById(R.id.routing_from);
-        final TextView tx2 = (TextView)v.findViewById(R.id.routing_to);*/
+        venue = (AutoCompleteTextView) v.findViewById(R.id.venue);
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
@@ -229,102 +242,23 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
             }
         });
 
-        //AGGIUNGERE ADATTATORE PER LE SEDI
+        //-------------------------Set Università e Sede
+        spinner_uni = (Spinner)v.findViewById(R.id.uni_spinner);
+        getUni();
 
-        /*
-        ImageButton address_delete = (ImageButton)v.findViewById(R.id.address_delete);
-        address_delete.setOnClickListener(new View.OnClickListener() {
+        spinner_uni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                address.setText("");
-                if (fromAtoV){
-                    tx1.setText("");
-
-                }else{
-                    tx2.setText("");
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getVenues((int)id+1);
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
         });
 
-        ImageButton venue_delete = (ImageButton)v.findViewById(R.id.venue_delete);
-        venue_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                venue.setText("");
-                if (fromAtoV){
-                    tx2.setText("");
-                }else{
-                    tx1.setText("");
-                }
-            }
-        });
-
-        address.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    if (fromAtoV) {
-                        tx1.setText(s);
-
-                    } else {
-                        tx2.setText(s);
-                    }
-                    final_address = s.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        venue.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    if (fromAtoV){
-                        tx2.setText(s);
-                    }else{
-                        tx1.setText(s);
-                    }
-
-                    final_venue = venue.getText().toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        ImageButton swap = (ImageButton)v.findViewById(R.id.swap);
-        swap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fromAtoV){
-                    fromAtoV = false;
-                    String temp = tx1.getText().toString();
-                    tx1.setText(tx2.getText());
-                    tx2.setText(temp);
-                }else{
-                    fromAtoV = true;
-                    String temp = tx1.getText().toString();
-                    tx1.setText(tx2.getText());
-                    tx2.setText(temp);
-                }
-            }
-        });
-        */
 
         //-------------------------Set Data e Ora
 
@@ -446,6 +380,87 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
             }*/
         }
     };
+
+    private void getUni() {
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = "http://movemate-api.azurewebsites.net/api/universities/getuniversities";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //parsing
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            String[] uni_list = new String[json.length()];
+                            for (int i = 0; i< uni_list.length;i++){
+                                JSONObject obj = new JSONObject(json.getString(i));
+                                uni_list[i] = obj.getString("UniversityName");
+
+
+                            }
+                            spinner_uni.setAdapter(new ArrayAdapter<>(getActivity(),
+                                    android.R.layout.simple_spinner_item, uni_list));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
+    private void getVenues(int s) {
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        String url = "http://movemate-api.azurewebsites.net/api/departments/getdepartments/"+s;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //parsing
+
+                        try {
+                            JSONArray json = new JSONArray(response);
+                            venue_list = new String[json.length()];
+                            for (int i = 0;i<json.length();i++){
+                                venue_list[i] = new JSONObject(json.getString(i)).getString("DepartmentName")+", "+new JSONObject(json.getString(i)).getString("Address");
+                            }
+                            venue.setAdapter(new ArrayAdapter<>(getActivity(),
+                                    android.R.layout.simple_spinner_item, venue_list));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
 
     @Override
     public void onDestroyView() {

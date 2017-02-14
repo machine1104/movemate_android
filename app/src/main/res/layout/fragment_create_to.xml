@@ -135,6 +135,20 @@
 
                 </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_university"
+                android:layout_marginBottom="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/uni_spinner">
+
+            </Spinner>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

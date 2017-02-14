@@ -107,14 +107,16 @@ public class LoginActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //codice 404
-                if (error.networkResponse.statusCode == 404) {
-                    Intent i = new Intent(LoginActivity.this, CheckActivity.class);
-                    startActivity(i);
-                    LoginActivity.this.finish();
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
+                if(error.networkResponse != null){
+                    //codice 404
+                    if (error.networkResponse.statusCode == 404) {
+                        Intent i = new Intent(LoginActivity.this, CheckActivity.class);
+                        startActivity(i);
+                        LoginActivity.this.finish();
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
