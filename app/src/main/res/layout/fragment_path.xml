@@ -1,0 +1,136 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.movemate.PathFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pn"
+                android:text="TITOLO"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:id="@+id/i"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="prezzo"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/p"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DA:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/ft"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/tt"
+                    android:layout_below="@+id/fa"
+                    android:layout_alignEnd="@+id/ft"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:text="indirizzo partenza"
+                    android:layout_toEndOf="@+id/ft"
+                    android:id="@+id/fa"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_alignBaseline="@+id/ft"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="indirizzo arrivo"
+                    android:layout_toEndOf="@+id/tt"
+                    android:paddingStart="5dp"
+                    android:id="@+id/ta"
+                    android:layout_alignTop="@+id/tt"
+                    android:layout_alignBaseline="@+id/tt"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="Date"
+                android:id="@+id/d"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/maps"
+                android:layout_marginTop="10dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="JOIN"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/White"
+                android:id="@+id/join_btn"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded"
+                android:visibility="gone"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DISJOIN"
+                android:id="@+id/disjoin_btn"
+                android:layout_margin="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/White"
+                android:visibility="gone"
+                android:background="@drawable/rounded_disjoin"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DELETE"
+                android:id="@+id/del_btn"
+                android:layout_margin="10dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/White"
+                android:visibility="gone"
+                android:background="@drawable/rounded_del"/>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

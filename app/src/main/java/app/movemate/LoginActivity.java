@@ -101,6 +101,7 @@ public class LoginActivity extends Activity {
                     public void onResponse(String response) {
                         //codice 200
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        i.putExtra("user",response);
                         startActivity(i);
                         LoginActivity.this.finish();
                     }

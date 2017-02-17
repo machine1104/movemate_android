@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/myMates"
-        android:title="@string/MyMates"
+        android:title="@string/MyPaths"
         android:icon="@drawable/ic_mine" />
 
     <item

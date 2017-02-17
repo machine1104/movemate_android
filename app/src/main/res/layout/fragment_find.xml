@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.movemate.FindMateFragment">
+    tools:context="app.movemate.FindPathFragment">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -10,11 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <ListView
             android:id="@+id/groupList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp">
+        </ListView>
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"

@@ -170,6 +170,7 @@ public class CheckActivity extends Activity {
                     public void onResponse(String response) {
                         progDialog.dismiss();
                         Intent i = new Intent(CheckActivity.this, MainActivity.class);
+                        i.putExtra("user",response);
                         startActivity(i);
                         CheckActivity.this.finish();
 

@@ -26,10 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_group_name"
-                android:inputType="text"
                 android:textColor="@color/colorPrimary"
                 android:maxLines="1"
-                android:id="@+id/group_name"/>
+                android:maxLength="20"
+                android:inputType="textCapSentences"
+                android:id="@+id/trip_name"/>
 
 
             <RelativeLayout
@@ -217,6 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/create_car"
+                        android:checked="true"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_marginBottom="5dp"/>
 
@@ -330,7 +332,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/moto_price_seekBar"
-                            android:text="@string/create_helmet"/>
+                            android:text="@string/create_helmet"
+                            android:id="@+id/helmet"/>
 
                     </RelativeLayout>
 
@@ -400,7 +403,8 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/create_desc"/>
+                                android:hint="@string/create_desc"
+                                android:id="@+id/desc"/>
                         </ScrollView>
 
 
@@ -417,9 +421,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/rounded_create"
                 android:text="@string/create_create"
                 android:textColor="@color/White"
+                android:id="@+id/create_btn"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
         </LinearLayout>

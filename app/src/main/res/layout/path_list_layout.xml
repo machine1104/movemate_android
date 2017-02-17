@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/i"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOME PERCORSO"
+                    android:id="@+id/pathname"
+                    android:paddingBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/White"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/body">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_from"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/ft"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_to"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/tt"
+                    android:layout_below="@+id/fa"
+                    android:layout_alignEnd="@+id/ft"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:text="indirizzo partenza"
+                    android:layout_toEndOf="@+id/ft"
+                    android:layout_alignTop="@+id/ft"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/fa"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="indirizzo arrivo"
+                    android:layout_toEndOf="@+id/tt"
+                    android:paddingStart="5dp"
+                    android:id="@+id/ta"
+                    android:layout_alignTop="@+id/tt"
+                    android:layout_alignBaseline="@+id/tt"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/d"
+                android:text="gg/mm/aaaa"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10€"
+            android:id="@+id/p"
+            android:background="@drawable/rounded_del"
+            android:textColor="@color/White"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        
+    </RelativeLayout>
+
+
+    
+</LinearLayout>

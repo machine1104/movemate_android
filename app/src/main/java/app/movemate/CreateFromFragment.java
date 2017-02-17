@@ -1,11 +1,10 @@
 package app.movemate;
 
-
-import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,13 +28,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -50,8 +51,9 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Calendar;
+
+
 
 
 public class CreateFromFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
@@ -65,11 +67,15 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS = new LatLngBounds(
             new LatLng(41.891527, 12.491170), new LatLng(41.891527, 12.491170));
-    private Spinner spinner_uni;
     private String final_placeId;
+    private Spinner spinner_uni;
     private String[] venue_list;
-
     private AutoCompleteTextView venue;
+    JSONObject departmentId;
+    private int c_price;
+    private int m_price;
+    private int c_seats = 1;
+    String date,time;
     View v;
 
 
@@ -90,7 +96,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progress = i;
                 avaible.setText(progress + 1 + "");
-
+                c_seats = progress;
             }
 
             @Override
@@ -101,6 +107,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 avaible.setText(progress + 1 + "");
+                c_seats = progress;
 
             }
         });
@@ -120,6 +127,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 } else {
                     car_price.setText(progress + "€");
                 }
+                c_price = progress;
 
             }
 
@@ -135,6 +143,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 } else {
                     car_price.setText(progress + "€");
                 }
+                c_price = progress;
             }
         });
 
@@ -153,6 +162,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 } else {
                     moto_price.setText(progress + "€");
                 }
+                m_price = progress;
 
             }
 
@@ -168,6 +178,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 } else {
                     moto_price.setText(progress + "€");
                 }
+                m_price = progress;
             }
         });
 
@@ -177,8 +188,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
         final RelativeLayout car_avaible = (RelativeLayout) v.findViewById(R.id.car_avaible_layout);
         final RelativeLayout moto_price = (RelativeLayout) v.findViewById(R.id.moto_price_layout);
         final LinearLayout public_layout = (LinearLayout) v.findViewById(R.id.public_transport_layout);
-        car_price.setVisibility(View.GONE);
-        car_avaible.setVisibility(View.GONE);
+
         moto_price.setVisibility(View.GONE);
         public_layout.setVisibility(View.GONE);
 
@@ -254,6 +264,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 getVenues((int)id+1);
+                venue.setText("");
             }
 
             @Override
@@ -318,6 +329,82 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                     }
                 },hour,minute,true);
                 timePicker.show(getFragmentManager(),"");
+            }
+        });
+        //-------------------------Crea Viaggio
+        Button create_btn = (Button)v.findViewById(R.id.create_btn);
+        create_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONObject trip = new JSONObject();
+                try {
+                    trip.put("ToFrom",true);
+                    trip.put("StudentId",((MainActivity)getActivity()).user_id);
+
+                    EditText trip_name = (EditText)v.findViewById(R.id.trip_name);
+                    String name = trip_name.getText().toString();
+                    EditText trip_date = (EditText)v.findViewById(R.id.group_date);
+                    date = trip_date.getText().toString();
+                    EditText trip_time = (EditText)v.findViewById(R.id.group_time);
+                    time = trip_time.getText().toString();
+                    String adrs = address.getText().toString();
+                    String ven = venue.getText().toString();
+                    EditText trip_desc = (EditText)v.findViewById(R.id.desc);
+                    String desc = trip_desc.getText().toString();
+
+                    if(name.equals("") || date.equals("") || time.equals("") || adrs.equals("") || ven.equals("") ){
+                        Toast.makeText(getActivity(),"Compila tutti i campi",Toast.LENGTH_SHORT).show();
+                    }else if (!departmentId.has(ven)){
+                        Toast.makeText(getActivity(),"Sede non valida",Toast.LENGTH_SHORT).show();
+                    }
+
+                    else{
+                        trip.put("PathName",name);
+                        trip.put("Address",adrs);
+                        trip.put("DepId",departmentId.getString(ven));
+                        int vId = vehicles.getCheckedRadioButtonId();
+                        if (vId==R.id.car){
+                            trip.put("Price",c_price);
+                            trip.put("Seats",c_seats);
+                            create(0,trip);
+                        }
+                        if (vId==R.id.moto){
+                            trip.put("Price",m_price);
+                            trip.put("Head",((CheckBox)v.findViewById(R.id.helmet)).isChecked());
+                            create(1,trip);
+                        }
+                        if (vId==R.id.public_transport){
+
+                            Boolean tram = ((CheckBox)v.findViewById(R.id.tram)).isChecked();
+                            Boolean train = ((CheckBox)v.findViewById(R.id.train)).isChecked();
+                            Boolean metro = ((CheckBox)v.findViewById(R.id.metro)).isChecked();
+                            Boolean bus = ((CheckBox)v.findViewById(R.id.bus)).isChecked();
+
+                            if (!tram && !train && !metro && !bus){
+                                Toast.makeText(getActivity(),"Seleziona almeno un mezzo",Toast.LENGTH_SHORT).show();
+                            }else{
+                                if (tram){
+                                    trip.put("Tram",true);
+                                }
+                                if (metro){
+                                    trip.put("Metro",true);
+                                }
+                                if (bus){
+                                    trip.put("Bus",true);
+                                }
+                                if (train){
+                                    trip.put("Train",true);
+                                }
+                                trip.put("Description",desc);
+                                create(2,trip);
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -442,13 +529,12 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //parsing
-
                         try {
                             JSONArray json = new JSONArray(response);
                             venue_list = new String[json.length()];
-                            //Log.d("json",json.toString());
+                            departmentId = new JSONObject();
                             for (int i = 0;i<json.length();i++){
+                                departmentId.put(new JSONObject(json.getString(i)).getString("DepartmentName")+", "+new JSONObject(json.getString(i)).getString("Address"),new JSONObject(json.getString(i)).getString("DepartmentId"));
                                 venue_list[i] = new JSONObject(json.getString(i)).getString("DepartmentName")+", "+new JSONObject(json.getString(i)).getString("Address");
                             }
                             venue.setAdapter(new ArrayAdapter<>(getActivity(),
@@ -468,6 +554,61 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
 
             }
         });
+
+        queue.add(stringRequest);
+    }
+
+    private void create(int n, final JSONObject json) throws JSONException {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url;
+
+
+        if (n == 0){
+            url = "http://movemate-api.azurewebsites.net/api/paths/postpathcar";
+        }else if (n == 1){
+            url = "http://movemate-api.azurewebsites.net/api/paths/postpathcyc";
+        }else{
+            url = "http://movemate-api.azurewebsites.net/api/paths/postpathpub";
+        }
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        View t = getActivity().findViewById(R.id.myMates);
+                        t.performClick();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(),"Errore creazione percorso",Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+
+                String s = json.toString();
+                String js = s.substring(0,s.indexOf("}"));
+                js = js+",\"Date\":\""+date+" "+time+"\"}";
+                Log.d("json",js);
+
+                return js.getBytes();
+            }
+
+        };
 
         queue.add(stringRequest);
     }

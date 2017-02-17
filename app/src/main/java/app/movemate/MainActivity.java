@@ -16,13 +16,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -30,16 +34,16 @@ import com.facebook.HttpMethod;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends ActionBarActivity {
-    private BottomNavigationView mBottomNav;
+    public BottomNavigationView mBottomNav;
     private ImageView imageView;
     private ActionBarDrawerToggle mDrawerToggle;
     private int tab_id;
+    public static String user_id;
 
 
 
@@ -49,8 +53,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //----------------------USER ID
+        user_id = getIntent().getStringExtra("user");
         //----------------------BOTTOM NAVIGATION BAR
-
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigationView);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -59,36 +64,16 @@ public class MainActivity extends ActionBarActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 tab_id = item.getItemId();
                 if (item.getItemId() == R.id.find){
-                    FragmentManager fm = getFragmentManager();
-                    for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
-                        fm.popBackStack();
-                    }
-                    changeTab(new FindMateFragment());
+                    changeTab(new FindPathFragment());
                     setTitle("Find");
-
-
-
                 }
                 if (item.getItemId() == R.id.map){
-                    FragmentManager fm = getFragmentManager();
-                    for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
-                        fm.popBackStack();
-                    }
                     changeTab(new MapFragment());
                     setTitle("Map");
-
-
-
                 }
                 if (item.getItemId() == R.id.myMates){
-                    FragmentManager fm = getFragmentManager();
-                    for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
-                        fm.popBackStack();
-                    }
-                    changeTab(new MyMatesFragment());
-                    setTitle("My Mates");
-
-
+                    changeTab(new MyPathsFragment());
+                    setTitle("My Paths");
                 }
                 return true;
             }
@@ -143,7 +128,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        View view = mBottomNav.findViewById(R.id.find);
+        View view = mBottomNav.findViewById(R.id.myMates);
         view.performClick();
 
     }
@@ -177,7 +162,11 @@ public class MainActivity extends ActionBarActivity {
     //SOLO PER MENU
     //IMPLEMENTARE ONBACKPRESSED SE NECESSARIO IN SEGUITO
     public void changeTab(Fragment frag){
+
         FragmentManager fragmentManager = getFragmentManager();
+        for(int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+            fragmentManager.popBackStack();
+        }
         android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, frag);
         fragmentTransaction.commit();
@@ -222,6 +211,29 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void userId(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = "http://movemate-api.azurewebsites.net/api/students/getstudentid?id="+AccessToken.getCurrentAccessToken().getUserId();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        user_id = response;
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                userId();
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
     @Override
     public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
@@ -234,7 +246,7 @@ public class MainActivity extends ActionBarActivity {
                 setTitle("Map");
             }
             if (tab_id == R.id.myMates){
-                setTitle("My Mates");
+                setTitle("My Paths");
             }
 
         }
