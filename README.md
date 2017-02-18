@@ -22,4 +22,4 @@ Repository for the GCW2016/2017 project
 
 ## MILESTONE 2
 * [Slides](https://1drv.ms/p/s!Arh0UdVHsGBcoGjKhkq51oPmD5cM)
-* Screenshots MOCKUP
+
