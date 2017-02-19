@@ -396,25 +396,16 @@
 
                         </LinearLayout>
 
-                        <ScrollView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/create_desc"
-                                android:id="@+id/desc"/>
-                        </ScrollView>
-
-
-
-
                     </LinearLayout>
 
                 </RadioGroup>
 
             </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/create_desc"
+                android:id="@+id/desc"/>
 
 
 

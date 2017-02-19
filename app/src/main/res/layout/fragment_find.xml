@@ -14,18 +14,20 @@
             android:id="@+id/groupList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:divider="@color/transparent">
         </ListView>
 
         <android.support.design.widget.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add"
-            android:id="@+id/add_btn"/>
+            android:id="@+id/add_btn"
+            app:backgroundTint="@color/colorPrimary"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

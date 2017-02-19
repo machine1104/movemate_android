@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -110,9 +112,11 @@ public class CheckActivity extends Activity {
     }
 
     private void sendCode(){
-        progDialog = new ProgressDialog(ctx);
-        progDialog.setMessage("Loading...");
+        progDialog = new ProgressDialog(this);
         progDialog.show();
+        progDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        progDialog.setContentView( R.layout.progress );
+
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = sendUrl;
 
@@ -157,9 +161,11 @@ public class CheckActivity extends Activity {
     }
 
     private void checkCode(){
-        progDialog = new ProgressDialog(ctx);
-        progDialog.setMessage("Loading...");
+        progDialog = new ProgressDialog(this);
         progDialog.show();
+        progDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        progDialog.setContentView( R.layout.progress );
+
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = checkUrl+"?facebookId="+AccessToken.getCurrentAccessToken().getUserId()+"&code="+confirmed_code;
 

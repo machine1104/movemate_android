@@ -5,12 +5,20 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,17 +32,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import app.movemate.ListAdapter.Path;
+import app.movemate.ListAdapter.PassAdapter;
 
 public class PathFragment extends Fragment {
     View view;
     String id;
     String url =  " http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
-    TextView pn,p,fa,ta,d;
+    TextView pn,p,fa,ta,d,s,h,v;
     ImageView imv;
     Button join_btn, del_btn, disjoin_btn;
     String user_id = ((MainActivity)getActivity()).user_id;
+    RelativeLayout rl;
+    LinearLayout ll;
 
 
     @Override
@@ -49,6 +58,9 @@ public class PathFragment extends Fragment {
             fa =(TextView)view.findViewById(R.id.fa);
             ta =(TextView)view.findViewById(R.id.ta);
             d =(TextView)view.findViewById(R.id.d);
+            s =(TextView)view.findViewById(R.id.s);
+            h =(TextView)view.findViewById(R.id.h);
+
             imv =(ImageView)view.findViewById(R.id.i);
             join_btn = (Button)view.findViewById(R.id.join_btn);
             del_btn = (Button)view.findViewById(R.id.del_btn);
@@ -71,6 +83,7 @@ public class PathFragment extends Fragment {
                     disjoin();
                 }
             });
+
 
 
             getPathInfo();
@@ -102,8 +115,37 @@ public class PathFragment extends Fragment {
                             ta.setText(jsonObject.getString("DestinationAddress"));
                             pn.setText(jsonObject.getString("PathName"));
                             i = jsonObject.getInt("Vehicle");
+
+                            String uid = jsonObject.getJSONObject("Maker").getString("StudentId");
+
+                            if (user_id.equals(uid)){
+                                del_btn.setVisibility(View.VISIBLE);
+
+                            }else{
+                                join_btn.setVisibility(View.VISIBLE);
+                            }
+                            JSONArray ja = jsonObject.getJSONArray("Participants");
+                            int count = 0;
+                            while(count<ja.length()){
+                                JSONObject JO = ja.getJSONObject(count);
+                                if (JO.getString("StudentId").equals(user_id)){
+                                    join_btn.setVisibility(View.GONE);
+                                    disjoin_btn.setVisibility(View.VISIBLE);
+                                }
+                                count++;
+                            }
                             Drawable drawable;
                             if (i == 1){
+                                rl = (RelativeLayout) view.findViewById(R.id.moto_ly);
+                                rl.setVisibility(View.VISIBLE);
+
+                                if (jsonObject.getBoolean("Head")){
+                                    h.setText(R.string.yes);
+                                    h.setTextColor(ContextCompat.getColor(p.getContext(),R.color.LightGreenA700));
+                                }else{
+                                    h.setText(R.string.no);
+                                    h.setTextColor(ContextCompat.getColor(p.getContext(),R.color.RedA700));
+                                }
                                 drawable = ContextCompat.getDrawable(imv.getContext(),R.drawable.ic_motorcycle);
                                 imv.setBackground(drawable);
                                 int price = 0;
@@ -128,13 +170,35 @@ public class PathFragment extends Fragment {
 
                             }
                             else if (i == 2) {
+                                ll = (LinearLayout) view.findViewById(R.id.bus_ly);
+                                ll.setVisibility(View.VISIBLE);
                                 drawable = ContextCompat.getDrawable(imv.getContext(), R.drawable.ic_bus);
                                 imv.setBackground(drawable);
                                 p.setText("FREE");
+
+                                if (jsonObject.getBoolean("Train")){
+                                    v =(TextView)view.findViewById(R.id.v_t);
+                                    v.setVisibility(View.VISIBLE);
+                                }
+                                if (jsonObject.getBoolean("Tram")){
+                                    v =(TextView)view.findViewById(R.id.v_tr);
+                                    v.setVisibility(View.VISIBLE);
+                                }
+                                if (jsonObject.getBoolean("Bus")){
+                                    v =(TextView)view.findViewById(R.id.v_b);
+                                    v.setVisibility(View.VISIBLE);
+                                }
+                                if (jsonObject.getBoolean("Metro")){
+                                    v =(TextView)view.findViewById(R.id.v_m);
+                                    v.setVisibility(View.VISIBLE);
+                                }
                                 p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.LightGreenA700));
 
                             }
                             else{
+                                rl = (RelativeLayout) view.findViewById(R.id.car_ly);
+                                rl.setVisibility(View.VISIBLE);
+                                s.setText(jsonObject.getInt("Seats")-ja.length()+"");
                                 drawable = ContextCompat.getDrawable(imv.getContext(),R.drawable.ic_car);
                                 imv.setBackground(drawable);
                                 int price = 0;
@@ -157,24 +221,24 @@ public class PathFragment extends Fragment {
                                     p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.RedA700));
                                 }
                             }
-                            String uid = jsonObject.getJSONObject("Maker").getString("StudentId");
+                            if (i!=1){
 
-                            if (user_id.equals(uid)){
-                                del_btn.setVisibility(View.VISIBLE);
+                                ll = (LinearLayout)view.findViewById(R.id.partecipants);
+                                ll.setVisibility(View.VISIBLE);
+                                RecyclerView rec = (RecyclerView)view.findViewById(R.id.rec);
+                                PassAdapter passAdapter = new PassAdapter(ja);
+                                LinearLayoutManager layoutManager
+                                        = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                rec.setLayoutManager(layoutManager);
+                                rec.setItemAnimator(new DefaultItemAnimator());
+                                rec.setAdapter(passAdapter);
 
-                            }else{
-                                join_btn.setVisibility(View.VISIBLE);
+
+
                             }
-                            JSONArray ja = jsonObject.getJSONArray("Participants");
-                            int count = 0;
-                            while(count<ja.length()){
-                                JSONObject JO = ja.getJSONObject(count);
-                                if (JO.getString("StudentId").equals(user_id)){
-                                    join_btn.setVisibility(View.GONE);
-                                    disjoin_btn.setVisibility(View.VISIBLE);
-                                }
-                                count++;
-                            }
+
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

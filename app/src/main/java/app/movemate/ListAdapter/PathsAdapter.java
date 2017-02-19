@@ -89,7 +89,7 @@ public class PathsAdapter extends ArrayAdapter {
                 drawable = ContextCompat.getDrawable(pathHolder.imv.getContext(),R.drawable.ic_bus);
                 pathHolder.imv.setBackground(drawable);
                 pathHolder.tx_p.setText("FREE");
-                pathHolder.tx_p.setTextColor(ContextCompat.getColor(pathHolder.tx_p.getContext(),R.color.LightGreenA700));
+                pathHolder.tx_p.setBackground(ContextCompat.getDrawable(pathHolder.tx_p.getContext(),R.drawable.rounded_green));
             }else{
                 drawable = ContextCompat.getDrawable(pathHolder.imv.getContext(),R.drawable.ic_car);
                 pathHolder.imv.setBackground(drawable);
@@ -122,5 +122,6 @@ public class PathsAdapter extends ArrayAdapter {
         TextView tx_p;
         TextView tx_d;
         ImageView imv;
+
     }
 }

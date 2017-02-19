@@ -1,5 +1,8 @@
 package app.movemate;
 
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,6 +32,7 @@ public class MyPathsFragment extends Fragment {
     ListView rv;
     PathsAdapter pathsAdapter;
     String user_id = ((MainActivity)getActivity()).user_id;
+    ProgressDialog progDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +69,10 @@ public class MyPathsFragment extends Fragment {
     }
 
     public void populateList(){
+        progDialog = new ProgressDialog(getActivity());
+        progDialog.show();
+        progDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        progDialog.setContentView( R.layout.progress );
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         url += user_id;
 
@@ -86,6 +94,7 @@ public class MyPathsFragment extends Fragment {
                                 pathsAdapter.add(path);
 
                             }
+                            progDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -96,7 +105,7 @@ public class MyPathsFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(),"Errore recupero percorsi",Toast.LENGTH_SHORT).show();
+                progDialog.dismiss();
             }
         })
         ;

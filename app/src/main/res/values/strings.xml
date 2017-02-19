@@ -48,4 +48,12 @@
     <string name="create_university">University</string>
     <string name="confirm">Confirm</string>
     <string name="MyPaths">My Paths</string>
+    <string name="price">Price:</string>
+    <string name="description">Description</string>
+    <string name="seats">Seats Avaible</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="type">Transports</string>
+    <string name="passengers">Passengers</string>
+    <string name="partecipants">Partecipants</string>
 </resources>

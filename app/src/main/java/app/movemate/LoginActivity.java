@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -35,8 +38,9 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+
         setContentView(R.layout.activity_login);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -81,17 +85,22 @@ public class LoginActivity extends Activity {
 
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        Log.d("token",accessToken+"");
         if (accessToken != null) {
             if (!accessToken.isExpired()) {
                 return true;
             }
             return false;
         }
-
         return false;
     }
 
     private void check() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+
+        progressDialog.show();
+        progressDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        progressDialog.setContentView( R.layout.progress );
 
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
@@ -100,6 +109,7 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         //codice 200
+                        progressDialog.dismiss();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         i.putExtra("user",response);
                         startActivity(i);
@@ -118,6 +128,7 @@ public class LoginActivity extends Activity {
                     else{
                         Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 }
             }
         });

@@ -350,7 +350,7 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
                     EditText trip_desc = (EditText)v.findViewById(R.id.desc);
                     String desc = trip_desc.getText().toString();
 
-                    if(name.equals("") || date.equals("") || time.equals("") || adrs.equals("") || ven.equals("") ){
+                    if(name.equals("") || date.equals("") || time.equals("") || adrs.equals("") || ven.equals("") || desc.equals("") ){
                         Toast.makeText(getActivity(),"Compila tutti i campi",Toast.LENGTH_SHORT).show();
                     }else if (!departmentId.has(ven)){
                         Toast.makeText(getActivity(),"Sede non valida",Toast.LENGTH_SHORT).show();
@@ -360,6 +360,7 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
                         trip.put("PathName",name);
                         trip.put("Address",adrs);
                         trip.put("DepId",departmentId.getString(ven));
+                        trip.put("Description",desc);
                         int vId = vehicles.getCheckedRadioButtonId();
                         if (vId==R.id.car){
                             trip.put("Price",c_price);
@@ -393,7 +394,6 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
                                 if (train){
                                     trip.put("Train",true);
                                 }
-                                trip.put("Description",desc);
                                 create(2,trip);
                             }
                         }
