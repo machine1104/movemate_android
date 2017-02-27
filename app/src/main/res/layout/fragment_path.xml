@@ -108,19 +108,28 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="10dp">
-                <ImageView
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/circle"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:id="@+id/i"/>
+                    android:paddingStart="10dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/i"
+
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
+
+                </RelativeLayout>
                 <!-- CAR -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/car_ly"
                     android:visibility="gone"
-
+                    android:layout_gravity="center_vertical"
                     android:paddingStart="10dp">
 
                     <TextView
@@ -145,6 +154,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/moto_ly"
                     android:visibility="gone"
+                    android:layout_gravity="center_vertical"
                     android:paddingStart="10dp">
 
                     <TextView
@@ -168,8 +178,8 @@
                     android:orientation="vertical"
                     android:id="@+id/bus_ly"
                     android:visibility="gone"
+                    android:layout_gravity="center_vertical"
                     android:paddingStart="10dp">
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -181,7 +191,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-
                         android:layout_gravity="center">
                         <TextView
                             android:layout_width="wrap_content"
@@ -189,12 +198,16 @@
                             android:text="@string/train"
                             android:id="@+id/v_t"
                             android:visibility="gone"
+                            android:gravity="center"
+                            android:layout_gravity="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/metro"
+                            android:gravity="center"
                             android:id="@+id/v_m"
+                            android:layout_gravity="center"
                             android:visibility="gone"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
                         <TextView
@@ -203,12 +216,14 @@
                             android:text="@string/tram"
                             android:id="@+id/v_tr"
                             android:visibility="gone"
+                            android:layout_gravity="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bus"
                             android:id="@+id/v_b"
+                            android:layout_gravity="center"
                             android:visibility="gone"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
@@ -264,10 +279,66 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:text="Desc"
+                    android:id="@+id/desc"
                     android:textColor="@color/colorPrimary"/>
             </LinearLayout>
+            <!-- MAKER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shadow_title"
+                android:padding="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mate"
+                    android:textAllCaps="true"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shadow"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pic_maker_border"
+                    android:background="@color/Red900"
+                    android:id="@+id/m_pic"
+                    android:layout_centerHorizontal="true"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pic_maker_border_2"
+                    android:layout_centerHorizontal="true"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pic_maker_border_3"
+                    android:layout_centerHorizontal="true"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:id="@+id/m_name"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/m_pic"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorPrimary"/>
+            </RelativeLayout>
             <!-- PASSENGERS -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,7 +357,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/partecipants"
+                        android:text="@string/participants"
                         android:textAllCaps="true"
                         android:gravity="center"
                         android:textColor="@color/White"
@@ -302,16 +373,15 @@
 
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-
-
-
-
-
-            <ImageView
+            <!-- MAP -->
+            <com.google.android.gms.maps.MapView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/maps"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="400dp"
+                android:id="@+id/map">
+
+            </com.google.android.gms.maps.MapView>
+
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

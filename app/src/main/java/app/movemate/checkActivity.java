@@ -7,12 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import es.dmoral.toasty.Toasty;
+
 public class CheckActivity extends Activity {
     Context ctx = this;
     String sendUrl = "http://movemate-api.azurewebsites.net/api/students/poststudent";
@@ -43,6 +47,7 @@ public class CheckActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+
 
         Button btn_send_code = (Button) findViewById(R.id.btn_send_code);
         btn_send_code.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +131,7 @@ public class CheckActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         progDialog.dismiss();
+                        Toasty.success(CheckActivity.this, "Success!", Toast.LENGTH_SHORT, true).show();
 
                     }
                 }, new Response.ErrorListener() {
@@ -145,6 +151,7 @@ public class CheckActivity extends Activity {
             public byte[] getBody() throws AuthFailureError {
                 String json = null;
                 try {
+
                     json = new JSONObject().put("facebookId", AccessToken.getCurrentAccessToken().getUserId()+"").
                             put("name", name).put("surname",surname).put("email",confirmed_email).toString();
                 } catch (JSONException e) {

@@ -14,7 +14,7 @@
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBIHVleJXoM5pAMyiSsTQs7oMsxzb7h3LM" />
+            android:value="AIzaSyBCuv3YHfuooMob5mtu8dUhEtv9mJ2wTZ4" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

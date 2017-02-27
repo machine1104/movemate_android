@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import app.movemate.ListAdapter.Path;
 import app.movemate.ListAdapter.PathsAdapter;
+import es.dmoral.toasty.Toasty;
 
 public class MyPathsFragment extends Fragment {
     View view;
@@ -44,15 +46,6 @@ public class MyPathsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Path p = (Path)rv.getItemAtPosition(position);
-
-            }
-        });
-        pathsAdapter = new PathsAdapter(getActivity(),R.layout.path_list_layout);
-        rv.setAdapter(pathsAdapter);
-        rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Path p = (Path)rv.getItemAtPosition(position);
                 Bundle b = new Bundle();
                 b.putString("path",p.path.toString());
                 Fragment f = new PathFragment();
@@ -61,12 +54,13 @@ public class MyPathsFragment extends Fragment {
 
             }
         });
+        pathsAdapter = new PathsAdapter(getActivity(),R.layout.path_list_layout);
+        rv.setAdapter(pathsAdapter);
         populateList();
-
-
 
         return view;
     }
+
 
     public void populateList(){
         progDialog = new ProgressDialog(getActivity());
@@ -81,9 +75,6 @@ public class MyPathsFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-
-
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             int count=jsonArray.length()-1;
@@ -92,26 +83,23 @@ public class MyPathsFragment extends Fragment {
                                 Path path = new Path(JO);
                                 count--;
                                 pathsAdapter.add(path);
-
                             }
                             progDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDialog.dismiss();
+                Toasty.error(getActivity(), getString(R.string.error_getpath), Toast.LENGTH_SHORT, true).show();
             }
         })
         ;
 
         queue.add(stringRequest);
     }
-
 
 }

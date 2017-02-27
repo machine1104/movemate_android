@@ -102,6 +102,7 @@ public class LoginActivity extends Activity {
         progressDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         progressDialog.setContentView( R.layout.progress );
 
+        Log.d("FACEBOOK_ID", AccessToken.getCurrentAccessToken().getUserId());
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -130,8 +131,14 @@ public class LoginActivity extends Activity {
                     }
                     progressDialog.dismiss();
                 }
+                else{
+                    progressDialog.dismiss();
+                    check();
+                }
+
             }
         });
+        stringRequest.setShouldCache(false);
         queue.add(stringRequest);
     }
 

@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import app.movemate.ListAdapter.Path;
 import app.movemate.ListAdapter.PathsAdapter;
+import es.dmoral.toasty.Toasty;
 
 public class FindPathFragment extends Fragment {
     View view;
@@ -68,6 +70,7 @@ public class FindPathFragment extends Fragment {
         return view;
     }
 
+
     public void populateList(){
         progDialog = new ProgressDialog(getActivity());
         progDialog.show();
@@ -104,9 +107,9 @@ public class FindPathFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDialog.dismiss();
+                Toasty.error(getActivity(), getString(R.string.error_getpath), Toast.LENGTH_SHORT, true).show();
             }
-        })
-                ;
+        });
 
         queue.add(stringRequest);
     }

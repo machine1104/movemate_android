@@ -56,6 +56,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Calendar;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class CreateToFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks{
@@ -364,7 +366,7 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
                         int vId = vehicles.getCheckedRadioButtonId();
                         if (vId==R.id.car){
                             trip.put("Price",c_price);
-                            trip.put("Seats",c_seats);
+                            trip.put("Seats",c_seats+1);
                             create(0,trip);
                         }
                         if (vId==R.id.moto){
@@ -578,6 +580,7 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
+                        Toasty.success(getActivity(), "Success!", Toast.LENGTH_SHORT, true).show();
                         View t = getActivity().findViewById(R.id.myMates);
                         t.performClick();
                     }
@@ -586,7 +589,7 @@ public class CreateToFragment extends Fragment implements GoogleApiClient.OnConn
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(),"Errore creazione percorso",Toast.LENGTH_SHORT).show();
+                Toasty.error(getActivity(), getString(R.string.error_create), Toast.LENGTH_SHORT, true).show();
             }
         })
         {

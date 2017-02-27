@@ -16,6 +16,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
@@ -206,28 +208,8 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void userId(){
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://movemate-api.azurewebsites.net/api/students/getstudentid?id="+AccessToken.getCurrentAccessToken().getUserId();
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        user_id = response;
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                userId();
-            }
-        });
-
-        queue.add(stringRequest);
-    }
 
     @Override
     public void onBackPressed() {

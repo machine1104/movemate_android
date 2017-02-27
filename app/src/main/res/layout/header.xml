@@ -4,18 +4,19 @@
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark"
-    app:theme="@style/AppTheme"
-    android:orientation="vertical"
-    android:gravity="bottom">
-
-
-
+    app:theme="@style/AppTheme">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="false"
         android:id="@+id/photo"
         android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/pic_border_drawer"
+        android:layout_centerHorizontal="true"/>
+
 
 
 </RelativeLayout>

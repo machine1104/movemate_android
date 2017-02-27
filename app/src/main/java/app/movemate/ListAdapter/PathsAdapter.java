@@ -46,7 +46,7 @@ public class PathsAdapter extends ArrayAdapter {
             pathHolder.tx_pathname= (TextView) row.findViewById(R.id.pathname);
             pathHolder.tx_fa= (TextView) row.findViewById(R.id.fa);
             pathHolder.tx_ta= (TextView) row.findViewById(R.id.ta);
-            pathHolder.imv= (ImageView) row.findViewById(R.id.i);
+            pathHolder.imv= (ImageView) row.findViewById(R.id.icon);
             pathHolder.tx_d= (TextView) row.findViewById(R.id.d);
             pathHolder.tx_p= (TextView) row.findViewById(R.id.p);
 
@@ -68,7 +68,7 @@ public class PathsAdapter extends ArrayAdapter {
             Drawable drawable;
             if (i == 1){
                 drawable = ContextCompat.getDrawable(pathHolder.imv.getContext(),R.drawable.ic_motorcycle);
-                pathHolder.imv.setBackground(drawable);
+                pathHolder.imv.setImageDrawable(drawable);
                 int price = Integer.parseInt(path.path.getString("Price"));
                 if(price == 0){
                     pathHolder.tx_p.setText("FREE");
@@ -87,12 +87,12 @@ public class PathsAdapter extends ArrayAdapter {
             }
             else if (i == 2){
                 drawable = ContextCompat.getDrawable(pathHolder.imv.getContext(),R.drawable.ic_bus);
-                pathHolder.imv.setBackground(drawable);
+                pathHolder.imv.setImageDrawable(drawable);
                 pathHolder.tx_p.setText("FREE");
                 pathHolder.tx_p.setBackground(ContextCompat.getDrawable(pathHolder.tx_p.getContext(),R.drawable.rounded_green));
             }else{
                 drawable = ContextCompat.getDrawable(pathHolder.imv.getContext(),R.drawable.ic_car);
-                pathHolder.imv.setBackground(drawable);
+                pathHolder.imv.setImageDrawable(drawable);
                 int price = Integer.parseInt(path.path.getString("Price"));
                 if(price == 0){
                     pathHolder.tx_p.setText("FREE");

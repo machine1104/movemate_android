@@ -16,14 +16,14 @@
     <string name="create_moto">Motorcycle</string>
     <string name="create_public_transport">Public Transport</string>
     <string name="create_train">Train</string>
-    <string name="create_avaible">Avaible Seats</string>
+    <string name="create_available">Available Seats</string>
     <string name="create_to_address">Starting Address</string>
     <string name="create_from_address">Arrival Address</string>
     <string name="hint_venue">Find Department</string>
     <string name="hint_address">Find Address</string>
     <string name="create_create">Create</string>
     <string name="create_price">Price</string>
-    <string name="create_helmet">Helmet Avaible</string>
+    <string name="create_helmet">Helmet Available</string>
     <string name="train">Train</string>
     <string name="metro">Metro</string>
     <string name="tram">Tram</string>
@@ -50,10 +50,15 @@
     <string name="MyPaths">My Paths</string>
     <string name="price">Price:</string>
     <string name="description">Description</string>
-    <string name="seats">Seats Avaible</string>
+    <string name="seats">Seats Available</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="type">Transports</string>
     <string name="passengers">Passengers</string>
-    <string name="partecipants">Partecipants</string>
+    <string name="participants">Participants</string>
+    <string name="mate">mate</string>
+    <string name="API">AIzaSyDQz-CaE2PK_oSDRKzasLsrUi9sQ3akXYM</string>
+    <string name="start">Start</string>
+    <string name="error_create">Impossible to create a trip.</string>
+    <string name="error_getpath">Can\'t retrieve path list.</string>
 </resources>

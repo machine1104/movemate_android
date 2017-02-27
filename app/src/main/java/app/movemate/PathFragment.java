@@ -4,6 +4,7 @@ package app.movemate;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,22 +29,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import app.movemate.ListAdapter.PassAdapter;
 
-public class PathFragment extends Fragment {
+public class PathFragment extends Fragment implements OnMapReadyCallback {
     View view;
     String id;
-    String url =  " http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
-    TextView pn,p,fa,ta,d,s,h,v;
-    ImageView imv;
+    String url =  "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
+    TextView pn,p,fa,ta,d,s,h,v,m,desc;
+    ImageView imv,m_pic;
     Button join_btn, del_btn, disjoin_btn;
     String user_id = ((MainActivity)getActivity()).user_id;
     RelativeLayout rl;
     LinearLayout ll;
+    MapView map;
 
 
     @Override
@@ -60,7 +68,12 @@ public class PathFragment extends Fragment {
             d =(TextView)view.findViewById(R.id.d);
             s =(TextView)view.findViewById(R.id.s);
             h =(TextView)view.findViewById(R.id.h);
-
+            m = (TextView)view.findViewById(R.id.m_name);
+            desc = (TextView)view.findViewById(R.id.desc);
+            map = (MapView)view.findViewById(R.id.map);
+            map.onCreate(savedInstanceState);
+            map.getMapAsync(this);
+            m_pic = (ImageView)view.findViewById(R.id.m_pic);
             imv =(ImageView)view.findViewById(R.id.i);
             join_btn = (Button)view.findViewById(R.id.join_btn);
             del_btn = (Button)view.findViewById(R.id.del_btn);
@@ -107,18 +120,23 @@ public class PathFragment extends Fragment {
                     public void onResponse(String response) {
 
                         JSONObject jsonObject = null;
-                        int i = 0;
+                        int i;
                         try {
                             jsonObject = new JSONObject(response);
                             d.setText(jsonObject.getString("Date"));
                             fa.setText(jsonObject.getString("StartAddress"));
                             ta.setText(jsonObject.getString("DestinationAddress"));
                             pn.setText(jsonObject.getString("PathName"));
+                            //desc.setText(jsonObject.getString("Desc"));
                             i = jsonObject.getInt("Vehicle");
 
                             String uid = jsonObject.getJSONObject("Maker").getString("StudentId");
 
                             if (user_id.equals(uid)){
+                                //NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+                                //View dView =  navigationView.getHeaderView(0);
+                                //ImageView pic = (ImageView) dView.findViewById(R.id.photo);
+                                //m_pic.setBackground(((MainActivity)getActivity()).pic);
                                 del_btn.setVisibility(View.VISIBLE);
 
                             }else{
@@ -222,20 +240,19 @@ public class PathFragment extends Fragment {
                                 }
                             }
                             if (i!=1){
-
-                                ll = (LinearLayout)view.findViewById(R.id.partecipants);
-                                ll.setVisibility(View.VISIBLE);
-                                RecyclerView rec = (RecyclerView)view.findViewById(R.id.rec);
-                                PassAdapter passAdapter = new PassAdapter(ja);
-                                LinearLayoutManager layoutManager
-                                        = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                                rec.setLayoutManager(layoutManager);
-                                rec.setItemAnimator(new DefaultItemAnimator());
-                                rec.setAdapter(passAdapter);
-
-
-
+                                if (ja.length()>0) {
+                                    ll = (LinearLayout) view.findViewById(R.id.partecipants);
+                                    ll.setVisibility(View.VISIBLE);
+                                    RecyclerView rec = (RecyclerView) view.findViewById(R.id.rec);
+                                    PassAdapter passAdapter = new PassAdapter(getActivity(),ja);
+                                    LinearLayoutManager layoutManager
+                                            = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                    rec.setLayoutManager(layoutManager);
+                                    rec.setItemAnimator(new DefaultItemAnimator());
+                                    rec.setAdapter(passAdapter);
+                                }
                             }
+                            m.setText(jsonObject.getJSONObject("Maker").getString("Name"));
 
 
 
@@ -329,4 +346,43 @@ public class PathFragment extends Fragment {
         queue.add(stringRequest);
     }
 
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJs9dd_-5hLxMRphsGkxcQs5o&key="
+                +getResources().getString(R.string.API);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject j = new JSONObject(response);
+                            Double lat = j.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+                            Double lng = j.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+                            LatLng place = new LatLng(lat, lng);
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 17));
+
+                            googleMap.addMarker(new MarkerOptions()
+                                    .position(place));
+
+                            map.onResume();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+    }
 }
