@@ -24,3 +24,9 @@ Repository for the GCW2016/2017 project
 * [Slides](https://1drv.ms/p/s!Arh0UdVHsGBcoGjKhkq51oPmD5cM)
 * [UI/UX Survey](https://docs.google.com/forms/d/e/1FAIpQLSfO1ji527b9swJuDaUcQwbIOfQB8SUK0CYIQulFwFD-nLU0ow/viewform?c=0&w=1)
 
+
+
+
+### SPECIAL THANKS TO
+* [akexorcist/Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
+* [pedant/sweet-alert-dialog](https://github.com/pedant/sweet-alert-dialog)
