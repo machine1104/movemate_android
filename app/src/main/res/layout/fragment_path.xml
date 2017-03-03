@@ -10,7 +10,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/scroller">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -267,19 +268,25 @@
                 android:background="@drawable/shadow"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:padding="10dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/description"
                     android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:id="@+id/desc"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:text="desc"
                     android:textColor="@color/colorPrimary"/>
             </LinearLayout>
             <!-- MAKER -->
@@ -388,19 +395,17 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="JOIN"
+        android:text="@string/join"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/White"
         android:id="@+id/join_btn"
-        android:layout_margin="5dp"
         android:background="@drawable/rounded"
         android:visibility="gone"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DISJOIN"
+        android:text="@string/leave"
         android:id="@+id/disjoin_btn"
-        android:layout_margin="5dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/White"
         android:visibility="gone"
@@ -408,9 +413,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DELETE"
+        android:text="@string/delete"
         android:id="@+id/del_btn"
-        android:layout_margin="5dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/White"
         android:visibility="gone"

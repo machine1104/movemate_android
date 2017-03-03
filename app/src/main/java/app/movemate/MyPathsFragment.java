@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import app.movemate.ListAdapter.Path;
 import app.movemate.ListAdapter.PathsAdapter;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 public class MyPathsFragment extends Fragment {
@@ -34,7 +35,6 @@ public class MyPathsFragment extends Fragment {
     ListView rv;
     PathsAdapter pathsAdapter;
     String user_id = ((MainActivity)getActivity()).user_id;
-    ProgressDialog progDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,15 +63,15 @@ public class MyPathsFragment extends Fragment {
 
 
     public void populateList(){
-        progDialog = new ProgressDialog(getActivity());
-        progDialog.show();
-        progDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
-        progDialog.setContentView( R.layout.progress );
+        final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText(getResources().getString(R.string.loading_path));
+        dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
+        dialog.setCancelable(false);
+        dialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        url += user_id;
 
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+user_id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -84,7 +84,7 @@ public class MyPathsFragment extends Fragment {
                                 count--;
                                 pathsAdapter.add(path);
                             }
-                            progDialog.dismiss();
+                            dialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -93,7 +93,7 @@ public class MyPathsFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progDialog.dismiss();
+                dialog.dismiss();
                 Toasty.error(getActivity(), getString(R.string.error_getpath), Toast.LENGTH_SHORT, true).show();
             }
         })

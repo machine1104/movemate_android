@@ -1,28 +1,36 @@
 package app.movemate;
 
 
+import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.constant.TransitMode;
+import com.akexorcist.googledirection.constant.TransportMode;
+import com.akexorcist.googledirection.model.Direction;
+import com.akexorcist.googledirection.model.Leg;
+import com.akexorcist.googledirection.model.Route;
+import com.akexorcist.googledirection.request.DirectionOriginRequest;
+import com.akexorcist.googledirection.request.DirectionRequest;
+import com.akexorcist.googledirection.util.DirectionConverter;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,13 +41,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.Normalizer;
+import java.util.ArrayList;
+
 import app.movemate.ListAdapter.PassAdapter;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PathFragment extends Fragment implements OnMapReadyCallback {
     View view;
@@ -52,6 +68,11 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     RelativeLayout rl;
     LinearLayout ll;
     MapView map;
+    LatLng origin = null;
+    LatLng destination = null;
+    JSONObject info = null;
+    GoogleMap gMap;
+    NestedScrollView scroller;
 
 
     @Override
@@ -72,6 +93,24 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
             desc = (TextView)view.findViewById(R.id.desc);
             map = (MapView)view.findViewById(R.id.map);
             map.onCreate(savedInstanceState);
+            scroller = (NestedScrollView)view.findViewById(R.id.scroller);
+            map.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_MOVE:
+                            scroller.requestDisallowInterceptTouchEvent(true);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            scroller.requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                    return map.onTouchEvent(event);
+                }
+
+
+            });
             map.getMapAsync(this);
             m_pic = (ImageView)view.findViewById(R.id.m_pic);
             imv =(ImageView)view.findViewById(R.id.i);
@@ -98,7 +137,6 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
             });
 
 
-
             getPathInfo();
 
         } catch (JSONException e) {
@@ -110,6 +148,11 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void getPathInfo(){
+        final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText(getResources().getString(R.string.loading_info));
+        dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
+        dialog.setCancelable(false);
+        dialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         url += id;
 
@@ -118,19 +161,21 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        dialog.dismiss();
 
-                        JSONObject jsonObject = null;
+
                         int i;
                         try {
-                            jsonObject = new JSONObject(response);
-                            d.setText(jsonObject.getString("Date"));
-                            fa.setText(jsonObject.getString("StartAddress"));
-                            ta.setText(jsonObject.getString("DestinationAddress"));
-                            pn.setText(jsonObject.getString("PathName"));
-                            //desc.setText(jsonObject.getString("Desc"));
-                            i = jsonObject.getInt("Vehicle");
+                            info = new JSONObject(response);
+                            d.setText(info.getString("Date"));
+                            fa.setText(info.getString("StartAddress"));
+                            ta.setText(info.getString("DestinationAddress"));
+                            pn.setText(info.getString("PathName"));
+                            desc.setText(info.getString("Description"));
+                            i = info.getInt("Vehicle");
 
-                            String uid = jsonObject.getJSONObject("Maker").getString("StudentId");
+
+                            String uid = info.getJSONObject("Maker").getString("StudentId");
 
                             if (user_id.equals(uid)){
                                 //NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
@@ -142,7 +187,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                             }else{
                                 join_btn.setVisibility(View.VISIBLE);
                             }
-                            JSONArray ja = jsonObject.getJSONArray("Participants");
+                            JSONArray ja = info.getJSONArray("Participants");
                             int count = 0;
                             while(count<ja.length()){
                                 JSONObject JO = ja.getJSONObject(count);
@@ -157,7 +202,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 rl = (RelativeLayout) view.findViewById(R.id.moto_ly);
                                 rl.setVisibility(View.VISIBLE);
 
-                                if (jsonObject.getBoolean("Head")){
+                                if (info.getBoolean("Head")){
                                     h.setText(R.string.yes);
                                     h.setTextColor(ContextCompat.getColor(p.getContext(),R.color.LightGreenA700));
                                 }else{
@@ -168,7 +213,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 imv.setBackground(drawable);
                                 int price = 0;
                                 try {
-                                    price = Integer.parseInt(jsonObject.getString("Price"));
+                                    price = Integer.parseInt(info.getString("Price"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -194,19 +239,19 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 imv.setBackground(drawable);
                                 p.setText("FREE");
 
-                                if (jsonObject.getBoolean("Train")){
+                                if (info.getBoolean("Train")){
                                     v =(TextView)view.findViewById(R.id.v_t);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (jsonObject.getBoolean("Tram")){
+                                if (info.getBoolean("Tram")){
                                     v =(TextView)view.findViewById(R.id.v_tr);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (jsonObject.getBoolean("Bus")){
+                                if (info.getBoolean("Bus")){
                                     v =(TextView)view.findViewById(R.id.v_b);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (jsonObject.getBoolean("Metro")){
+                                if (info.getBoolean("Metro")){
                                     v =(TextView)view.findViewById(R.id.v_m);
                                     v.setVisibility(View.VISIBLE);
                                 }
@@ -216,12 +261,12 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                             else{
                                 rl = (RelativeLayout) view.findViewById(R.id.car_ly);
                                 rl.setVisibility(View.VISIBLE);
-                                s.setText(jsonObject.getInt("Seats")-ja.length()+"");
+                                s.setText(info.getInt("Seats")-ja.length()+"");
                                 drawable = ContextCompat.getDrawable(imv.getContext(),R.drawable.ic_car);
                                 imv.setBackground(drawable);
                                 int price = 0;
                                 try {
-                                    price = Integer.parseInt(jsonObject.getString("Price"));
+                                    price = Integer.parseInt(info.getString("Price"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -252,7 +297,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                     rec.setAdapter(passAdapter);
                                 }
                             }
-                            m.setText(jsonObject.getJSONObject("Maker").getString("Name"));
+                            m.setText(info.getJSONObject("Maker").getString("Name"));
 
 
 
@@ -265,7 +310,8 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                dialog.dismiss();
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -346,32 +392,31 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         queue.add(stringRequest);
     }
 
-    @Override
-    public void onMapReady(final GoogleMap googleMap) {
-
-
+    public void origin2LatLng(String from, final String to){
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJs9dd_-5hLxMRphsGkxcQs5o&key="
-                +getResources().getString(R.string.API);
+        from = from.replace(" ","");
+        from = Normalizer.normalize(from, Normalizer.Form.NFD);
+        from = from.replaceAll("[^\\p{ASCII}]", "");
+        String url = "http://maps.google.com/maps/api/geocode/json?address="+from;
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject j = new JSONObject(response);
-                            Double lat = j.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat");
-                            Double lng = j.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-                            LatLng place = new LatLng(lat, lng);
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 17));
+                            JSONObject json = new JSONObject(response);
+                            double lat = ((JSONArray)json.get("results")).getJSONObject(0)
+                                    .getJSONObject("geometry").getJSONObject("location")
+                                    .getDouble("lat");
+                            double lng = ((JSONArray)json.get("results")).getJSONObject(0)
+                                    .getJSONObject("geometry").getJSONObject("location")
+                                    .getDouble("lng");
+                            origin = new LatLng(lat,lng);
+                            destination2LatLng(to);
 
-                            googleMap.addMarker(new MarkerOptions()
-                                    .position(place));
-
-                            map.onResume();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
                 , new Response.ErrorListener() {
@@ -383,6 +428,113 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         });
 
         queue.add(stringRequest);
+    }
+    public void destination2LatLng(String to){
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        to = to.replace(" ","");
+        to = Normalizer.normalize(to, Normalizer.Form.NFD);
+        to = to.replaceAll("[^\\p{ASCII}]", "");
+        String url = "http://maps.google.com/maps/api/geocode/json?address="+to;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            double lat = ((JSONArray)json.get("results")).getJSONObject(0)
+                                    .getJSONObject("geometry").getJSONObject("location")
+                                    .getDouble("lat");
+                            double lng = ((JSONArray)json.get("results")).getJSONObject(0)
+                                    .getJSONObject("geometry").getJSONObject("location")
+                                    .getDouble("lng");
+                            destination = new LatLng(lat,lng);
+                            createRoute();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+    private void createRoute() throws JSONException {
+
+        DirectionRequest direction =   GoogleDirection.withServerKey(getResources().getString(R.string.API))
+                .from(origin)
+                .to(destination);
+        if (info.getInt("Vehicle")!=2){
+            direction = direction.transportMode(TransportMode.DRIVING);
+        }else{
+            direction = direction.transportMode(TransportMode.TRANSIT);
+            if (info.getBoolean("Train")){
+                direction = direction.transitMode(TransitMode.TRAIN);
+            }
+            if (info.getBoolean("Bus")){
+                direction = direction.transitMode(TransitMode.BUS);
+            }
+            if (info.getBoolean("Metro")){
+                direction = direction.transitMode(TransitMode.SUBWAY);
+            }
+            if (info.getBoolean("Tram")){
+                direction = direction.transitMode(TransitMode.TRAM);
+            }
+        }
+
+
+        direction.execute(new DirectionCallback() {
+            @Override
+            public void onDirectionSuccess(Direction direction, String rawBody) {
+                if(direction.isOK()) {
+                    map.onResume();
+                    Route route = direction.getRouteList().get(0);
+                    Leg leg = route.getLegList().get(0);
+                    ArrayList<LatLng> pointList = leg.getDirectionPoint();
+                    PolylineOptions polylineOptions = DirectionConverter.createPolyline(getActivity(), pointList, 5, getResources().getColor(R.color.colorPrimary));
+                    gMap.addPolyline(polylineOptions);
+                    gMap.getUiSettings().setZoomControlsEnabled(true);
+                    gMap.addMarker(new MarkerOptions().position(origin)).setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    gMap.addMarker(new MarkerOptions().position(destination)).setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
+
+                }
+            }
+
+            @Override
+            public void onDirectionFailure(Throwable t) {
+
+            }
+        });
+    }
+
+    public void onMapReady(GoogleMap googleMap){
+        gMap = googleMap;
+
+        try {
+            if (new JSONObject(getArguments().getString("path")).getBoolean("ToFrom")){
+                String addressFrom = new JSONObject(getArguments().getString("path")).getString("StartAddress");
+                String addressTo = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
+                origin2LatLng(addressFrom,addressTo);
+            }else{
+                String addressTo = new JSONObject(getArguments().getString("path")).getString("DestinationAddress");
+                String addressFrom = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
+                origin2LatLng(addressFrom,addressTo);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 }

@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import app.movemate.ListAdapter.Path;
 import app.movemate.ListAdapter.PathsAdapter;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 public class FindPathFragment extends Fragment {
@@ -34,7 +36,6 @@ public class FindPathFragment extends Fragment {
     ListView rv;
     PathsAdapter pathsAdapter;
     String user_id = ((MainActivity)getActivity()).user_id;
-    ProgressDialog progDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +47,7 @@ public class FindPathFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).nextFrag(new ChooseDirectionFragment());
-                getActivity().setTitle("Crea");
+                getActivity().setTitle(getResources().getString(R.string.create));
             }
         });
         rv = (ListView) view.findViewById(R.id.groupList);
@@ -72,10 +73,11 @@ public class FindPathFragment extends Fragment {
 
 
     public void populateList(){
-        progDialog = new ProgressDialog(getActivity());
-        progDialog.show();
-        progDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
-        progDialog.setContentView( R.layout.progress );
+        final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText(getResources().getString(R.string.loading_path));
+        dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
+        dialog.setCancelable(false);
+        dialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         url += user_id;
@@ -95,7 +97,7 @@ public class FindPathFragment extends Fragment {
                                 pathsAdapter.add(path);
 
                             }
-                            progDialog.dismiss();
+                            dialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -106,7 +108,7 @@ public class FindPathFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progDialog.dismiss();
+                dialog.dismiss();
                 Toasty.error(getActivity(), getString(R.string.error_getpath), Toast.LENGTH_SHORT, true).show();
             }
         });

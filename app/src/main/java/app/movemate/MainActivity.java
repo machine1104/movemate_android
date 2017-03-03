@@ -33,6 +33,7 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONObject;
 
@@ -67,15 +68,15 @@ public class MainActivity extends ActionBarActivity {
                 tab_id = item.getItemId();
                 if (item.getItemId() == R.id.find){
                     changeTab(new FindPathFragment());
-                    setTitle("Find");
+                    setTitle(getResources().getString(R.string.find));
                 }
                 if (item.getItemId() == R.id.map){
                     changeTab(new MapFragment());
-                    setTitle("Map");
+                    setTitle(getResources().getString(R.string.map));
                 }
                 if (item.getItemId() == R.id.myMates){
                     changeTab(new MyPathsFragment());
-                    setTitle("My Paths");
+                    setTitle(getResources().getString(R.string.myRoutes));
                 }
                 return true;
             }
@@ -178,6 +179,7 @@ public class MainActivity extends ActionBarActivity {
         fragmentTransaction.commit();
     }
 
+
     class bitMapTask extends AsyncTask<String,ImageView, Bitmap> {
 
         private Exception exception;
@@ -217,13 +219,13 @@ public class MainActivity extends ActionBarActivity {
         super.onBackPressed();
         if(fm.getBackStackEntryCount()==0){
             if (tab_id == R.id.find){
-                setTitle("Find");
+                setTitle(getResources().getString(R.string.find));
             }
             if (tab_id == R.id.map){
-                setTitle("Map");
+                setTitle(getResources().getString(R.string.map));
             }
             if (tab_id == R.id.myMates){
-                setTitle("My Paths");
+                setTitle(getResources().getString(R.string.myRoutes));
             }
 
         }

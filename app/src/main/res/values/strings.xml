@@ -1,13 +1,9 @@
 <resources>
 
-    <string name="facebook_app_id">256934444739950</string>
-
     <string name="app_name">Move Mate</string>
-    <string name="Find">Find</string>
-    <string name="Map">Map</string>
-    <string name="MyMates">My Mates</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="find">Find</string>
+    <string name="map">Map</string>
+    <string name="myRoutes">My Routes</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_group_name">Path Name</string>
     <string name="hint_group_name">Insert Path Name</string>
@@ -48,7 +44,7 @@
     <string name="create_university">University</string>
     <string name="confirm">Confirm</string>
     <string name="MyPaths">My Paths</string>
-    <string name="price">Price:</string>
+    <string name="price">Price (each):</string>
     <string name="description">Description</string>
     <string name="seats">Seats Available</string>
     <string name="yes">YES</string>
@@ -57,8 +53,15 @@
     <string name="passengers">Passengers</string>
     <string name="participants">Participants</string>
     <string name="mate">mate</string>
-    <string name="API">AIzaSyDQz-CaE2PK_oSDRKzasLsrUi9sQ3akXYM</string>
     <string name="start">Start</string>
-    <string name="error_create">Impossible to create a trip.</string>
-    <string name="error_getpath">Can\'t retrieve path list.</string>
+    <string name="error_create">Impossible to create a route.</string>
+    <string name="error_getpath">Can\'t retrieve routes list.</string>
+    <string name="loading_info">Retrieving route info...</string>
+    <string name="loading_app">Checking user info...</string>
+    <string name="loading_path">Retrieving routes list...</string>
+    <string name="loading_creation">Creating path...</string>
+    <string name="create">Create</string>
+    <string name="delete">DELETE</string>
+    <string name="leave">LEAVE</string>
+    <string name="join">JOIN</string>
 </resources>

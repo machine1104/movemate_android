@@ -27,6 +27,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class LoginActivity extends Activity {
     CallbackManager callbackManager;
     LoginButton loginButton;
@@ -96,11 +98,11 @@ public class LoginActivity extends Activity {
     }
 
     private void check() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-
-        progressDialog.show();
-        progressDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
-        progressDialog.setContentView( R.layout.progress );
+        final SweetAlertDialog dialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText(getResources().getString(R.string.loading_app));
+        dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
+        dialog.setCancelable(false);
+        dialog.show();
 
         Log.d("FACEBOOK_ID", AccessToken.getCurrentAccessToken().getUserId());
         RequestQueue queue = Volley.newRequestQueue(ctx);
@@ -110,7 +112,7 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         //codice 200
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         i.putExtra("user",response);
                         startActivity(i);
@@ -129,10 +131,10 @@ public class LoginActivity extends Activity {
                     else{
                         Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
+                    dialog.dismiss();
                 }
                 else{
-                    progressDialog.dismiss();
+                    dialog.dismiss();
                     check();
                 }
 

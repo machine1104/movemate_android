@@ -9,7 +9,7 @@
         android:textColor="@color/Black"
         android:layout_width="match_parent"
         android:layout_height="561dp"
-        android:text="@string/Map"
+        android:text="@string/map"
         android:id="@+id/textView" />
 
 </FrameLayout>

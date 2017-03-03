@@ -53,6 +53,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Calendar;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
@@ -338,7 +339,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
             public void onClick(View view) {
                 JSONObject trip = new JSONObject();
                 try {
-                    trip.put("ToFrom",true);
+                    trip.put("ToFrom",false);
                     trip.put("StudentId",((MainActivity)getActivity()).user_id);
 
                     EditText trip_name = (EditText)v.findViewById(R.id.trip_name);
@@ -559,9 +560,11 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
     }
 
     private void create(int n, final JSONObject json) throws JSONException {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText(getResources().getString(R.string.loading_creation));
+        dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
+        dialog.setCancelable(false);
+        dialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url;
 
@@ -579,7 +582,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                         Toasty.success(getActivity(), "Success!", Toast.LENGTH_SHORT, true).show();
                         View t = getActivity().findViewById(R.id.myMates);
                         t.performClick();
@@ -588,7 +591,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+                dialog.dismiss();
                 Toasty.error(getActivity(), getString(R.string.error_create), Toast.LENGTH_SHORT, true).show();
             }
         })
@@ -604,7 +607,6 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                 String s = json.toString();
                 String js = s.substring(0,s.indexOf("}"));
                 js = js+",\"Date\":\""+date+" "+time+"\"}";
-                Log.d("json",js);
 
                 return js.getBytes();
             }
