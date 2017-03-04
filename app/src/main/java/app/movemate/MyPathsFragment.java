@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +40,16 @@ public class MyPathsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_my_paths, container, false);
+        FloatingActionButton add = (FloatingActionButton)view.findViewById(R.id.add_btn);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).nextFrag(new ChooseDirectionFragment());
+                getActivity().setTitle(getResources().getString(R.string.create));
+            }
+        });
         rv = (ListView) view.findViewById(R.id.matesList);
         rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

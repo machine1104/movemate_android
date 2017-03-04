@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     tools:context="app.movemate.FindPathFragment">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/main_content"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/groupList"
@@ -17,17 +12,5 @@
             android:layout_marginStart="5dp"
             android:divider="@color/transparent">
         </ListView>
-
-        <android.support.design.widget.FloatingActionButton
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_add"
-            android:id="@+id/add_btn"
-            app:backgroundTint="@color/colorPrimary"/>
-
-    </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

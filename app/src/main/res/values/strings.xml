@@ -64,4 +64,8 @@
     <string name="delete">DELETE</string>
     <string name="leave">LEAVE</string>
     <string name="join">JOIN</string>
+    <string name="join_confirm">Join route?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_confirm">Delete route?</string>
+    <string name="disjoin_confirm">Leave route?</string>
 </resources>

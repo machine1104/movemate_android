@@ -1,14 +1,15 @@
 package app.movemate;
 
-import android.os.Bundle;
+
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class ChooseDirectionFragment extends Fragment {
+public class FindDirectionFragment extends Fragment {
 
     View view;
 
@@ -21,7 +22,7 @@ public class ChooseDirectionFragment extends Fragment {
         btn_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).nextFrag(new CreateToFragment());
+                //((MainActivity)getActivity()).nextFrag(new CreateToFragment());
             }
         });
 
@@ -29,7 +30,7 @@ public class ChooseDirectionFragment extends Fragment {
         btn_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).nextFrag(new CreateFromFragment());
+                //((MainActivity)getActivity()).nextFrag(new CreateFromFragment());
             }
         });
 

@@ -42,14 +42,7 @@ public class FindPathFragment extends Fragment {
                              Bundle savedInstanceState) {
          view =  inflater.inflate(R.layout.fragment_find, container, false);
 
-        FloatingActionButton add = (FloatingActionButton)view.findViewById(R.id.add_btn);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).nextFrag(new ChooseDirectionFragment());
-                getActivity().setTitle(getResources().getString(R.string.create));
-            }
-        });
+
         rv = (ListView) view.findViewById(R.id.groupList);
         rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

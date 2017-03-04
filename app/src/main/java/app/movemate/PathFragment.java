@@ -2,6 +2,7 @@ package app.movemate;
 
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -57,11 +58,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class PathFragment extends Fragment implements OnMapReadyCallback {
     View view;
     String id;
-    String url =  "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
-    TextView pn,p,fa,ta,d,s,h,v,m,desc;
-    ImageView imv,m_pic;
+    String url = "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
+    TextView pn, p, fa, ta, d, s, h, v, m, desc;
+    ImageView imv, m_pic;
     Button join_btn, del_btn, disjoin_btn;
-    String user_id = ((MainActivity)getActivity()).user_id;
+    String user_id = ((MainActivity) getActivity()).user_id;
     RelativeLayout rl;
     LinearLayout ll;
     MapView map;
@@ -75,22 +76,21 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_path, container, false);
         try {
             id = new JSONObject(getArguments().getString("path")).getString("PathId");
-            pn =(TextView)view.findViewById(R.id.pn);
-            p =(TextView)view.findViewById(R.id.p);
-            fa =(TextView)view.findViewById(R.id.fa);
-            ta =(TextView)view.findViewById(R.id.ta);
-            d =(TextView)view.findViewById(R.id.d);
-            s =(TextView)view.findViewById(R.id.s);
-            h =(TextView)view.findViewById(R.id.h);
-            m = (TextView)view.findViewById(R.id.m_name);
-            desc = (TextView)view.findViewById(R.id.desc);
-            map = (MapView)view.findViewById(R.id.map);
+            pn = (TextView) view.findViewById(R.id.pn);
+            p = (TextView) view.findViewById(R.id.p);
+            fa = (TextView) view.findViewById(R.id.fa);
+            ta = (TextView) view.findViewById(R.id.ta);
+            d = (TextView) view.findViewById(R.id.d);
+            s = (TextView) view.findViewById(R.id.s);
+            h = (TextView) view.findViewById(R.id.h);
+            m = (TextView) view.findViewById(R.id.m_name);
+            desc = (TextView) view.findViewById(R.id.desc);
+            map = (MapView) view.findViewById(R.id.map);
             map.onCreate(savedInstanceState);
-            scroller = (NestedScrollView)view.findViewById(R.id.scroller);
+            scroller = (NestedScrollView) view.findViewById(R.id.scroller);
             map.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -109,27 +109,81 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
             });
             map.getMapAsync(this);
-            m_pic = (ImageView)view.findViewById(R.id.m_pic);
-            imv =(ImageView)view.findViewById(R.id.i);
-            join_btn = (Button)view.findViewById(R.id.join_btn);
-            del_btn = (Button)view.findViewById(R.id.del_btn);
-            disjoin_btn = (Button)view.findViewById(R.id.disjoin_btn);
+            m_pic = (ImageView) view.findViewById(R.id.m_pic);
+            imv = (ImageView) view.findViewById(R.id.i);
+            join_btn = (Button) view.findViewById(R.id.join_btn);
+            del_btn = (Button) view.findViewById(R.id.del_btn);
+            disjoin_btn = (Button) view.findViewById(R.id.disjoin_btn);
             join_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    join();
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getResources().getString(R.string.join_confirm))
+                            .setConfirmText(getResources().getString(R.string.confirm))
+                            .setCancelText(getResources().getString(R.string.cancel))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    join();
+                                }
+                            })
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            })
+                            .show();
                 }
             });
             del_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    delete();
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getResources().getString(R.string.delete_confirm))
+                            .setConfirmText(getResources().getString(R.string.confirm))
+                            .setCancelText(getResources().getString(R.string.cancel))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    delete();
+                                }
+                            })
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            })
+                            .show();
                 }
             });
             disjoin_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    disjoin();
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getResources().getString(R.string.disjoin_confirm))
+                            .setConfirmText(getResources().getString(R.string.confirm))
+                            .setCancelText(getResources().getString(R.string.cancel))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    disjoin();
+                                }
+                            })
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            })
+                            .show();
                 }
             });
 
@@ -144,7 +198,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    public void getPathInfo(){
+    private void getPathInfo() {
         final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
         dialog.setTitleText(getResources().getString(R.string.loading_info));
         dialog.getProgressHelper().setBarColor(getResources().getColor(R.color.colorAccent));
@@ -152,8 +206,6 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         dialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         url += id;
-
-        // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -169,44 +221,51 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                             ta.setText(info.getString("DestinationAddress"));
                             pn.setText(info.getString("PathName"));
                             desc.setText(info.getString("Description"));
+
+                            if (new JSONObject(getArguments().getString("path")).getBoolean("ToFrom")) {
+                                String addressFrom = new JSONObject(getArguments().getString("path")).getString("StartAddress");
+                                String addressTo = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
+                                origin2LatLng(addressFrom, addressTo);
+                            } else {
+                                String addressTo = new JSONObject(getArguments().getString("path")).getString("DestinationAddress");
+                                String addressFrom = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
+                                origin2LatLng(addressFrom, addressTo);
+                            }
+
                             i = info.getInt("Vehicle");
 
 
                             String uid = info.getJSONObject("Maker").getString("StudentId");
 
-                            if (user_id.equals(uid)){
-                                //NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
-                                //View dView =  navigationView.getHeaderView(0);
-                                //ImageView pic = (ImageView) dView.findViewById(R.id.photo);
-                                //m_pic.setBackground(((MainActivity)getActivity()).pic);
+                            if (user_id.equals(uid)) {
                                 del_btn.setVisibility(View.VISIBLE);
 
-                            }else{
+                            } else {
                                 join_btn.setVisibility(View.VISIBLE);
                             }
                             JSONArray ja = info.getJSONArray("Participants");
                             int count = 0;
-                            while(count<ja.length()){
+                            while (count < ja.length()) {
                                 JSONObject JO = ja.getJSONObject(count);
-                                if (JO.getString("StudentId").equals(user_id)){
+                                if (JO.getString("StudentId").equals(user_id)) {
                                     join_btn.setVisibility(View.GONE);
                                     disjoin_btn.setVisibility(View.VISIBLE);
                                 }
                                 count++;
                             }
                             Drawable drawable;
-                            if (i == 1){
+                            if (i == 1) {
                                 rl = (RelativeLayout) view.findViewById(R.id.moto_ly);
                                 rl.setVisibility(View.VISIBLE);
 
-                                if (info.getBoolean("Head")){
+                                if (info.getBoolean("Head")) {
                                     h.setText(R.string.yes);
-                                    h.setTextColor(ContextCompat.getColor(p.getContext(),R.color.LightGreenA700));
-                                }else{
+                                    h.setTextColor(Color.parseColor("#27ae60"));
+                                } else {
                                     h.setText(R.string.no);
-                                    h.setTextColor(ContextCompat.getColor(p.getContext(),R.color.RedA700));
+                                    h.setTextColor(ContextCompat.getColor(p.getContext(), R.color.RedA700));
                                 }
-                                drawable = ContextCompat.getDrawable(imv.getContext(),R.drawable.ic_motorcycle);
+                                drawable = ContextCompat.getDrawable(imv.getContext(), R.drawable.ic_motorcycle);
                                 imv.setBackground(drawable);
                                 int price = 0;
                                 try {
@@ -214,52 +273,49 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                if(price == 0){
+                                if (price == 0) {
                                     p.setText("FREE");
-                                }else{
-                                    p.setText(price+"€");
+                                } else {
+                                    p.setText(price + "€");
                                 }
-                                if (price < 3){
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.LightGreenA700));
-                                }
-                                else if (price < 7 && price >= 4){
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.Amber900));
-                                }else{
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.RedA700));
+                                if (price < 3) {
+                                    p.setTextColor(Color.parseColor("#27ae60"));
+                                } else if (price < 7 && price >= 4) {
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.Amber900));
+                                } else {
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.RedA700));
                                 }
 
-                            }
-                            else if (i == 2) {
+                            } else if (i == 2) {
                                 ll = (LinearLayout) view.findViewById(R.id.bus_ly);
                                 ll.setVisibility(View.VISIBLE);
                                 drawable = ContextCompat.getDrawable(imv.getContext(), R.drawable.ic_bus);
                                 imv.setBackground(drawable);
                                 p.setText("FREE");
 
-                                if (info.getBoolean("Train")){
-                                    v =(TextView)view.findViewById(R.id.v_t);
+                                if (info.getBoolean("Train")) {
+                                    v = (TextView) view.findViewById(R.id.v_t);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (info.getBoolean("Tram")){
-                                    v =(TextView)view.findViewById(R.id.v_tr);
+                                if (info.getBoolean("Tram")) {
+                                    v = (TextView) view.findViewById(R.id.v_tr);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (info.getBoolean("Bus")){
-                                    v =(TextView)view.findViewById(R.id.v_b);
+                                if (info.getBoolean("Bus")) {
+                                    v = (TextView) view.findViewById(R.id.v_b);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                if (info.getBoolean("Metro")){
-                                    v =(TextView)view.findViewById(R.id.v_m);
+                                if (info.getBoolean("Metro")) {
+                                    v = (TextView) view.findViewById(R.id.v_m);
                                     v.setVisibility(View.VISIBLE);
                                 }
-                                p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.LightGreenA700));
+                                p.setTextColor(Color.parseColor("#27ae60"));
 
-                            }
-                            else{
+                            } else {
                                 rl = (RelativeLayout) view.findViewById(R.id.car_ly);
                                 rl.setVisibility(View.VISIBLE);
-                                s.setText(info.getInt("Seats")-ja.length()+"");
-                                drawable = ContextCompat.getDrawable(imv.getContext(),R.drawable.ic_car);
+                                s.setText(info.getInt("Seats") - ja.length() + "");
+                                drawable = ContextCompat.getDrawable(imv.getContext(), R.drawable.ic_car);
                                 imv.setBackground(drawable);
                                 int price = 0;
                                 try {
@@ -267,26 +323,25 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                if(price == 0){
+                                if (price == 0) {
                                     p.setText("FREE");
-                                }else{
-                                    p.setText(price+"€");
+                                } else {
+                                    p.setText(price + "€");
                                 }
-                                if (price < 4){
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.LightGreenA700));
-                                }
-                                else if (price < 7 && price >= 4){
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.Amber900));
-                                }else{
-                                    p.setTextColor(ContextCompat.getColor(p.getContext(),R.color.RedA700));
+                                if (price < 4) {
+                                    p.setTextColor(Color.parseColor("#27ae60"));
+                                } else if (price < 7 && price >= 4) {
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.Amber900));
+                                } else {
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.RedA700));
                                 }
                             }
-                            if (i!=1){
-                                if (ja.length()>0) {
+                            if (i != 1) {
+                                if (ja.length() > 0) {
                                     ll = (LinearLayout) view.findViewById(R.id.partecipants);
                                     ll.setVisibility(View.VISIBLE);
                                     RecyclerView rec = (RecyclerView) view.findViewById(R.id.rec);
-                                    PassAdapter passAdapter = new PassAdapter(getActivity(),ja);
+                                    PassAdapter passAdapter = new PassAdapter(getActivity(), ja);
                                     LinearLayoutManager layoutManager
                                             = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                                     rec.setLayoutManager(layoutManager);
@@ -295,7 +350,6 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 }
                             }
                             m.setText(info.getJSONObject("Maker").getString("Name"));
-
 
 
                         } catch (JSONException e) {
@@ -315,12 +369,10 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         queue.add(stringRequest);
     }
 
-    public void join(){
+    private void join() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        String url = "http://movemate-api.azurewebsites.net/api/paths/putjoinpath?StudentId="+user_id+"&PathId="+id;
-
-        // Request a string response from the provided URL.
+        String url = "http://movemate-api.azurewebsites.net/api/paths/putjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
@@ -334,18 +386,16 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(),"Errore recupero percorsi",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Errore recupero percorsi", Toast.LENGTH_SHORT).show();
             }
         });
 
         queue.add(stringRequest);
     }
 
-    public void delete(){
+    private void delete() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "http://movemate-api.azurewebsites.net/api/paths/deletepath?StudentId="+user_id+"&PathId="+id;
-
-        // Request a string response from the provided URL.
+        String url = "http://movemate-api.azurewebsites.net/api/paths/deletepath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
                     @Override
@@ -365,11 +415,9 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         queue.add(stringRequest);
     }
 
-    public void disjoin(){
+    private void disjoin() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "http://movemate-api.azurewebsites.net/api/paths/putdisjoinpath?StudentId="+user_id+"&PathId="+id;
-
-        // Request a string response from the provided URL.
+        String url = "http://movemate-api.azurewebsites.net/api/paths/putdisjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
@@ -389,26 +437,25 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         queue.add(stringRequest);
     }
 
-    public void origin2LatLng(String from, final String to){
+    private void origin2LatLng(String from, final String to) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        from = from.replace(" ","");
+        from = from.replace(" ", "");
         from = Normalizer.normalize(from, Normalizer.Form.NFD);
         from = from.replaceAll("[^\\p{ASCII}]", "");
-        String url = "http://maps.google.com/maps/api/geocode/json?address="+from;
-
+        String url = "http://maps.google.com/maps/api/geocode/json?address=" + from;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject json = new JSONObject(response);
-                            double lat = ((JSONArray)json.get("results")).getJSONObject(0)
+                            double lat = ((JSONArray) json.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lat");
-                            double lng = ((JSONArray)json.get("results")).getJSONObject(0)
+                            double lng = ((JSONArray) json.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lng");
-                            origin = new LatLng(lat,lng);
+                            origin = new LatLng(lat, lng);
                             destination2LatLng(to);
 
                         } catch (JSONException e) {
@@ -426,26 +473,26 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
         queue.add(stringRequest);
     }
-    public void destination2LatLng(String to){
+
+    private void destination2LatLng(String to) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        to = to.replace(" ","");
+        to = to.replace(" ", "");
         to = Normalizer.normalize(to, Normalizer.Form.NFD);
         to = to.replaceAll("[^\\p{ASCII}]", "");
-        String url = "http://maps.google.com/maps/api/geocode/json?address="+to;
-
+        String url = "http://maps.google.com/maps/api/geocode/json?address=" + to;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject json = new JSONObject(response);
-                            double lat = ((JSONArray)json.get("results")).getJSONObject(0)
+                            double lat = ((JSONArray) json.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lat");
-                            double lng = ((JSONArray)json.get("results")).getJSONObject(0)
+                            double lng = ((JSONArray) json.get("results")).getJSONObject(0)
                                     .getJSONObject("geometry").getJSONObject("location")
                                     .getDouble("lng");
-                            destination = new LatLng(lat,lng);
+                            destination = new LatLng(lat, lng);
                             createRoute();
 
                         } catch (JSONException e) {
@@ -463,25 +510,26 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
         queue.add(stringRequest);
     }
+
     private void createRoute() throws JSONException {
 
-        DirectionRequest direction =   GoogleDirection.withServerKey(getResources().getString(R.string.API))
+        DirectionRequest direction = GoogleDirection.withServerKey(getResources().getString(R.string.API))
                 .from(origin)
                 .to(destination);
-        if (info.getInt("Vehicle")!=2){
+        if (info.getInt("Vehicle") != 2) {
             direction = direction.transportMode(TransportMode.DRIVING);
-        }else{
+        } else {
             direction = direction.transportMode(TransportMode.TRANSIT);
-            if (info.getBoolean("Train")){
+            if (info.getBoolean("Train")) {
                 direction = direction.transitMode(TransitMode.TRAIN);
             }
-            if (info.getBoolean("Bus")){
+            if (info.getBoolean("Bus")) {
                 direction = direction.transitMode(TransitMode.BUS);
             }
-            if (info.getBoolean("Metro")){
+            if (info.getBoolean("Metro")) {
                 direction = direction.transitMode(TransitMode.SUBWAY);
             }
-            if (info.getBoolean("Tram")){
+            if (info.getBoolean("Tram")) {
                 direction = direction.transitMode(TransitMode.TRAM);
             }
         }
@@ -490,7 +538,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         direction.execute(new DirectionCallback() {
             @Override
             public void onDirectionSuccess(Direction direction, String rawBody) {
-                if(direction.isOK()) {
+                if (direction.isOK()) {
                     map.onResume();
                     Route route = direction.getRouteList().get(0);
                     Leg leg = route.getLegList().get(0);
@@ -514,24 +562,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
-    public void onMapReady(GoogleMap googleMap){
+    public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
-
-        try {
-            if (new JSONObject(getArguments().getString("path")).getBoolean("ToFrom")){
-                String addressFrom = new JSONObject(getArguments().getString("path")).getString("StartAddress");
-                String addressTo = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
-                origin2LatLng(addressFrom,addressTo);
-            }else{
-                String addressTo = new JSONObject(getArguments().getString("path")).getString("DestinationAddress");
-                String addressFrom = new JSONObject(getArguments().getString("path")).getString("DepartmentAddress");
-                origin2LatLng(addressFrom,addressTo);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
     }
 }
