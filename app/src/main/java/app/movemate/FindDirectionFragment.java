@@ -22,7 +22,11 @@ public class FindDirectionFragment extends Fragment {
         btn_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //((MainActivity)getActivity()).nextFrag(new CreateToFragment());
+                Bundle b = new Bundle();
+                b.putBoolean("ToFrom",true);
+                FilterFragment frag = new FilterFragment();
+                frag.setArguments(b);
+                ((MainActivity)getActivity()).nextFrag(frag);
             }
         });
 
@@ -30,7 +34,11 @@ public class FindDirectionFragment extends Fragment {
         btn_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //((MainActivity)getActivity()).nextFrag(new CreateFromFragment());
+                Bundle b = new Bundle();
+                b.putBoolean("ToFrom",false);
+                FilterFragment frag = new FilterFragment();
+                frag.setArguments(b);
+                ((MainActivity)getActivity()).nextFrag(frag);
             }
         });
 

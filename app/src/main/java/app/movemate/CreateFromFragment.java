@@ -354,9 +354,9 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                     String desc = trip_desc.getText().toString();
 
                     if(name.equals("") || date.equals("") || time.equals("") || adrs.equals("") || ven.equals("") || desc.equals("") ){
-                        Toast.makeText(getActivity(),"Compila tutti i campi",Toast.LENGTH_SHORT).show();
+                        Toasty.error(getActivity(),getString(R.string.missing_fields),Toast.LENGTH_SHORT, true).show();
                     }else if (!departmentId.has(ven)){
-                        Toast.makeText(getActivity(),"Sede non valida",Toast.LENGTH_SHORT).show();
+                        Toasty.error(getActivity(),getString(R.string.dep_err),Toast.LENGTH_SHORT, true).show();
                     }
 
                     else{
@@ -383,7 +383,7 @@ public class CreateFromFragment extends Fragment implements GoogleApiClient.OnCo
                             Boolean bus = ((CheckBox)v.findViewById(R.id.bus)).isChecked();
 
                             if (!tram && !train && !metro && !bus){
-                                Toast.makeText(getActivity(),"Seleziona almeno un mezzo",Toast.LENGTH_SHORT).show();
+                                Toasty.error(getActivity(),getString(R.string.missing_vehicle),Toast.LENGTH_SHORT, true).show();
                             }else{
                                 if (tram){
                                     trip.put("Tram",true);

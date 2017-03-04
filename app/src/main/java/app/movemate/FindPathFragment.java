@@ -19,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,16 +31,13 @@ import es.dmoral.toasty.Toasty;
 
 public class FindPathFragment extends Fragment {
     View view;
-    String url =  "http://movemate-api.azurewebsites.net/api/paths/getpaths/";
     ListView rv;
     PathsAdapter pathsAdapter;
-    String user_id = ((MainActivity)getActivity()).user_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          view =  inflater.inflate(R.layout.fragment_find, container, false);
-
 
         rv = (ListView) view.findViewById(R.id.groupList);
         rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +69,7 @@ public class FindPathFragment extends Fragment {
         dialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        url += user_id;
+        String url = getArguments().getString("url");
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

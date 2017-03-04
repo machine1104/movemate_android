@@ -18,7 +18,7 @@
     <string name="hint_venue">Find Department</string>
     <string name="hint_address">Find Address</string>
     <string name="create_create">Create</string>
-    <string name="create_price">Price</string>
+    <string name="create_price">Choose Price</string>
     <string name="create_helmet">Helmet Available</string>
     <string name="train">Train</string>
     <string name="metro">Metro</string>
@@ -68,4 +68,7 @@
     <string name="cancel">Cancel</string>
     <string name="delete_confirm">Delete route?</string>
     <string name="disjoin_confirm">Leave route?</string>
+    <string name="missing_fields">Some missing fields</string>
+    <string name="dep_err">Choose department from list!</string>
+    <string name="missing_vehicle">Missing vehicle.</string>
 </resources>

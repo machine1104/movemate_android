@@ -36,12 +36,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -77,6 +80,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_path, container, false);
+
         try {
             id = new JSONObject(getArguments().getString("path")).getString("PathId");
             pn = (TextView) view.findViewById(R.id.pn);
@@ -260,7 +264,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
                                 if (info.getBoolean("Head")) {
                                     h.setText(R.string.yes);
-                                    h.setTextColor(Color.parseColor("#27ae60"));
+                                    h.setTextColor(ContextCompat.getColor(p.getContext(), R.color.GreenA800));
                                 } else {
                                     h.setText(R.string.no);
                                     h.setTextColor(ContextCompat.getColor(p.getContext(), R.color.RedA700));
@@ -278,8 +282,8 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 } else {
                                     p.setText(price + "€");
                                 }
-                                if (price < 3) {
-                                    p.setTextColor(Color.parseColor("#27ae60"));
+                                if (price < 4) {
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.GreenA800));
                                 } else if (price < 7 && price >= 4) {
                                     p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.Amber900));
                                 } else {
@@ -329,7 +333,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                     p.setText(price + "€");
                                 }
                                 if (price < 4) {
-                                    p.setTextColor(Color.parseColor("#27ae60"));
+                                    p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.GreenA800));
                                 } else if (price < 7 && price >= 4) {
                                     p.setTextColor(ContextCompat.getColor(p.getContext(), R.color.Amber900));
                                 } else {
@@ -546,11 +550,17 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                     PolylineOptions polylineOptions = DirectionConverter.createPolyline(getActivity(), pointList, 5, getResources().getColor(R.color.colorPrimary));
                     gMap.addPolyline(polylineOptions);
                     gMap.getUiSettings().setZoomControlsEnabled(true);
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.include(origin);
+                    builder.include(destination);
+                    LatLngBounds bounds = builder.build();
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 150);
+
                     gMap.addMarker(new MarkerOptions().position(origin)).setIcon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     gMap.addMarker(new MarkerOptions().position(destination)).setIcon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
+                    gMap.animateCamera(cu);
 
                 }
             }
