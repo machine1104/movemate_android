@@ -19,7 +19,7 @@ public class FilterFragment extends Fragment {
     View view;
     TextView price;
     SeekBar price_bar;
-    String url = "http://movemate-api.azurewebsites.net/api/paths/getfilteredpaths?";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class FilterFragment extends Fragment {
     }
 
     private void apply(){
+        String url = "http://movemate-api.azurewebsites.net/api/paths/getfilteredpaths?";
         Boolean car,moto,transport;
         car = ((CheckBox)view.findViewById(R.id.car)).isChecked();
         moto = ((CheckBox)view.findViewById(R.id.moto)).isChecked();
