@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class ChooseDirectionFragment extends Fragment {
 
@@ -21,7 +24,19 @@ public class ChooseDirectionFragment extends Fragment {
         btn_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).nextFrag(new CreateToFragment());
+                Bundle b = new Bundle();
+                JSONObject route = new JSONObject();
+                try {
+                    route.put("ToFrom",true);
+                    route.put("StudentId",((MainActivity)getActivity()).user_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                b.putString("route",route.toString());
+                CreateTransportFragment frag = new CreateTransportFragment();
+                frag.setArguments(b);
+                ((MainActivity)getActivity()).nextFrag(frag);
             }
         });
 
@@ -29,7 +44,19 @@ public class ChooseDirectionFragment extends Fragment {
         btn_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).nextFrag(new CreateFromFragment());
+                Bundle b = new Bundle();
+                JSONObject route = new JSONObject();
+                try {
+                    route.put("ToFrom",false);
+                    route.put("StudentId",((MainActivity)getActivity()).user_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                b.putString("route",route.toString());
+                CreateTransportFragment frag = new CreateTransportFragment();
+                frag.setArguments(b);
+                ((MainActivity)getActivity()).nextFrag(frag);
             }
         });
 

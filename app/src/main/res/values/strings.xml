@@ -6,8 +6,8 @@
     <string name="myRoutes">My Routes</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_group_name">Path Name</string>
-    <string name="hint_group_name">Insert Path Name</string>
-    <string name="create_vehicle">Choose Transport</string>
+    <string name="hint_group_name">Insert Route Name</string>
+    <string name="create_vehicle">Choose Transport Type</string>
     <string name="create_car">Car</string>
     <string name="create_moto">Motorcycle</string>
     <string name="create_public_transport">Public Transport</string>
@@ -24,7 +24,7 @@
     <string name="metro">Metro</string>
     <string name="tram">Tram</string>
     <string name="bus">Bus</string>
-    <string name="create_desc">Short Description</string>
+    <string name="create_desc">Insert Description</string>
     <string name="create_start_date">Date</string>
     <string name="hint_group_date">Insert Date</string>
     <string name="create_start_time">Time</string>
@@ -71,4 +71,14 @@
     <string name="missing_fields">Some missing fields</string>
     <string name="dep_err">Choose department from list!</string>
     <string name="missing_vehicle">Missing vehicle.</string>
+    <string name="distance">Distance (meters)</string>
+    <string name="choose_direction">Choose Route</string>
+    <string name="next">Next</string>
+    <string name="error_missing_public_type">Select at least one public transport type.</string>
+    <string name="free">FREE</string>
+    <string name="create_date">Choose Date and Time</string>
+    <string name="create_route">Choose Route</string>
+    <string name="error_missing_date">Date or Time Missing</string>
+    <string name="error_venue">Department not valid.</string>
+    <string name="create_info">Choose Route Name</string>
 </resources>

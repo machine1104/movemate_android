@@ -1,4 +1,4 @@
-package app.movemate.ListAdapter;
+package app.movemate.Adapters;
 
 
 import org.json.JSONObject;

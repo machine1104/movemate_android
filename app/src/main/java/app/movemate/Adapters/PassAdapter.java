@@ -1,6 +1,5 @@
-package app.movemate.ListAdapter;
+package app.movemate.Adapters;
 import android.content.Context;
-import android.support.design.widget.NavigationView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

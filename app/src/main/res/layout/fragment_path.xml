@@ -396,7 +396,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/join"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
         android:textColor="@color/White"
         android:id="@+id/join_btn"
         android:background="@drawable/rounded"
@@ -406,7 +406,7 @@
         android:layout_height="wrap_content"
         android:text="@string/leave"
         android:id="@+id/disjoin_btn"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
         android:textColor="@color/White"
         android:visibility="gone"
         android:background="@drawable/rounded_disjoin"/>
@@ -415,7 +415,7 @@
         android:layout_height="wrap_content"
         android:text="@string/delete"
         android:id="@+id/del_btn"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
         android:textColor="@color/White"
         android:visibility="gone"
         android:background="@drawable/rounded_del"/>

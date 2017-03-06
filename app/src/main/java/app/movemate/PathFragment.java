@@ -44,7 +44,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -55,7 +54,7 @@ import org.json.JSONObject;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
-import app.movemate.ListAdapter.PassAdapter;
+import app.movemate.Adapters.PassAdapter;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PathFragment extends Fragment implements OnMapReadyCallback {
@@ -549,7 +548,6 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                     ArrayList<LatLng> pointList = leg.getDirectionPoint();
                     PolylineOptions polylineOptions = DirectionConverter.createPolyline(getActivity(), pointList, 5, getResources().getColor(R.color.colorPrimary));
                     gMap.addPolyline(polylineOptions);
-                    gMap.getUiSettings().setZoomControlsEnabled(true);
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(origin);
                     builder.include(destination);

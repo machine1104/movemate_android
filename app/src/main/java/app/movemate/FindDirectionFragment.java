@@ -24,7 +24,7 @@ public class FindDirectionFragment extends Fragment {
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putBoolean("ToFrom",true);
-                FilterFragment frag = new FilterFragment();
+                FilterTransportFragment frag = new FilterTransportFragment();
                 frag.setArguments(b);
                 ((MainActivity)getActivity()).nextFrag(frag);
             }
@@ -36,7 +36,7 @@ public class FindDirectionFragment extends Fragment {
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putBoolean("ToFrom",false);
-                FilterFragment frag = new FilterFragment();
+                FilterTransportFragment frag = new FilterTransportFragment();
                 frag.setArguments(b);
                 ((MainActivity)getActivity()).nextFrag(frag);
             }
