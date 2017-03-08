@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class FindDirectionFragment extends Fragment {
+public class FilterDirectionFragment extends Fragment {
 
     View view;
 

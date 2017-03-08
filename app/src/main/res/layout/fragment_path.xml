@@ -413,12 +413,30 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/close"
+        android:id="@+id/close_btn"
+        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+        android:textColor="@color/White"
+        android:visibility="gone"
+        android:background="@drawable/rounded_disjoin"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/delete"
         android:id="@+id/del_btn"
         android:textSize="@dimen/cast_expanded_controller_control_button_margin"
         android:textColor="@color/White"
         android:visibility="gone"
         android:background="@drawable/rounded_del"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/feed"
+        android:id="@+id/feed_btn"
+        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+        android:textColor="@color/White"
+        android:visibility="gone"
+        android:background="@drawable/rounded_disjoin"/>
 
 
 </LinearLayout>

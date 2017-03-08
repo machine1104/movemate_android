@@ -75,8 +75,9 @@ public class FilterPriceFragment extends Fragment {
         String url = getArguments().getString("url");
         url += "&Price="+price_bar.getProgress();
 
-        FindPathFragment frag = new FindPathFragment();
+        FilterDepartmentFragment frag = new FilterDepartmentFragment();
         Bundle b = new Bundle();
+        b.putBoolean("ToFrom",getArguments().getBoolean("ToFrom"));
         b.putString("url", url);
         frag.setArguments(b);
         ((MainActivity) getActivity()).nextFrag(frag);

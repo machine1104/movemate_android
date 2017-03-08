@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/info"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/White" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_below="@+id/title"
+            android:src="@drawable/pic_maker_border"
+            android:background="@color/Red900"
+            android:id="@+id/m_pic"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/title"
+            android:layout_gravity="center"
+            android:src="@drawable/pic_maker_border_2"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_below="@+id/title"
+            android:src="@drawable/pic_maker_border_3"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:id="@+id/m_name"
+            android:text="maker"
+            android:layout_gravity="center"
+            android:layout_below="@+id/m_pic"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"/>
+        <LinearLayout
+            android:layout_below="@+id/m_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_stars"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedback"
+                android:text="5/5"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

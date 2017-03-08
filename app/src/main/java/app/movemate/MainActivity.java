@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 tab_id = item.getItemId();
                 if (item.getItemId() == R.id.find) {
-                    changeTab(new FindDirectionFragment());
+                    changeTab(new FilterDirectionFragment());
                     setTitle(getResources().getString(R.string.find));
                 }
                 if (item.getItemId() == R.id.map) {
@@ -161,7 +161,7 @@ public class MainActivity extends ActionBarActivity {
     public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
         super.onBackPressed();
-        if (fm.getBackStackEntryCount() == 0) {
+        if (fm.getBackStackEntryCount() == 1) {
             if (tab_id == R.id.find) {
                 setTitle(getResources().getString(R.string.find));
             }
@@ -172,6 +172,9 @@ public class MainActivity extends ActionBarActivity {
                 setTitle(getResources().getString(R.string.myRoutes));
             }
 
+        }
+        if (fm.getBackStackEntryCount() == 0){
+            super.onBackPressed();
         }
 
     }

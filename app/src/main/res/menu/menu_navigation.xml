@@ -10,10 +10,11 @@
         android:id="@+id/find"
         android:title="@string/find"
         android:icon="@drawable/ic_find" />
+    <!--
     <item
 
         android:id="@+id/map"
         android:title="@string/map"
-        android:icon="@drawable/ic_map" />
+        android:icon="@drawable/ic_map" />-->
 
 </menu>

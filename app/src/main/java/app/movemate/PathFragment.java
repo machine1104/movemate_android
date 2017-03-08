@@ -1,6 +1,7 @@
 package app.movemate;
 
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,11 +53,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
 import app.movemate.Adapters.PassAdapter;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 
 public class PathFragment extends Fragment implements OnMapReadyCallback {
     View view;
@@ -63,7 +67,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     String url = "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
     TextView pn, p, fa, ta, d, s, h, v, m, desc;
     ImageView imv, m_pic;
-    Button join_btn, del_btn, disjoin_btn;
+    Button join_btn, del_btn, disjoin_btn,close_btn,feed_btn;
     String user_id = ((MainActivity) getActivity()).user_id;
     RelativeLayout rl;
     LinearLayout ll;
@@ -73,6 +77,7 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
     JSONObject info = null;
     GoogleMap gMap;
     NestedScrollView scroller;
+    int maker_id;
 
 
     @Override
@@ -117,6 +122,8 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
             join_btn = (Button) view.findViewById(R.id.join_btn);
             del_btn = (Button) view.findViewById(R.id.del_btn);
             disjoin_btn = (Button) view.findViewById(R.id.disjoin_btn);
+            close_btn = (Button) view.findViewById(R.id.close_btn);
+            feed_btn = (Button) view.findViewById(R.id.feed_btn);
             join_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,6 +196,44 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                             .show();
                 }
             });
+            close_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getResources().getString(R.string.close_confirm))
+                            .setContentText(getResources().getString(R.string.close_text))
+                            .setConfirmText(getResources().getString(R.string.confirm))
+                            .setCancelText(getResources().getString(R.string.cancel))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    close();
+                                }
+                            })
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.cancel();
+                                }
+                            })
+                            .show();
+                }
+            });
+            feed_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    feed();
+                }
+            });
+            ImageView m_pic = (ImageView)view.findViewById(R.id.m_pic);
+            m_pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getUserInfo();
+                }
+            });
 
 
             getPathInfo();
@@ -218,7 +263,9 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
                         int i;
                         try {
+
                             info = new JSONObject(response);
+                            maker_id = info.getJSONObject("Maker").getInt("StudentId");
                             d.setText(info.getString("Date"));
                             fa.setText(info.getString("StartAddress"));
                             ta.setText(info.getString("DestinationAddress"));
@@ -239,23 +286,31 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
 
                             String uid = info.getJSONObject("Maker").getString("StudentId");
-
+                            JSONArray ja = info.getJSONArray("Participants");
                             if (user_id.equals(uid)) {
                                 del_btn.setVisibility(View.VISIBLE);
-
-                            } else {
-                                join_btn.setVisibility(View.VISIBLE);
-                            }
-                            JSONArray ja = info.getJSONArray("Participants");
-                            int count = 0;
-                            while (count < ja.length()) {
-                                JSONObject JO = ja.getJSONObject(count);
-                                if (JO.getString("StudentId").equals(user_id)) {
-                                    join_btn.setVisibility(View.GONE);
-                                    disjoin_btn.setVisibility(View.VISIBLE);
+                                if (info.getBoolean("Open")) {
+                                    close_btn.setVisibility(View.VISIBLE);
                                 }
-                                count++;
+
+                            }else {
+                                if (info.getBoolean("Open")) {
+                                    join_btn.setVisibility(View.VISIBLE);
+                                    int count = 0;
+                                    while (count < ja.length()) {
+                                        JSONObject JO = ja.getJSONObject(count);
+                                        if (JO.getString("StudentId").equals(user_id)) {
+                                            join_btn.setVisibility(View.GONE);
+                                            disjoin_btn.setVisibility(View.VISIBLE);
+                                        }
+                                        count++;
+                                    }
+                                }else{
+                                    feed_btn.setVisibility(View.VISIBLE);
+                                }
                             }
+
+
                             Drawable drawable;
                             if (i == 1) {
                                 rl = (RelativeLayout) view.findViewById(R.id.moto_ly);
@@ -394,6 +449,89 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
         });
 
         queue.add(stringRequest);
+    }
+    private void close() {
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        String url = "http://movemate-api.azurewebsites.net/api/paths/putclosepath?StudentId=" + user_id + "&PathId=" + id;
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        View t = getActivity().findViewById(R.id.myMates);
+                        t.performClick();
+                    }
+
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Errore recupero percorsi", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+    private void feed() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_user_feed);
+        final SeekBar rate = (SeekBar)dialog.findViewById(R.id.feed_bar);
+        final TextView feed = (TextView)dialog.findViewById(R.id.feedback);
+        feed.setText(rate.getProgress()+"/5");
+        rate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    progress = i;
+                    feed.setText(i+"/5");
+
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                feed.setText(progress+"/5");
+
+
+            }
+        });
+        Button send = (Button)dialog.findViewById(R.id.send_feed);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                String url = "http://movemate-api.azurewebsites.net/api/students/postfeedback?StudentId="+maker_id+"&Rate="+rate.getProgress();
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toasty.success(getActivity(), "Success!", Toast.LENGTH_SHORT, true).show();
+                                dialog.dismiss();
+                            }
+
+                        }
+                        , new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+        });
+        dialog.show();
+
     }
 
     private void delete() {
@@ -568,6 +706,53 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+    }
+
+    private void getUserInfo(){
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String url = "http://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+maker_id;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject json = null;
+                        try {
+                            json = new JSONObject(response);
+                            final Dialog dialog = new Dialog(getActivity());
+                            dialog.setContentView(R.layout.dialog_user_rate);
+                            TextView name = (TextView)dialog.findViewById(R.id.m_name);
+                            name.setText(json.getString("Name"));
+                            TextView rate = (TextView)dialog.findViewById(R.id.feedback);
+                            Double r = json.getDouble("TotalFeedback");
+                            String rs ;
+                            if(r>5){
+                                rs = "N.A.";
+                            }else{
+                                rs = new DecimalFormat("##.#").format(r);
+                            }
+                            rate.setText(rs+"/5");
+                            dialog.show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                getFragmentManager().popBackStack();
+            }
+        });
+
+        queue.add(stringRequest);
+
+
+
     }
 
     public void onMapReady(GoogleMap googleMap) {

@@ -56,6 +56,7 @@ public class FilterTransportFragment extends Fragment {
             }
             FilterPriceFragment frag = new FilterPriceFragment();
             Bundle b = new Bundle();
+            b.putBoolean("ToFrom",getArguments().getBoolean("ToFrom"));
             b.putString("url", url);
             frag.setArguments(b);
             ((MainActivity) getActivity()).nextFrag(frag);

@@ -81,4 +81,11 @@
     <string name="error_missing_date">Date or Time Missing</string>
     <string name="error_venue">Department not valid.</string>
     <string name="create_info">Choose Route Name</string>
+    <string name="feedback">Feedback</string>
+    <string name="info">User Details</string>
+    <string name="close">Close</string>
+    <string name="close_confirm">Close Route?</string>
+    <string name="close_text">Mates will still be able to send you feedbacks.</string>
+    <string name="feed">Send Feedback</string>
+    <string name="send">Send</string>
 </resources>
