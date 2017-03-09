@@ -294,20 +294,22 @@ public class PathFragment extends Fragment implements OnMapReadyCallback {
                                 }
 
                             }else {
-                                if (info.getBoolean("Open")) {
-                                    join_btn.setVisibility(View.VISIBLE);
-                                    int count = 0;
-                                    while (count < ja.length()) {
-                                        JSONObject JO = ja.getJSONObject(count);
-                                        if (JO.getString("StudentId").equals(user_id)) {
-                                            join_btn.setVisibility(View.GONE);
+                                int count = 0;
+                                while (count < ja.length()) {
+                                    JSONObject JO = ja.getJSONObject(count);
+                                    if (JO.getString("StudentId").equals(user_id)) {
+                                        if(info.getBoolean("Open")){
                                             disjoin_btn.setVisibility(View.VISIBLE);
+                                        }else{
+                                            feed_btn.setVisibility(View.VISIBLE);
                                         }
-                                        count++;
+
+                                    }else if(info.getInt("Seats")>ja.length()){
+                                        join_btn.setVisibility(View.VISIBLE);
                                     }
-                                }else{
-                                    feed_btn.setVisibility(View.VISIBLE);
+                                    count++;
                                 }
+
                             }
 
 

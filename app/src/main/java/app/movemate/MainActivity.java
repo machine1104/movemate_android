@@ -164,10 +164,10 @@ public class MainActivity extends ActionBarActivity {
         if (fm.getBackStackEntryCount() == 1) {
             if (tab_id == R.id.find) {
                 setTitle(getResources().getString(R.string.find));
-            }
+            }/*
             if (tab_id == R.id.map) {
                 setTitle(getResources().getString(R.string.map));
-            }
+            }*/
             if (tab_id == R.id.myMates) {
                 setTitle(getResources().getString(R.string.myRoutes));
             }
