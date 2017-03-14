@@ -1,4 +1,5 @@
-package app.movemate;
+package app.movemate.Filter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +22,9 @@ import org.json.JSONObject;
 
 import app.movemate.Adapters.Path;
 import app.movemate.Adapters.PathsAdapter;
+import app.movemate.FilterActivity;
+import app.movemate.PathActivity;
+import app.movemate.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
@@ -35,21 +39,8 @@ public class FindPathFragment extends Fragment {
          view =  inflater.inflate(R.layout.fragment_find, container, false);
 
         rv = (ListView) view.findViewById(R.id.groupList);
-        rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Path p = (Path)rv.getItemAtPosition(position);
-                Bundle b = new Bundle();
-                b.putString("path",p.path.toString());
-                Fragment f = new PathFragment();
-                f.setArguments(b);
-                ((MainActivity)getActivity()).nextFrag(f);
-
-            }
-        });
         pathsAdapter = new PathsAdapter(getActivity(),R.layout.path_list_layout);
         rv.setAdapter(pathsAdapter);
-
         populateList();
 
         return view;

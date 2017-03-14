@@ -1,9 +1,8 @@
-package app.movemate;
+package app.movemate.Filter;
 
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.movemate.FilterActivity;
+import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
 public class FilterDepartmentFragment extends Fragment {
@@ -179,7 +180,7 @@ public class FilterDepartmentFragment extends Fragment {
         b.putBoolean("ToFrom",getArguments().getBoolean("ToFrom"));
         b.putString("url", url);
         frag.setArguments(b);
-        ((MainActivity) getActivity()).nextFrag(frag);
+        ((FilterActivity) getActivity()).nextFrag(frag);
         }
 
     }

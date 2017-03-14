@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="app.movemate.FilterDepartmentFragment">
+    tools:context="app.movemate.Filter.FilterDepartmentFragment">
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -12,7 +12,8 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/create_route"
+        android:text="@string/filter_step_2"
+        android:textAllCaps="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/White" />
 
@@ -25,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_university"
+            android:text="@string/university"
             android:layout_marginBottom="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 

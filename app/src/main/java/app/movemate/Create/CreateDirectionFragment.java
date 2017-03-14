@@ -1,4 +1,4 @@
-package app.movemate;
+package app.movemate.Create;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,15 +10,19 @@ import android.widget.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.movemate.CreateActivity;
+import app.movemate.MainActivity;
+import app.movemate.R;
 
-public class ChooseDirectionFragment extends Fragment {
+
+public class CreateDirectionFragment extends Fragment {
 
     View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_choose_direction, container, false);
+        view =  inflater.inflate(R.layout.fragment_direction, container, false);
 
         Button btn_to = (Button)view.findViewById(R.id.to);
         btn_to.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +32,7 @@ public class ChooseDirectionFragment extends Fragment {
                 JSONObject route = new JSONObject();
                 try {
                     route.put("ToFrom",true);
-                    route.put("StudentId",((MainActivity)getActivity()).user_id);
+                    route.put("StudentId",MainActivity.user_id);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -36,7 +40,7 @@ public class ChooseDirectionFragment extends Fragment {
                 b.putString("route",route.toString());
                 CreateTransportFragment frag = new CreateTransportFragment();
                 frag.setArguments(b);
-                ((MainActivity)getActivity()).nextFrag(frag);
+                ((CreateActivity)getActivity()).nextFrag(frag);
             }
         });
 
@@ -48,7 +52,7 @@ public class ChooseDirectionFragment extends Fragment {
                 JSONObject route = new JSONObject();
                 try {
                     route.put("ToFrom",false);
-                    route.put("StudentId",((MainActivity)getActivity()).user_id);
+                    route.put("StudentId",MainActivity.user_id);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -56,7 +60,7 @@ public class ChooseDirectionFragment extends Fragment {
                 b.putString("route",route.toString());
                 CreateTransportFragment frag = new CreateTransportFragment();
                 frag.setArguments(b);
-                ((MainActivity)getActivity()).nextFrag(frag);
+                ((CreateActivity)getActivity()).nextFrag(frag);
             }
         });
 

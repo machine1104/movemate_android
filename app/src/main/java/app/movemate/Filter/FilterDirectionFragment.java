@@ -1,4 +1,4 @@
-package app.movemate;
+package app.movemate.Filter;
 
 
 import android.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import app.movemate.FilterActivity;
+import app.movemate.R;
+
 
 public class FilterDirectionFragment extends Fragment {
 
@@ -16,7 +19,7 @@ public class FilterDirectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_choose_direction, container, false);
+        view =  inflater.inflate(R.layout.fragment_direction, container, false);
 
         Button btn_to = (Button)view.findViewById(R.id.to);
         btn_to.setOnClickListener(new View.OnClickListener() {
@@ -26,7 +29,7 @@ public class FilterDirectionFragment extends Fragment {
                 b.putBoolean("ToFrom",true);
                 FilterTransportFragment frag = new FilterTransportFragment();
                 frag.setArguments(b);
-                ((MainActivity)getActivity()).nextFrag(frag);
+                ((FilterActivity)getActivity()).nextFrag(frag);
             }
         });
 
@@ -38,11 +41,12 @@ public class FilterDirectionFragment extends Fragment {
                 b.putBoolean("ToFrom",false);
                 FilterTransportFragment frag = new FilterTransportFragment();
                 frag.setArguments(b);
-                ((MainActivity)getActivity()).nextFrag(frag);
+                ((FilterActivity)getActivity()).nextFrag(frag);
             }
         });
 
         return view;
     }
+
 
 }

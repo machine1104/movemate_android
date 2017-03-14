@@ -11,11 +11,6 @@
         android:layout_centerVertical="false"
         android:id="@+id/photo"
         android:layout_centerHorizontal="true"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/pic_border_drawer"
-        android:layout_centerHorizontal="true"/>
 
 
 

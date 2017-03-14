@@ -22,17 +22,18 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 
 import app.movemate.MainActivity;
+import app.movemate.PathActivity;
 import app.movemate.R;
 
 
 public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> {
 
     private JSONArray passList;
-    private MainActivity ctx;
+    private PathActivity ctx;
 
     public PassAdapter(Context context,JSONArray passList) {
         this.passList = passList;
-        this.ctx = (MainActivity)context;
+        this.ctx = (PathActivity)context;
     }
 
 

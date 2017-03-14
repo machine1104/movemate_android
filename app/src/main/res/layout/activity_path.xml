@@ -2,10 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.movemate.PathFragment"
+    tools:context="app.movemate.PathActivity"
     android:orientation="vertical">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="fill_parent"

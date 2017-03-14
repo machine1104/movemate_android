@@ -40,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.movemate.Create.CreateInfoFragment;
 import es.dmoral.toasty.Toasty;
 
 
@@ -162,7 +163,7 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
             b.putString("date",getArguments().getString("date"));
             b.putString("time",getArguments().getString("time"));
             frag.setArguments(b);
-            ((MainActivity) getActivity()).nextFrag(frag);
+            ((CreateActivity) getActivity()).nextFrag(frag);
         }
 
 

@@ -10,40 +10,31 @@
     android:layout_weight="1">
 
 
-    <RelativeLayout
-
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
+        <ListView
+            android:id="@+id/matesList"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            layout="@layout/navigation_view"/>
+            android:layout_marginStart="5dp"
+            android:divider="@color/transparent">
+        </ListView>
 
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/navigationView"
-            android:layout_alignParentTop="true"
-            android:background="@color/White">
-        </FrameLayout>
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            android:id="@+id/add_btn"
+            app:backgroundTint="@color/colorPrimary"/>
 
-        <android.support.design.widget.BottomNavigationView
-            android:background="@color/colorPrimary"
-            android:id="@+id/navigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            design:menu="@menu/menu_navigation"
-            android:layout_gravity="bottom"
-            design:itemIconTint="@color/White"
-            design:itemTextColor="@color/White"
-            design:itemBackground="@drawable/navigation_selected_item"
-            android:layout_alignParentBottom="true"/>
-
-
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 
 

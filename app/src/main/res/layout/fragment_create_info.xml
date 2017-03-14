@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="app.movemate.CreateInfoFragment">
+    tools:context="app.movemate.Create.CreateInfoFragment">
     <TextView
         android:id="@+id/transport_title"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/create_info"
+        android:text="@string/create_step_3"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/White" />
     <LinearLayout
@@ -25,7 +25,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_group_name"
+            android:hint="@string/hint_route_name"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
             android:maxLength="20"

@@ -1,6 +1,7 @@
-package app.movemate;
+package app.movemate.Create;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -22,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.movemate.CreateActivity;
+import app.movemate.MainActivity;
+import app.movemate.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
@@ -87,8 +91,12 @@ public class CreateInfoFragment extends Fragment {
                         public void onResponse(String response) {
                             dialog.dismiss();
                             Toasty.success(getActivity(), "Success!", Toast.LENGTH_SHORT, true).show();
-                            View t = getActivity().findViewById(R.id.myMates);
-                            t.performClick();
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("user",MainActivity.user_id);
+                            startActivity(intent);
+                            getActivity().finish();
+
                         }
                     }, new Response.ErrorListener() {
 
