@@ -108,4 +108,5 @@
     <string name="wrong_email">Wrong email address?</string>
     <string name="email_code_spec">Check your email and insert the code below</string>
     <string name="email">Email</string>
+    <string name="fb_login">   Log In With Facebook</string>
 </resources>

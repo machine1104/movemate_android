@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
@@ -9,13 +9,13 @@
     tools:context="app.movemate.LoginActivity"
     android:background="@color/colorPrimary">
 
-
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:src="@drawable/logo"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_above="@+id/btn"/>
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -23,23 +23,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="30dp"
-        android:layout_weight="0.5"
         android:visibility="gone"/>
-
-    <ImageButton
-        android:id="@+id/btn"
+    <Button
         android:visibility="gone"
+        android:id="@+id/btn"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/login_button"
-        android:scaleType="fitStart"
-        android:background="@color/transparent"
-        android:layout_weight="0.5"
-        android:layout_margin="10dp"/>
+        android:background="@drawable/rounded_fb"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:text="@string/fb_login"
+        android:textAllCaps="true"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_fb_login_icon"
+        android:padding="10dp"/>
 
 
 
 
 
-</LinearLayout>
+
+
+</RelativeLayout>
