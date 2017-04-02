@@ -1,4 +1,4 @@
-package app.movemate;
+package app.movemate.Create;
 
 
 import android.content.Context;
@@ -40,7 +40,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import app.movemate.Create.CreateInfoFragment;
+import app.movemate.CreateActivity;
+import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
 

@@ -25,7 +25,6 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import app.movemate.CreateActivity;
-import app.movemate.CreateRouteFragment;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 

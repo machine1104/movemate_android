@@ -50,7 +50,7 @@
     <string name="participants">Participants</string>
     <string name="mate">mate</string>
     <string name="start">Start</string>
-    <string name="error_create">Impossible to create a route.</string>
+    <string name="error_create">Can\'t Create route.</string>
     <string name="error_getpath">Can\'t retrieve routes list.</string>
     <string name="loading_info">Retrieving route info...</string>
     <string name="loading_app">Checking user info...</string>
@@ -93,4 +93,19 @@
     <string name="error_delete">Can\'t delete route.</string>
     <string name="error_disjoin">Can\'t leave route.</string>
     <string name="error_info">Can\'t retrieve path info.</string>
+    <string name="error_email">Email not valid.</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="hint_phone_number">Insert phone number</string>
+    <string name="phone_spec">Insert your mobile phone and let other Mates contact you</string>
+    <string name="error_mobile">Mobile not valid.</string>
+    <string name="code_spec">You will receive an SMS with a code to verify your mobile number</string>
+    <string name="hint_code">Code</string>
+    <string name="wrong_number">Wrong number?</string>
+    <string name="error_code">Wrong code.</string>
+    <string name="email_spec">Insert your institutional email address to verify your are a student</string>
+    <string name="error_send_email_code">Can\'t send verification email.</string>
+    <string name="success">Success!</string>
+    <string name="wrong_email">Wrong email address?</string>
+    <string name="email_code_spec">Check your email and insert the code below</string>
+    <string name="email">Email</string>
 </resources>

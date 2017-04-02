@@ -1,0 +1,33 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.movemate.Phone.PhoneActivity"
+    android:background="@color/White"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:id="@+id/mobile"
+        android:textColorHint="@color/transparent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:text="@string/phone_spec"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+
+
+</LinearLayout>

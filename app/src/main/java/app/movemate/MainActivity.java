@@ -35,6 +35,7 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +83,9 @@ public class MainActivity extends ActionBarActivity {
                                     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                                     View dView = navigationView.getHeaderView(0);
                                     imageView = (ImageView) dView.findViewById(R.id.photo);
-                                    new bitMapTask().execute(profilePicUrl);
+                                    Picasso.with(MainActivity.this)
+                                            .load(profilePicUrl)
+                                            .into(imageView);
 
 
                                 }
@@ -140,17 +143,6 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void changeTab(Fragment frag) {
-
-        FragmentManager fragmentManager = getFragmentManager();
-        for (int i = 0; i < fragmentManager.getBackStackEntryCount()+1; i++) {
-            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, frag).addToBackStack("init");
-        fragmentTransaction.commit();
-    }
-
     public void nextFrag(Fragment frag) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -158,37 +150,6 @@ public class MainActivity extends ActionBarActivity {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
         fragmentTransaction.commit();
-    }
-
-
-    class bitMapTask extends AsyncTask<String, ImageView, Bitmap> {
-
-        private Exception exception;
-
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-
-            } catch (Exception e) {
-                this.exception = e;
-
-                return null;
-            }
-        }
-
-        protected void onPostExecute(Bitmap bit) {
-            imageView.setImageBitmap(bit);
-
-        }
-
     }
 
     @Override

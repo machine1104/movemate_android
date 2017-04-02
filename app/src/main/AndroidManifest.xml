@@ -4,6 +4,7 @@
     package="app.movemate">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -37,9 +38,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CheckActivity"
+            android:name=".Email.EmailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".FilterActivity"
             android:parentActivityName=".MainActivity"
@@ -48,13 +49,23 @@
         <activity
             android:name=".PathActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".CreateActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Phone.PhoneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Phone.PhoneCheckActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Email.EmailCheckActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" ></activity>
     </application>
 
 </manifest>

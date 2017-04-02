@@ -1,18 +1,15 @@
 package app.movemate;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,7 +24,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import app.movemate.Email.EmailActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 
 public class LoginActivity extends Activity {
     CallbackManager callbackManager;
@@ -104,7 +103,6 @@ public class LoginActivity extends Activity {
         dialog.setCancelable(false);
         dialog.show();
 
-        Log.d("FACEBOOK_ID", AccessToken.getCurrentAccessToken().getUserId());
         RequestQueue queue = Volley.newRequestQueue(ctx);
         String url = checkUrl + AccessToken.getCurrentAccessToken().getUserId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -124,12 +122,12 @@ public class LoginActivity extends Activity {
                 if(error.networkResponse != null){
                     //codice 404
                     if (error.networkResponse.statusCode == 404) {
-                        Intent i = new Intent(LoginActivity.this, CheckActivity.class);
+                        Intent i = new Intent(LoginActivity.this, EmailActivity.class);
                         startActivity(i);
                         LoginActivity.this.finish();
                     }
                     else{
-                        Toast.makeText(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG).show();
+                        Toasty.error(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG,true).show();
                     }
                     dialog.dismiss();
                 }
@@ -140,6 +138,7 @@ public class LoginActivity extends Activity {
 
             }
         });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         stringRequest.setShouldCache(false);
         queue.add(stringRequest);
     }
