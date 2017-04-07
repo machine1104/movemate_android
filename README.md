@@ -32,5 +32,6 @@ Repository for the GCW2016/2017 project
 * [akexorcist/Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
 * [pedant/sweet-alert-dialog](https://github.com/pedant/sweet-alert-dialog)
 * [GrenderG/Toasty](https://github.com/GrenderG/Toasty)
-* [segunfamisa/bottom-navigation-demo](https://github.com/segunfamisa/bottom-navigation-demo)
+* [wasabeef/glide-transformations](https://github.com/wasabeef/glide-transformations)
+
 
