@@ -97,7 +97,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="hint_phone_number">Insert phone number</string>
     <string name="phone_spec">Insert your mobile phone and let other Mates contact you</string>
-    <string name="error_mobile">Mobile not valid.</string>
+    <string name="error_mobile">Number not valid.</string>
     <string name="code_spec">You will receive an SMS with a code to verify your mobile number</string>
     <string name="hint_code">Code</string>
     <string name="wrong_number">Wrong number?</string>
@@ -109,4 +109,7 @@
     <string name="email_code_spec">Check your email and insert the code below</string>
     <string name="email">Email</string>
     <string name="fb_login">   Log In With Facebook</string>
+    <string name="no_sms_permission">Allow MoveMate to Send/Read SMS in Settings</string>
+    <string name="call">Call</string>
+    <string name="message">Sms</string>
 </resources>

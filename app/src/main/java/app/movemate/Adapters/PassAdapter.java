@@ -1,10 +1,13 @@
 package app.movemate.Adapters;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,15 +98,45 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        JSONObject json = null;
+
                         try {
-                            json = new JSONObject(response);
+                            final JSONObject json = new JSONObject(response);
                             final Dialog dialog = new Dialog(ctx);
                             dialog.setContentView(R.layout.dialog_user_rate);
                             TextView name = (TextView)dialog.findViewById(R.id.m_name);
                             name.setText(json.getString("Name"));
                             TextView rate = (TextView)dialog.findViewById(R.id.feedback);
                             Double r = json.getDouble("TotalFeedback");
+                            Button call = (Button)dialog.findViewById(R.id.call_btn);
+                            Button sms = (Button)dialog.findViewById(R.id.sms_btn);
+                            call.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                                        String n = json.getString("PhoneNumber");
+                                        intent.setData(Uri.parse("tel:"+n));
+                                        ctx.startActivity(intent);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+                            sms.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        String n = json.getString("PhoneNumber");
+                                        Intent intentsms = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + n ) );
+                                        intentsms.putExtra( "sms_body", "" );
+                                        ctx.startActivity( intentsms );
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
                             String rs ;
                             if(r>5){
                                 rs = "N.A.";

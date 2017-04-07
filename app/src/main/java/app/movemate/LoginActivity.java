@@ -26,6 +26,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import app.movemate.Email.EmailActivity;
+import app.movemate.Phone.PhoneActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
@@ -123,7 +124,7 @@ public class LoginActivity extends Activity {
                 if(error.networkResponse != null){
                     //codice 404
                     if (error.networkResponse.statusCode == 404) {
-                        Intent i = new Intent(LoginActivity.this, EmailActivity.class);
+                        Intent i = new Intent(LoginActivity.this, PhoneActivity.class);
                         startActivity(i);
                         LoginActivity.this.finish();
                     }

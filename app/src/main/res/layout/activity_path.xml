@@ -305,7 +305,7 @@
                     android:textColor="@color/White"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             </LinearLayout>
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -313,37 +313,84 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="10dp">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/pic_maker_border"
-                    android:background="@color/Red900"
-                    android:id="@+id/m_pic"
-                    android:layout_centerHorizontal="true"/>
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/pic_maker_border_2"
-                    android:layout_centerHorizontal="true"/>
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/pic_maker_border_3"
-                    android:layout_centerHorizontal="true"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:id="@+id/m_name"
-                    android:layout_gravity="center"
-                    android:layout_below="@+id/m_pic"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/colorPrimary"/>
-            </RelativeLayout>
+                    android:layout_gravity="center_horizontal">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pic_maker_border"
+                            android:background="@color/Red900"
+                            android:id="@+id/m_pic"
+                            android:layout_centerHorizontal="true"/>
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pic_maker_border_2"
+                            android:layout_centerHorizontal="true"/>
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pic_maker_border_3"
+                            android:layout_centerHorizontal="true"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:id="@+id/m_name"
+                            android:layout_gravity="center"
+                            android:layout_below="@+id/m_pic"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimary"/>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp">
+                        <Button
+                            android:id="@+id/call_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rounded_primary_dark"
+                            android:text="@string/call"
+                            android:textColor="@color/White"
+                            android:drawableStart="@drawable/ic_phone"
+                            android:drawablePadding="10dp"
+                            android:padding="10dp"
+                            android:textSize="@dimen/cast_expanded_controller_control_button_margin"/>
+
+                        <Button
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/sms_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rounded_primary_dark"
+                            android:text="@string/message"
+                            android:textColor="@color/White"
+                            android:drawableStart="@drawable/ic_message"
+                            android:drawablePadding="10dp"
+                            android:padding="10dp"
+                            android:textSize="@dimen/cast_expanded_controller_control_button_margin"/>
+
+                    </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+            </LinearLayout>
             <!-- PASSENGERS -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -390,51 +437,63 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/join"
-        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
-        android:textColor="@color/White"
-        android:id="@+id/join_btn"
-        android:background="@drawable/rounded"
-        android:visibility="gone"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/leave"
-        android:id="@+id/disjoin_btn"
-        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
-        android:textColor="@color/White"
-        android:visibility="gone"
-        android:background="@drawable/rounded_disjoin"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/close"
-        android:id="@+id/close_btn"
-        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
-        android:textColor="@color/White"
-        android:visibility="gone"
-        android:background="@drawable/rounded_disjoin"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:id="@+id/del_btn"
-        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
-        android:textColor="@color/White"
-        android:visibility="gone"
-        android:background="@drawable/rounded_del"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/feed"
-        android:id="@+id/feed_btn"
-        android:textSize="@dimen/cast_expanded_controller_control_button_margin"
-        android:textColor="@color/White"
-        android:visibility="gone"
-        android:background="@drawable/rounded_disjoin"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/join"
+            android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+            android:textColor="@color/White"
+            android:id="@+id/join_btn"
+            android:background="@drawable/sqr_green"
+            android:visibility="gone"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/leave"
+            android:id="@+id/disjoin_btn"
+            android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+            android:textColor="@color/White"
+            android:visibility="gone"
+            android:background="@drawable/sqr_primary_dark"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/close"
+            android:id="@+id/close_btn"
+            android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+            android:textColor="@color/White"
+            android:visibility="gone"
+            android:background="@drawable/sqr_primary_dark"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:id="@+id/del_btn"
+            android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+            android:textColor="@color/White"
+            android:visibility="gone"
+            android:background="@drawable/sqr_red"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/feed"
+            android:id="@+id/feed_btn"
+            android:textSize="@dimen/cast_expanded_controller_control_button_margin"
+            android:textColor="@color/White"
+            android:visibility="gone"
+            android:background="@drawable/sqr_primary_dark"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

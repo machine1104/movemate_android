@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -51,7 +52,9 @@ public class EmailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+
         if (id == R.id.confirm) {
+
             checkMail();
             return true;
         }
@@ -118,9 +121,10 @@ public class EmailActivity extends AppCompatActivity {
             public byte[] getBody() throws AuthFailureError {
                 String json = null;
                 try {
-
+                    Log.d("telefono",getIntent().getStringExtra("mobile"));
                     json = new JSONObject().put("facebookId", AccessToken.getCurrentAccessToken().getUserId()).
-                            put("name", name).put("surname",surname).put("email",confirmed_email).toString();
+                            put("name", name).put("surname",surname).put("email",confirmed_email).
+                            put("PhoneNumber",getIntent().getStringExtra("mobile")).toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

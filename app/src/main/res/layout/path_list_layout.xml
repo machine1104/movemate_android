@@ -90,7 +90,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_blu"
+        android:background="@drawable/rounded_primary_dark"
         android:layout_below="@+id/ta"
         android:layout_alignParentStart="true"
         android:id="@+id/date"

@@ -3,13 +3,37 @@ package app.movemate.Phone;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.text.Text;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.util.Random;
+
+import app.movemate.Email.EmailActivity;
+import app.movemate.Email.EmailCheckActivity;
+import app.movemate.MainActivity;
+import app.movemate.Manifest;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
@@ -21,12 +45,10 @@ public class PhoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
+        getSupportActionBar().setTitle(R.string.phone_number);
         mobile = (EditText)findViewById(R.id.mobile);
-        TelephonyManager tMgr =(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
-        String mNumber = tMgr.getLine1Number();
-        if (mNumber != null){
-            mobile.setText(mNumber);
-        }
+
+
 
 
 
@@ -42,13 +64,14 @@ public class PhoneActivity extends AppCompatActivity {
 
         if (id == R.id.confirm) {
             String s = mobile.getText().toString();
-            if (!s.equals("") && s.length()>7){
-                Intent intent = new Intent(this, PhoneCheckActivity.class);
-                intent.putExtra("mobile", s);
-                intent.putExtra("user",getIntent().getStringExtra("user"));
+            if (s.length()>=7){
+                Intent intent = new Intent(this, EmailActivity.class);
+                String n = "+39"+mobile.getText().toString();
+                Log.d("telefono",n);
+                intent.putExtra("mobile", n);
                 startActivity(intent);
             }else{
-                Toasty.error(this, getResources().getString(R.string.error_mobile), Toast.LENGTH_SHORT, true).show();
+                Toasty.error(PhoneActivity.this, getResources().getString(R.string.error_mobile), Toast.LENGTH_SHORT, true).show();
             }
 
             return true;

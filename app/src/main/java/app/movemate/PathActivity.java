@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +67,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     String url = "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
     TextView pn, p, fa, ta, d, s, h, v, m, desc;
     ImageView imv, m_pic;
-    Button join_btn, del_btn, disjoin_btn,close_btn,feed_btn;
+    Button join_btn, del_btn, disjoin_btn,close_btn,feed_btn,call_btn,sms_btn;
     String user_id = MainActivity.user_id;
     RelativeLayout rl;
     LinearLayout ll;
@@ -86,8 +87,13 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.path_info);
 
+
+
         try {
             id = new JSONObject(getIntent().getStringExtra("path")).getString("PathId");
+
+
+
             pn = (TextView) findViewById(R.id.pn);
             p = (TextView) findViewById(R.id.p);
             fa = (TextView) findViewById(R.id.fa);
@@ -235,6 +241,8 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                     getUserInfo();
                 }
             });
+            call_btn = (Button)findViewById(R.id.call_btn);
+            sms_btn = (Button)findViewById(R.id.sms_btn);
 
 
             getPathInfo();
@@ -258,6 +266,34 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             ta.setText(info.getString("DestinationAddress"));
             pn.setText(info.getString("PathName"));
             desc.setText(info.getString("Description"));
+            call_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    try {
+                        String n = info.getJSONObject("Maker").getString("PhoneNumber");
+                        intent.setData(Uri.parse("tel:"+n));
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            sms_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        String n = info.getJSONObject("Maker").getString("PhoneNumber");
+                        Intent intentsms = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + n ) );
+                        intentsms.putExtra( "sms_body", "" );
+                        startActivity( intentsms );
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
             if (info.getBoolean("ToFrom")) {
                 String addressFrom = info.getString("StartAddress");
@@ -722,15 +758,45 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        JSONObject json = null;
+
                         try {
-                            json = new JSONObject(response);
+                            final JSONObject json = new JSONObject(response);
                             final Dialog dialog = new Dialog(PathActivity.this);
                             dialog.setContentView(R.layout.dialog_user_rate);
                             TextView name = (TextView)dialog.findViewById(R.id.m_name);
                             name.setText(json.getString("Name"));
                             TextView rate = (TextView)dialog.findViewById(R.id.feedback);
                             Double r = json.getDouble("TotalFeedback");
+                            Button call = (Button)dialog.findViewById(R.id.call_btn);
+                            Button sms = (Button)dialog.findViewById(R.id.sms_btn);
+                            call.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                                        String n = json.getString("PhoneNumber");
+                                        intent.setData(Uri.parse("tel:"+n));
+                                        startActivity(intent);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+                            sms.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        String n = json.getString("PhoneNumber");
+                                        Intent intentsms = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + n ) );
+                                        intentsms.putExtra( "sms_body", "" );
+                                        startActivity( intentsms );
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
                             String rs ;
                             if(r>5){
                                 rs = "N.A.";
