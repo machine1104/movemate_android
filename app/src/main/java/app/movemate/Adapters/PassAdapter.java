@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,8 @@ import java.text.DecimalFormat;
 import app.movemate.MainActivity;
 import app.movemate.PathActivity;
 import app.movemate.R;
+import jp.wasabeef.picasso.transformations.BlurTransformation;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
 public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> {
@@ -54,6 +57,9 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
         try {
             final JSONObject partecipant =  passList.getJSONObject(position);
             holder.name.setText(partecipant.getString("Name"));
+            Picasso.with(ctx).load(R.drawable.logo)
+                    .transform(new CropCircleTransformation())
+                    .into(holder.imv);
             holder.imv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -137,6 +143,10 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
 
                                 }
                             });
+                            Picasso.with(ctx).load(R.drawable.logo)
+                                    .transform(new BlurTransformation(ctx))
+                                    .into((ImageView) dialog.findViewById(R.id.pic));
+
                             String rs ;
                             if(r>5){
                                 rs = "N.A.";

@@ -49,6 +49,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +62,9 @@ import java.util.ArrayList;
 import app.movemate.Adapters.PassAdapter;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
+import jp.wasabeef.picasso.transformations.BlurTransformation;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 
 public class PathActivity extends AppCompatActivity implements OnMapReadyCallback {
     String id;
@@ -86,7 +90,6 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_path);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.path_info);
-
 
 
         try {
@@ -294,6 +297,10 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 }
             });
+
+            Picasso.with(PathActivity.this).load(R.drawable.logo)
+                    .transform(new CropCircleTransformation())
+                    .into((ImageView) findViewById(R.id.m_pic));
 
             if (info.getBoolean("ToFrom")) {
                 String addressFrom = info.getString("StartAddress");
@@ -783,6 +790,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                 }
                             });
+
                             sms.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -797,6 +805,10 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                 }
                             });
+                            Picasso.with(PathActivity.this).load(R.drawable.logo)
+                                    .transform(new BlurTransformation(PathActivity.this))
+                                    .into((ImageView) dialog.findViewById(R.id.pic));
+
                             String rs ;
                             if(r>5){
                                 rs = "N.A.";

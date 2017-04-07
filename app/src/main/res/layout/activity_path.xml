@@ -286,6 +286,8 @@
                     android:gravity="center"
                     android:text="desc"
                     android:textColor="@color/colorPrimary"/>
+
+
             </LinearLayout>
             <!-- MAKER -->
             <LinearLayout
@@ -325,21 +327,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/pic_maker_border"
-                            android:background="@color/Red900"
                             android:id="@+id/m_pic"
-                            android:layout_centerHorizontal="true"/>
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/pic_maker_border_2"
-                            android:layout_centerHorizontal="true"/>
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/pic_maker_border_3"
                             android:layout_centerHorizontal="true"/>
 
                         <TextView
@@ -352,6 +340,7 @@
                             android:layout_centerHorizontal="true"
                             android:textColor="@color/colorPrimary"/>
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -386,7 +375,7 @@
 
                     </LinearLayout>
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
 

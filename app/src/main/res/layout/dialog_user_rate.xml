@@ -26,23 +26,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_below="@+id/title"
-            android:src="@drawable/pic_maker_border"
-            android:background="@color/Red900"
-            android:id="@+id/m_pic"
-            android:layout_centerHorizontal="true"/>
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/title"
-            android:layout_gravity="center"
-            android:src="@drawable/pic_maker_border_2"
-            android:layout_centerHorizontal="true"/>
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_below="@+id/title"
-            android:src="@drawable/pic_maker_border_3"
+            android:id="@+id/pic"
             android:layout_centerHorizontal="true"/>
 
         <TextView
@@ -52,7 +36,7 @@
             android:id="@+id/m_name"
             android:text="maker"
             android:layout_gravity="center"
-            android:layout_below="@+id/m_pic"
+            android:layout_below="@+id/pic"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimary"/>
         <LinearLayout
