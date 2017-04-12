@@ -21,13 +21,26 @@
             android:text="@string/info"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/White" />
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/border"
             android:layout_below="@+id/title"
-            android:id="@+id/pic"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle_dark"/>
+
+            <ImageView
+                android:padding="5dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/pic"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +49,7 @@
             android:id="@+id/m_name"
             android:text="maker"
             android:layout_gravity="center"
-            android:layout_below="@+id/pic"
+            android:layout_below="@+id/border"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimary"/>
         <LinearLayout

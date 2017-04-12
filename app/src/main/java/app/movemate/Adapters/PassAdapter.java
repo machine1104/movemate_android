@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,9 +28,9 @@ import java.text.DecimalFormat;
 
 import app.movemate.MainActivity;
 import app.movemate.PathActivity;
+import app.movemate.ProfileActivity;
 import app.movemate.R;
-import jp.wasabeef.picasso.transformations.BlurTransformation;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> {
@@ -52,14 +53,37 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         try {
             final JSONObject partecipant =  passList.getJSONObject(position);
             holder.name.setText(partecipant.getString("Name"));
-            Picasso.with(ctx).load(R.drawable.logo)
-                    .transform(new CropCircleTransformation())
-                    .into(holder.imv);
+            RequestQueue queue = Volley.newRequestQueue(ctx);
+            String url = "https://movemate-api.azurewebsites.net/api/students/getphoto?id="+partecipant.getInt("StudentId");
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            String imageBytes = response;
+                            byte[] imageByteArray = Base64.decode(imageBytes, Base64.DEFAULT);
+                            Glide.with(ctx).load(imageByteArray)
+                                    .bitmapTransform(new CropCircleTransformation(ctx))
+                                    .into(holder.imv);
+
+
+
+                        }
+                    }
+                    , new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+
+            queue.add(stringRequest);
             holder.imv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,55 +130,10 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
                     public void onResponse(String response) {
 
                         try {
-                            final JSONObject json = new JSONObject(response);
-                            final Dialog dialog = new Dialog(ctx);
-                            dialog.setContentView(R.layout.dialog_user_rate);
-                            TextView name = (TextView)dialog.findViewById(R.id.m_name);
-                            name.setText(json.getString("Name"));
-                            TextView rate = (TextView)dialog.findViewById(R.id.feedback);
-                            Double r = json.getDouble("TotalFeedback");
-                            Button call = (Button)dialog.findViewById(R.id.call_btn);
-                            Button sms = (Button)dialog.findViewById(R.id.sms_btn);
-                            call.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    try {
-                                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                                        String n = json.getString("PhoneNumber");
-                                        intent.setData(Uri.parse("tel:"+n));
-                                        ctx.startActivity(intent);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            });
-                            sms.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    try {
-                                        String n = json.getString("PhoneNumber");
-                                        Intent intentsms = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + n ) );
-                                        intentsms.putExtra( "sms_body", "" );
-                                        ctx.startActivity( intentsms );
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            });
-                            Picasso.with(ctx).load(R.drawable.logo)
-                                    .transform(new BlurTransformation(ctx))
-                                    .into((ImageView) dialog.findViewById(R.id.pic));
-
-                            String rs ;
-                            if(r>5){
-                                rs = "N.A.";
-                            }else{
-                                rs = new DecimalFormat("##.#").format(r);
-                            }
-                            rate.setText(rs+"/5");
-                            dialog.show();
+                            JSONObject json = new JSONObject(response);
+                            Intent intent = new Intent(ctx, ProfileActivity.class);
+                            intent.putExtra("info",json.toString());
+                            ctx.startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -60,7 +60,7 @@ public class CreateInfoFragment extends Fragment {
         final JSONObject route = new JSONObject(this.getArguments().getString("route"));
         String name = ((EditText)view.findViewById(R.id.route_name)).getText().toString();
         String desc = ((EditText)view.findViewById(R.id.desc)).getText().toString();
-        if(name.equals("") || desc.equals("")) {
+        if(name.equals("")) {
             Toasty.error(getActivity(), getString(R.string.missing_fields), Toast.LENGTH_SHORT, true).show();
         }else{
             route.put("PathName",name);

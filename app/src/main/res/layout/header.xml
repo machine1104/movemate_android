@@ -6,6 +6,15 @@
     android:background="@color/colorPrimaryDark"
     app:theme="@style/AppTheme">
     <ImageView
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/circle_white"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="false"

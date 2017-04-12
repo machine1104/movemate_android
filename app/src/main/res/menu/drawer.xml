@@ -5,11 +5,7 @@
     <item
         android:id="@+id/profile"
         android:title="@string/profile"
-        android:icon="@drawable/ic_verified_user" />
+        android:icon="@drawable/ic_user" />
 
-    <item
-        android:id="@+id/settings"
-        android:title="@string/settings"
-        android:icon="@drawable/ic_settings" />
 
 </menu>

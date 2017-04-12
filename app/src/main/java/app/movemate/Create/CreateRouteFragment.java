@@ -239,7 +239,7 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
     private void getUni() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url = "http://movemate-api.azurewebsites.net/api/universities/getuniversities";
+        String url = "https://movemate-api.azurewebsites.net/api/universities/getuniversities";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -279,7 +279,7 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        String url = "http://movemate-api.azurewebsites.net/api/departments/getdepartments/"+s;
+        String url = "https://movemate-api.azurewebsites.net/api/departments/getdepartments/"+s;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

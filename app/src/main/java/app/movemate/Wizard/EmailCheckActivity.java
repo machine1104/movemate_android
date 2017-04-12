@@ -1,4 +1,4 @@
-package app.movemate.Email;
+package app.movemate.Wizard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
@@ -20,9 +20,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+
+import org.json.JSONObject;
 
 import app.movemate.MainActivity;
-import app.movemate.Phone.PhoneActivity;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
@@ -44,6 +48,8 @@ public class EmailCheckActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,4 +100,6 @@ public class EmailCheckActivity extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
+
+
 }

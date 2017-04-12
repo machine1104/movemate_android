@@ -1,26 +1,19 @@
 package app.movemate;
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,32 +24,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import app.movemate.Adapters.Path;
 import app.movemate.Adapters.PathsAdapter;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class MainActivity extends ActionBarActivity {
     public static String user_id;
     private ImageView imageView;
     PathsAdapter pathsAdapter;
     ListView rv;
-    String url =  "http://movemate-api.azurewebsites.net/api/paths/getmypaths?StudentId=";
+    String url =  "https://movemate-api.azurewebsites.net/api/paths/getmypaths?StudentId=";
     private ActionBarDrawerToggle mDrawerToggle;
+    NavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,35 +55,10 @@ public class MainActivity extends ActionBarActivity {
         user_id = getIntent().getStringExtra("user");
 
 
-        //----------------------DRAWER PROFILE PIC
-        Bundle params = new Bundle();
-        params.putString("fields", "id,email,gender,cover,picture.type(large)");
-        new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse response) {
-                        if (response != null) {
-                            try {
-                                JSONObject data = response.getJSONObject();
-                                if (data.has("picture")) {
-                                    String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
-                                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                                    View dView = navigationView.getHeaderView(0);
-                                    imageView = (ImageView) dView.findViewById(R.id.photo);
-                                    Picasso.with(MainActivity.this)
-                                            .load(profilePicUrl)
-                                            .into(imageView);
+
+        //----------------------DRAWER
 
 
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }).executeAsync();
-
-        //----------------------DRAWER TOGGLE
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0) {
             public void onDrawerClosed(View view) {
@@ -108,6 +70,20 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        navigation = (NavigationView) findViewById(R.id.nav_view);
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.profile:
+                        getUserInfo();
+                        break;
+                }
+                return false;
+            }
+        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -127,6 +103,38 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://movemate-api.azurewebsites.net/api/students/getphoto?id="+user_id;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equals(null) || response.equals("null") ){
+                            Log.d("null","null");
+                        }
+                        View dView = navigation.getHeaderView(0);
+                        String imageBytes = response;
+                        byte[] imageByteArray = Base64.decode(imageBytes, Base64.DEFAULT);
+                        imageView = (ImageView) dView.findViewById(R.id.photo);
+                        Glide.with(MainActivity.this).load(imageByteArray)
+                                .bitmapTransform(new CropCircleTransformation(MainActivity.this))
+                                .into(imageView);
+
+
+
+                    }
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+
 
 
     }
@@ -143,14 +151,6 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void nextFrag(Fragment frag) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, frag).addToBackStack(null);
-        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-        fragmentTransaction.commit();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -212,9 +212,38 @@ public class MainActivity extends ActionBarActivity {
 
         queue.add(stringRequest);
     }
-}
 
-/*Intent intent = new Intent(PathActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();*/
+    private void getUserInfo(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+user_id;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            Intent intent = new Intent(MainActivity.this, PersonalProfileActivity.class);
+                            intent.putExtra("info",json.toString());
+                            startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+                , new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                getFragmentManager().popBackStack();
+            }
+        });
+
+        queue.add(stringRequest);
+
+
+
+    }
+}

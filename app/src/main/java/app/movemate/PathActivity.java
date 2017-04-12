@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -39,6 +40,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,7 +51,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,10 +61,10 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 
 import app.movemate.Adapters.PassAdapter;
+import app.movemate.Wizard.PhoneActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
-import jp.wasabeef.picasso.transformations.BlurTransformation;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 public class PathActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -268,7 +269,13 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             fa.setText(info.getString("StartAddress"));
             ta.setText(info.getString("DestinationAddress"));
             pn.setText(info.getString("PathName"));
-            desc.setText(info.getString("Description"));
+            String sDesc = info.getString("Description");
+            if (sDesc.length()>0){
+                LinearLayout l = (LinearLayout)findViewById(R.id.descL);
+                l.setVisibility(View.VISIBLE);
+                desc.setText(sDesc);
+            }
+
             call_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -297,10 +304,32 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 }
             });
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = "http://movemate-api.azurewebsites.net/api/students/getphoto?id="+info.getJSONObject("Maker").getString("StudentId");
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-            Picasso.with(PathActivity.this).load(R.drawable.logo)
-                    .transform(new CropCircleTransformation())
-                    .into((ImageView) findViewById(R.id.m_pic));
+                            String imageBytes = response;
+                            byte[] imageByteArray = Base64.decode(imageBytes, Base64.DEFAULT);
+                            Glide.with(PathActivity.this).load(imageByteArray)
+                                    .bitmapTransform(new CropCircleTransformation(PathActivity.this))
+                                    .into((ImageView) findViewById(R.id.m_pic));
+
+
+
+                        }
+                    }
+                    , new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+
+            queue.add(stringRequest);
 
             if (info.getBoolean("ToFrom")) {
                 String addressFrom = info.getString("StartAddress");
@@ -767,63 +796,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onResponse(String response) {
 
                         try {
-                            final JSONObject json = new JSONObject(response);
-                            final Dialog dialog = new Dialog(PathActivity.this);
-                            dialog.setContentView(R.layout.dialog_user_rate);
-                            TextView name = (TextView)dialog.findViewById(R.id.m_name);
-                            name.setText(json.getString("Name"));
-                            TextView rate = (TextView)dialog.findViewById(R.id.feedback);
-                            Double r = json.getDouble("TotalFeedback");
-                            Button call = (Button)dialog.findViewById(R.id.call_btn);
-                            Button sms = (Button)dialog.findViewById(R.id.sms_btn);
-                            call.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    try {
-                                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                                        String n = json.getString("PhoneNumber");
-                                        intent.setData(Uri.parse("tel:"+n));
-                                        startActivity(intent);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            });
-
-                            sms.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    try {
-                                        String n = json.getString("PhoneNumber");
-                                        Intent intentsms = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + n ) );
-                                        intentsms.putExtra( "sms_body", "" );
-                                        startActivity( intentsms );
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            });
-                            Picasso.with(PathActivity.this).load(R.drawable.logo)
-                                    .transform(new BlurTransformation(PathActivity.this))
-                                    .into((ImageView) dialog.findViewById(R.id.pic));
-
-                            String rs ;
-                            if(r>5){
-                                rs = "N.A.";
-                            }else{
-                                rs = new DecimalFormat("##.#").format(r);
-                            }
-                            rate.setText(rs+"/5");
-                            dialog.show();
+                            JSONObject json = new JSONObject(response);
+                            Intent intent = new Intent(PathActivity.this, ProfileActivity.class);
+                            intent.putExtra("info",json.toString());
+                            startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-
                     }
-
                 }
                 , new Response.ErrorListener() {
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -22,11 +21,15 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import app.movemate.Email.EmailActivity;
-import app.movemate.Phone.PhoneActivity;
+import org.json.JSONObject;
+
+import app.movemate.Wizard.PhoneActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
@@ -121,12 +124,37 @@ public class LoginActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("errore",error.toString());
                 if(error.networkResponse != null){
                     //codice 404
                     if (error.networkResponse.statusCode == 404) {
-                        Intent i = new Intent(LoginActivity.this, PhoneActivity.class);
-                        startActivity(i);
-                        LoginActivity.this.finish();
+                        Bundle params = new Bundle();
+                        params.putString("fields", "picture.type(large)");
+                        new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                                new GraphRequest.Callback() {
+                                    @Override
+                                    public void onCompleted(GraphResponse response) {
+                                        if (response != null) {
+                                            try {
+                                                JSONObject data = response.getJSONObject();
+                                                if (data.has("picture")) {
+                                                    String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                                    Intent i = new Intent(LoginActivity.this, PhoneActivity.class);
+                                                    profilePicUrl = profilePicUrl.replaceAll("&",",");
+                                                    i.putExtra("pic",profilePicUrl);
+                                                    startActivity(i);
+                                                    LoginActivity.this.finish();
+
+
+                                                }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }).executeAsync();
+
+
                     }
                     else{
                         Toasty.error(LoginActivity.this,error.networkResponse.statusCode+"",Toast.LENGTH_LONG,true).show();

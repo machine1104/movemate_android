@@ -1,4 +1,4 @@
-package app.movemate.Email;
+package app.movemate.Wizard;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,12 +24,15 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import app.movemate.MainActivity;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
 public class EmailActivity extends AppCompatActivity {
     Context ctx = this;
     String sendUrl = "http://movemate-api.azurewebsites.net/api/students/poststudent";
+    String photoUrl = "http://movemate-api.azurewebsites.net/api/students/putstdimagebylink?id=";
     String name,surname,confirmed_email;
     ProgressDialog progDialog;
     EditText mail;
@@ -121,10 +124,10 @@ public class EmailActivity extends AppCompatActivity {
             public byte[] getBody() throws AuthFailureError {
                 String json = null;
                 try {
-                    Log.d("telefono",getIntent().getStringExtra("mobile"));
                     json = new JSONObject().put("facebookId", AccessToken.getCurrentAccessToken().getUserId()).
                             put("name", name).put("surname",surname).put("email",confirmed_email).
-                            put("PhoneNumber",getIntent().getStringExtra("mobile")).toString();
+                            put("PhoneNumber",getIntent().getStringExtra("mobile"))
+                            .put("PhotoUri",getIntent().getStringExtra("pic")).toString();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

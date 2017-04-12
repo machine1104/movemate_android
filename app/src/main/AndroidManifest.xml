@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Email.EmailActivity"
+            android:name=".Wizard.EmailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -54,17 +54,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Phone.PhoneActivity"
+            android:name=".Wizard.PhoneActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Phone.PhoneCheckActivity"
+            android:name=".Wizard.EmailCheckActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Email.EmailCheckActivity"
+            android:name=".ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" ></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PersonalProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+
+        </activity>
     </application>
 
 </manifest>
