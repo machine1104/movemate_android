@@ -20,19 +20,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.movemate.MainActivity;
 import app.movemate.PathActivity;
@@ -41,7 +45,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PathsAdapter extends ArrayAdapter {
     List list = new ArrayList();
-    String url = "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
+    String url = "https://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
 
     public PathsAdapter(Context context, int resource) {
         super(context, resource);
@@ -181,7 +185,16 @@ public class PathsAdapter extends ArrayAdapter {
                 dialog.dismiss();
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.error_info), Toast.LENGTH_SHORT).show();
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }

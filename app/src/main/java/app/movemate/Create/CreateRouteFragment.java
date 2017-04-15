@@ -20,12 +20,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -39,6 +41,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import app.movemate.CreateActivity;
 import app.movemate.R;
@@ -117,6 +122,7 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
         spinner_uni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 getVenues((int)id+1);
                 venue.setText("");
             }
@@ -270,7 +276,14 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
@@ -313,7 +326,15 @@ public class CreateRouteFragment extends Fragment implements GoogleApiClient.OnC
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }

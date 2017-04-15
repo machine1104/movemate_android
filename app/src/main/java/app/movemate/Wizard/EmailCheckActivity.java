@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,12 +27,15 @@ import com.facebook.HttpMethod;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import app.movemate.MainActivity;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
 public class EmailCheckActivity extends AppCompatActivity {
-    String checkUrl = "http://movemate-api.azurewebsites.net/api/students/putstudentverification";
+    String checkUrl = "https://movemate-api.azurewebsites.net/api/students/putstudentverification";
     ProgressDialog progDialog;
     EditText code;
 
@@ -97,7 +101,15 @@ public class EmailCheckActivity extends AppCompatActivity {
                     Toasty.error(EmailCheckActivity.this, getResources().getString(R.string.error_code), Toast.LENGTH_SHORT, true).show();
                 }
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
         queue.add(stringRequest);
     }
 

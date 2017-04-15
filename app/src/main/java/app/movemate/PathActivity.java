@@ -34,6 +34,7 @@ import com.akexorcist.googledirection.model.Leg;
 import com.akexorcist.googledirection.model.Route;
 import com.akexorcist.googledirection.request.DirectionRequest;
 import com.akexorcist.googledirection.util.DirectionConverter;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -41,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,6 +61,8 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import app.movemate.Adapters.PassAdapter;
 import app.movemate.Wizard.PhoneActivity;
@@ -305,7 +309,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             });
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url = "http://movemate-api.azurewebsites.net/api/students/getphoto?id="+info.getJSONObject("Maker").getString("StudentId");
+            String url = "https://movemate-api.azurewebsites.net/api/students/getphoto?id="+info.getJSONObject("Maker").getString("StudentId");
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -327,7 +331,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                 public void onErrorResponse(VolleyError error) {
 
                 }
-            });
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                    return map;
+                }
+            };
 
             queue.add(stringRequest);
 
@@ -482,7 +494,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void join() {
         RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
 
-        String url = "http://movemate-api.azurewebsites.net/api/paths/putjoinpath?StudentId=" + user_id + "&PathId=" + id;
+        String url = "https://movemate-api.azurewebsites.net/api/paths/putjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
@@ -501,14 +513,22 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(PathActivity.this, getResources().getString(R.string.error_join), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
     private void close() {
         RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
 
-        String url = "http://movemate-api.azurewebsites.net/api/paths/putclosepath?StudentId=" + user_id + "&PathId=" + id;
+        String url = "https://movemate-api.azurewebsites.net/api/paths/putclosepath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
@@ -527,7 +547,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(PathActivity.this, getResources().getString(R.string.error_close), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
@@ -568,7 +596,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                 RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
                 String url = null;
                 try {
-                    url = "http://movemate-api.azurewebsites.net/api/students/postfeedback?StudentId="+maker_id+"&Rate="+rate.getProgress()
+                    url = "https://movemate-api.azurewebsites.net/api/students/postfeedback?StudentId="+maker_id+"&Rate="+rate.getProgress()
                             +"&LeaverId="+user_id+"&PathId="+info.getInt("PathId");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -597,7 +625,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toasty.error(PathActivity.this, getResources().getString(R.string.error_feed), Toast.LENGTH_SHORT, true).show();
 
                     }
-                });
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                        return map;
+                    }
+                };
 
                 queue.add(stringRequest);
             }
@@ -608,7 +644,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void delete() {
         RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
-        String url = "http://movemate-api.azurewebsites.net/api/paths/deletepath?StudentId=" + user_id + "&PathId=" + id;
+        String url = "https://movemate-api.azurewebsites.net/api/paths/deletepath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
                     @Override
@@ -627,14 +663,22 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toasty.error(PathActivity.this, getResources().getString(R.string.error_delete), Toast.LENGTH_SHORT, true).show();
 
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
 
     private void disjoin() {
         RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
-        String url = "http://movemate-api.azurewebsites.net/api/paths/putdisjoinpath?StudentId=" + user_id + "&PathId=" + id;
+        String url = "https://movemate-api.azurewebsites.net/api/paths/putdisjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
@@ -652,7 +696,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onErrorResponse(VolleyError error) {
                 Toasty.error(PathActivity.this, getResources().getString(R.string.error_disjoin), Toast.LENGTH_SHORT, true).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
@@ -789,7 +841,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void getUserInfo(){
         RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
-        String url = "http://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+maker_id;
+        String url = "https://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+maker_id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -813,7 +865,15 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 getFragmentManager().popBackStack();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
 

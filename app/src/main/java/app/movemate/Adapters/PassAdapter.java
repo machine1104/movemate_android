@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,12 +20,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import app.movemate.MainActivity;
 import app.movemate.PathActivity;
@@ -81,7 +85,15 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
                 public void onErrorResponse(VolleyError error) {
 
                 }
-            });
+
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+                    return map;
+                }
+            };
 
             queue.add(stringRequest);
             holder.imv.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +135,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
     }
     private void getUserInfo(int id){
         RequestQueue queue = Volley.newRequestQueue(ctx);
-        String url = "http://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+id;
+        String url = "https://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -148,7 +160,15 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> 
             public void onErrorResponse(VolleyError error) {
                 ctx.getFragmentManager().popBackStack();
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
 

@@ -85,7 +85,7 @@ public class FilterTransportFragment extends Fragment implements android.widget.
     }
 
     private void next() {
-        String url = "http://movemate-api.azurewebsites.net/api/paths/getfilteredpaths?";
+        String url = "https://movemate-api.azurewebsites.net/api/paths/getfilteredpaths?";
         Boolean car, moto, transport;
         car = carCheck.isChecked();
         moto = motoCheck.isChecked();

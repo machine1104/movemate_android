@@ -16,6 +16,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ms_no_routes_main"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:gravity="center_horizontal"
+            android:id="@+id/ms"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimary"/>
+
         <ListView
             android:id="@+id/matesList"
             android:layout_width="match_parent"

@@ -20,8 +20,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RelativeLayout
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="10dp">
                     <ImageView
@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Nome"
-                android:textAllCaps="true"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorPrimaryDark" />
 

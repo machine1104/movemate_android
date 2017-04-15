@@ -4,13 +4,24 @@
     android:layout_height="match_parent"
     tools:context="app.movemate.Filter.FindPathFragment">
 
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ms_no_routes_find"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:gravity="center_horizontal"
+        android:id="@+id/ms"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimary"/>
 
-        <ListView
-            android:id="@+id/groupList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:divider="@color/transparent">
-        </ListView>
+
+    <ListView
+        android:id="@+id/groupList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:divider="@color/transparent">
+    </ListView>
 
 </RelativeLayout>

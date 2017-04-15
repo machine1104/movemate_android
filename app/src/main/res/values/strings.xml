@@ -52,9 +52,9 @@
     <string name="start">Partenza</string>
     <string name="error_create">Impossibile creare percorso.</string>
     <string name="error_getpath">Impossibile recuperare lista percorsi.</string>
-    <string name="loading_info">Recupero informazioni percorso...</string>
+    <string name="loading_info">Recupero informazioni</string>
     <string name="loading_app">Controllo informazioni utente...</string>
-    <string name="loading_path">Recupero lista percorsi...</string>
+    <string name="loading_path">Recupero percorsi...</string>
     <string name="loading_creation">Creazione percorso...</string>
     <string name="create">CREA</string>
     <string name="delete">CANCELLA</string>
@@ -112,4 +112,7 @@
     <string name="no_sms_permission">Permetti a MoveMate di inviare e ricevere SMS dalle Impostazioni</string>
     <string name="call">Chiama</string>
     <string name="message">Sms</string>
+    <string name="ms_no_routes_main">Non fai parte di nessun percorso!\nCercane uno o crealo tu stesso.</string>
+    <string name="ms_no_routes_find">Nessun percorso disponibile per la tua ricerca</string>
+    <string name="no_filter_venues">Qualunque sede</string>
 </resources>

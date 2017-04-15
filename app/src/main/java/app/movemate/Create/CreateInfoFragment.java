@@ -19,9 +19,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import app.movemate.CreateActivity;
 import app.movemate.MainActivity;
@@ -77,11 +81,11 @@ public class CreateInfoFragment extends Fragment {
 
 
             if (vId == 0){
-                url = "http://movemate-api.azurewebsites.net/api/paths/postpathcar";
+                url = "https://movemate-api.azurewebsites.net/api/paths/postpathcar";
             }else if (vId == 1){
-                url = "http://movemate-api.azurewebsites.net/api/paths/postpathcyc";
+                url = "https://movemate-api.azurewebsites.net/api/paths/postpathcyc";
             }else{
-                url = "http://movemate-api.azurewebsites.net/api/paths/postpathpub";
+                url = "https://movemate-api.azurewebsites.net/api/paths/postpathpub";
             }
 
 
@@ -106,10 +110,18 @@ public class CreateInfoFragment extends Fragment {
                     Toasty.error(getActivity(), getString(R.string.error_create), Toast.LENGTH_SHORT, true).show();
                 }
             })
+
             {
                 @Override
                 public String getBodyContentType() {
                     return "application/json; charset=utf-8";
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                    return map;
                 }
 
                 @Override

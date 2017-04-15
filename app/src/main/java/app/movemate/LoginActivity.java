@@ -36,7 +36,7 @@ import es.dmoral.toasty.Toasty;
 public class LoginActivity extends Activity {
     CallbackManager callbackManager;
     LoginButton loginButton;
-    String checkUrl = "http://movemate-api.azurewebsites.net/api/students/getregisteredstudent?facebookId=";
+    String checkUrl = "https://movemate-api.azurewebsites.net/api/students/getregisteredstudent?facebookId=";
     Context ctx = this;
 
     @Override
@@ -79,6 +79,7 @@ public class LoginActivity extends Activity {
         }else{
             btn.setVisibility(View.VISIBLE);
         }
+
 
 
     }

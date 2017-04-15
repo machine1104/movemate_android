@@ -25,14 +25,16 @@ import com.facebook.HttpMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import app.movemate.MainActivity;
 import app.movemate.R;
 import es.dmoral.toasty.Toasty;
 
 public class EmailActivity extends AppCompatActivity {
     Context ctx = this;
-    String sendUrl = "http://movemate-api.azurewebsites.net/api/students/poststudent";
-    String photoUrl = "http://movemate-api.azurewebsites.net/api/students/putstdimagebylink?id=";
+    String sendUrl = "https://movemate-api.azurewebsites.net/api/students/poststudent";
     String name,surname,confirmed_email;
     ProgressDialog progDialog;
     EditText mail;
@@ -118,6 +120,14 @@ public class EmailActivity extends AppCompatActivity {
             @Override
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
             }
 
             @Override

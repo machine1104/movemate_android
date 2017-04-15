@@ -3,6 +3,7 @@ package app.movemate.Filter;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import app.movemate.FilterActivity;
 import app.movemate.R;
@@ -35,6 +42,8 @@ public class FilterDepartmentFragment extends Fragment {
     private AutoCompleteTextView venue;
     private Spinner spinner_uni;
     private String[] venue_list;
+    private int uId;
+    private CheckBox check;
     JSONObject departmentId;
 
 
@@ -63,7 +72,8 @@ public class FilterDepartmentFragment extends Fragment {
         spinner_uni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                getVenues((int)id+1);
+                uId =(int) id+1;
+                getVenues(uId);
                 venue.setText("");
             }
 
@@ -85,6 +95,8 @@ public class FilterDepartmentFragment extends Fragment {
                 }
             }
         });
+
+        check = (CheckBox)view.findViewById(R.id.check);
 
 
 
@@ -125,7 +137,14 @@ public class FilterDepartmentFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
@@ -162,27 +181,40 @@ public class FilterDepartmentFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", AccessToken.getCurrentAccessToken().getUserId());
+
+                return map;
+            }
+        };
 
         queue.add(stringRequest);
     }
 
     private void next() throws JSONException {
+        String url;
 
-        if (!departmentId.has(venue.getText().toString())) {
+        if (!departmentId.has(venue.getText().toString()) && !check.isChecked()) {
             Toasty.error(getActivity(), getString(R.string.error_venue), Toast.LENGTH_SHORT, true).show();
         }else{
-
-        String url = getArguments().getString("url")+"&DepId="+ departmentId.get(venue.getText().toString());
-
-        FindPathFragment frag = new FindPathFragment();
-        Bundle b = new Bundle();
-        b.putBoolean("ToFrom",getArguments().getBoolean("ToFrom"));
-        b.putString("url", url);
-        frag.setArguments(b);
-        ((FilterActivity) getActivity()).nextFrag(frag);
+            if (check.isChecked()){
+                url = getArguments().getString("url")+"&DepId="+ 0 + "&UniId="+uId;
+            }else{
+                url = getArguments().getString("url")+"&DepId="+ departmentId.get(venue.getText().toString())+ "&UniId="+uId;
+            }
+            FindPathFragment frag = new FindPathFragment();
+            Bundle b = new Bundle();
+            b.putBoolean("ToFrom",getArguments().getBoolean("ToFrom"));
+            b.putString("url", url);
+            frag.setArguments(b);
+            ((FilterActivity) getActivity()).nextFrag(frag);
         }
+
 
     }
 
 }
+
