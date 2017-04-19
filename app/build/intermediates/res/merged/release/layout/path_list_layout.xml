@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="5dp"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow"
+        android:layout_alignBottom="@+id/date"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/linearLayout"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NOME PERCORSO"
+        android:id="@+id/pathname"
+        android:paddingStart="5dp"
+        android:textAllCaps="true"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/i"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10€"
+            android:id="@+id/p"
+            android:background="@drawable/rounded_green"
+            android:textColor="@color/White"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/from"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:id="@+id/ft"
+        android:layout_alignStart="@+id/i"
+        android:layout_below="@+id/pathname"
+        android:layout_marginStart="15dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:text="indirizzo partenza"
+        android:layout_toEndOf="@+id/ft"
+        android:layout_alignBaseline="@+id/ft"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:id="@+id/fa"
+        android:layout_marginEnd="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:id="@+id/tt"
+        android:layout_alignStart="@+id/ft"
+        android:layout_below="@+id/fa"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="indirizzo arrivo"
+        android:id="@+id/ta"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_below="@+id/fa"
+        android:paddingStart="5dp"
+        android:layout_alignStart="@+id/fa"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginEnd="5dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_primary_dark"
+        android:layout_below="@+id/ta"
+        android:layout_alignParentStart="true"
+        android:id="@+id/date"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gg/mm/aaaa"
+            android:id="@+id/d"
+            android:textColor="@color/White"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:id="@+id/i"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/icon"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

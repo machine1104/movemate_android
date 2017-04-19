@@ -1,0 +1,45 @@
+[
+    {
+        "outputFile": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-h330dp-v13\\values-h330dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 69,
+                    "endOffset": 120
+                },
+                "from": {
+                    "file": "C:\\Users\\Edoardo\\.android\\build-cache\\4fead0aa0db55746d7b901bc6be33ff7f2cc3db2\\output\\res\\values-h330dp\\values-h330dp.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 216,
+                        "endColumn": 69,
+                        "endOffset": 281
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 125,
+                    "endColumn": 56,
+                    "endOffset": 177
+                },
+                "from": {
+                    "file": "C:\\Users\\Edoardo\\.android\\build-cache\\4fead0aa0db55746d7b901bc6be33ff7f2cc3db2\\output\\res\\values-h330dp\\values-h330dp.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 286,
+                        "endColumn": 56,
+                        "endOffset": 338
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,7 @@
+#Sat Apr 15 19:33:44 CEST 2017
+base.0=C\:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_af0e58458f6d0d4faeb43f947d3259834daa49e6
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e17a0f51782b21fa11cb5b6beba35b07e3d42ebf\\classes.dex
+base.1=C\:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_e17a0f51782b21fa11cb5b6beba35b07e3d42ebf
+file.0=C\:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_af0e58458f6d0d4faeb43f947d3259834daa49e6\\classes.dex

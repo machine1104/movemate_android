@@ -1,0 +1,54 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.movemate.Wizard.PhoneActivity"
+    android:background="@color/White"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:id="@+id/pre"
+                android:text="+39"
+                android:textColorHint="@color/transparent"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:id="@+id/mobile"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:text="@string/phone_spec"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

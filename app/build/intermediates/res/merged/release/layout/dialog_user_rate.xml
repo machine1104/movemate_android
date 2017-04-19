@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/info"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/White" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/border"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle_dark"/>
+
+            <ImageView
+                android:padding="5dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/pic"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:id="@+id/m_name"
+            android:text="maker"
+            android:layout_gravity="center"
+            android:layout_below="@+id/border"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"/>
+        <LinearLayout
+            android:layout_below="@+id/m_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rate"
+            android:paddingBottom="10dp"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_stars"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedback"
+                android:text="5/5"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/rate">
+            <Button
+                android:paddingStart="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/call_btn"
+                android:background="@drawable/sqr_green"
+                android:text="@string/call"
+                android:drawableStart="@drawable/ic_phone"
+                android:textColor="@color/White"
+                android:textSize="@dimen/cast_expanded_controller_control_button_margin"/>
+            <Button
+                android:paddingStart="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/sms_btn"
+                android:drawableStart="@drawable/ic_message"
+                android:background="@drawable/sqr_green"
+                android:text="@string/message"
+                android:textColor="@color/White"
+                android:textSize="@dimen/cast_expanded_controller_control_button_margin"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

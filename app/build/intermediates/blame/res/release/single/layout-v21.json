@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\place_autocomplete_fragment.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8977cdc9c4d3de56305f9adf29567527e0c9b426\\output\\res\\layout-v21\\place_autocomplete_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_show_password.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\drawable-v21\\avd_show_password.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_bottom_navigation_item_background.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\drawable-v21\\design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\mdtp_material_button_selected.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\4fead0aa0db55746d7b901bc6be33ff7f2cc3db2\\output\\res\\drawable-v21\\mdtp_material_button_selected.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_hide_password.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\drawable-v21\\avd_hide_password.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_password_eye.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\drawable-v21\\design_password_eye.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\mdtp_material_button_background.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\4fead0aa0db55746d7b901bc6be33ff7f2cc3db2\\output\\res\\drawable-v21\\mdtp_material_button_background.xml"
+    }
+]

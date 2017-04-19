@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\success_bow_roate.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\success_bow_roate.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\error_frame_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\error_frame_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\modal_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\modal_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\anim\\design_snackbar_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\error_x_in.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\error_x_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\modal_out.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\modal_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\anim\\design_snackbar_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\debug\\anim\\success_mask_layout.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\baf1bb9f56ad642fa196af91880c25e8fa5238cd\\output\\res\\anim\\success_mask_layout.xml"
+    }
+]

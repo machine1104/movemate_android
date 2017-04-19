@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\menu\\drawer.xml",
+        "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\menu\\drawer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\menu\\find.xml",
+        "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\menu\\find.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\menu\\confirm.xml",
+        "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\menu\\confirm.xml"
+    }
+]
