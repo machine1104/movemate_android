@@ -1,14 +1,11 @@
 package app.movemate.Adapters;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,12 +23,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.movemate.MainActivity;
-import app.movemate.PathActivity;
+import app.movemate.RouteActivity;
 import app.movemate.ProfileActivity;
 import app.movemate.R;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -40,11 +35,11 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class PassAdapter extends RecyclerView.Adapter<PassAdapter.MyViewHolder> {
 
     private JSONArray passList;
-    private PathActivity ctx;
+    private RouteActivity ctx;
 
     public PassAdapter(Context context,JSONArray passList) {
         this.passList = passList;
-        this.ctx = (PathActivity)context;
+        this.ctx = (RouteActivity)context;
     }
 
 

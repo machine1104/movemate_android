@@ -3,20 +3,13 @@ package app.movemate.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,8 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.movemate.MainActivity;
-import app.movemate.PathActivity;
+import app.movemate.RouteActivity;
 import app.movemate.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -173,7 +164,7 @@ public class PathsAdapter extends ArrayAdapter {
                             e.printStackTrace();
                         }
 
-                        Intent intent = new Intent(getContext(), PathActivity.class);
+                        Intent intent = new Intent(getContext(), RouteActivity.class);
                         intent.putExtra("path",info.toString());
                         getContext().startActivity(intent);
                     }

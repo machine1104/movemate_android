@@ -13,7 +13,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,20 +57,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import app.movemate.Adapters.PassAdapter;
-import app.movemate.Wizard.PhoneActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
-public class PathActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class RouteActivity extends AppCompatActivity implements OnMapReadyCallback {
     String id;
     String url = "http://movemate-api.azurewebsites.net/api/paths/getpath?PathId=";
     TextView pn, p, fa, ta, d, s, h, v, m, desc;
@@ -142,7 +139,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             join_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    new SweetAlertDialog(RouteActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getResources().getString(R.string.join_confirm))
                             .setConfirmText(getResources().getString(R.string.confirm))
                             .setCancelText(getResources().getString(R.string.cancel))
@@ -166,7 +163,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             del_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    new SweetAlertDialog(RouteActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getResources().getString(R.string.delete_confirm))
                             .setConfirmText(getResources().getString(R.string.confirm))
                             .setCancelText(getResources().getString(R.string.cancel))
@@ -190,7 +187,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             disjoin_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    new SweetAlertDialog(RouteActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getResources().getString(R.string.disjoin_confirm))
                             .setConfirmText(getResources().getString(R.string.confirm))
                             .setCancelText(getResources().getString(R.string.cancel))
@@ -214,7 +211,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
             close_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    new SweetAlertDialog(RouteActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getResources().getString(R.string.close_confirm))
                             .setContentText(getResources().getString(R.string.close_text))
                             .setConfirmText(getResources().getString(R.string.confirm))
@@ -317,8 +314,8 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             String imageBytes = response;
                             byte[] imageByteArray = Base64.decode(imageBytes, Base64.DEFAULT);
-                            Glide.with(PathActivity.this).load(imageByteArray)
-                                    .bitmapTransform(new CropCircleTransformation(PathActivity.this))
+                            Glide.with(RouteActivity.this).load(imageByteArray)
+                                    .bitmapTransform(new CropCircleTransformation(RouteActivity.this))
                                     .into((ImageView) findViewById(R.id.m_pic));
 
 
@@ -475,9 +472,9 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                     ll = (LinearLayout) findViewById(R.id.partecipants);
                     ll.setVisibility(View.VISIBLE);
                     RecyclerView rec = (RecyclerView) findViewById(R.id.rec);
-                    PassAdapter passAdapter = new PassAdapter(PathActivity.this, ja);
+                    PassAdapter passAdapter = new PassAdapter(RouteActivity.this, ja);
                     LinearLayoutManager layoutManager
-                            = new LinearLayoutManager(PathActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                            = new LinearLayoutManager(RouteActivity.this, LinearLayoutManager.HORIZONTAL, false);
                     rec.setLayoutManager(layoutManager);
                     rec.setItemAnimator(new DefaultItemAnimator());
                     rec.setAdapter(passAdapter);
@@ -492,14 +489,14 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void join() {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
 
         String url = "https://movemate-api.azurewebsites.net/api/paths/putjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Intent intent = new Intent(PathActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RouteActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("user",MainActivity.user_id);
                         startActivity(intent);
@@ -511,7 +508,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PathActivity.this, getResources().getString(R.string.error_join), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RouteActivity.this, getResources().getString(R.string.error_join), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -526,14 +523,14 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         queue.add(stringRequest);
     }
     private void close() {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
 
         String url = "https://movemate-api.azurewebsites.net/api/paths/putclosepath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Intent intent = new Intent(PathActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RouteActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("user",MainActivity.user_id);
                         startActivity(intent);
@@ -545,7 +542,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PathActivity.this, getResources().getString(R.string.error_close), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RouteActivity.this, getResources().getString(R.string.error_close), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -560,7 +557,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         queue.add(stringRequest);
     }
     private void feed() {
-        final Dialog dialog = new Dialog(PathActivity.this);
+        final Dialog dialog = new Dialog(RouteActivity.this);
         dialog.setContentView(R.layout.dialog_user_feed);
         final SeekBar rate = (SeekBar)dialog.findViewById(R.id.feed_bar);
         final TextView feed = (TextView)dialog.findViewById(R.id.feedback);
@@ -593,7 +590,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+                RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
                 String url = null;
                 try {
                     url = "https://movemate-api.azurewebsites.net/api/students/postfeedback?StudentId="+maker_id+"&Rate="+rate.getProgress()
@@ -605,9 +602,9 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toasty.success(PathActivity.this, "Success!", Toast.LENGTH_SHORT, true).show();
+                                Toasty.success(RouteActivity.this, "Success!", Toast.LENGTH_SHORT, true).show();
                                 dialog.dismiss();
-                                Intent intent = new Intent(PathActivity.this, MainActivity.class);
+                                Intent intent = new Intent(RouteActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.putExtra("user",MainActivity.user_id);
                                 startActivity(intent);
@@ -622,7 +619,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onErrorResponse(VolleyError error) {
 
                         dialog.dismiss();
-                        Toasty.error(PathActivity.this, getResources().getString(R.string.error_feed), Toast.LENGTH_SHORT, true).show();
+                        Toasty.error(RouteActivity.this, getResources().getString(R.string.error_feed), Toast.LENGTH_SHORT, true).show();
 
                     }
                 }){
@@ -643,13 +640,13 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void delete() {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
         String url = "https://movemate-api.azurewebsites.net/api/paths/deletepath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Intent intent = new Intent(PathActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RouteActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("user",MainActivity.user_id);
                         startActivity(intent);
@@ -660,7 +657,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(PathActivity.this, getResources().getString(R.string.error_delete), Toast.LENGTH_SHORT, true).show();
+                Toasty.error(RouteActivity.this, getResources().getString(R.string.error_delete), Toast.LENGTH_SHORT, true).show();
 
             }
         }){
@@ -677,13 +674,13 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void disjoin() {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
         String url = "https://movemate-api.azurewebsites.net/api/paths/putdisjoinpath?StudentId=" + user_id + "&PathId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Intent intent = new Intent(PathActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RouteActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("user",MainActivity.user_id);
                         startActivity(intent);
@@ -694,7 +691,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(PathActivity.this, getResources().getString(R.string.error_disjoin), Toast.LENGTH_SHORT, true).show();
+                Toasty.error(RouteActivity.this, getResources().getString(R.string.error_disjoin), Toast.LENGTH_SHORT, true).show();
             }
         }){
             @Override
@@ -710,7 +707,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void origin2LatLng(String from, final String to) {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
         from = from.replace(" ", "");
         from = Normalizer.normalize(from, Normalizer.Form.NFD);
         from = from.replaceAll("[^\\p{ASCII}]", "");
@@ -747,7 +744,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void destination2LatLng(String to) {
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
         to = to.replace(" ", "");
         to = Normalizer.normalize(to, Normalizer.Form.NFD);
         to = to.replaceAll("[^\\p{ASCII}]", "");
@@ -815,7 +812,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Route route = direction.getRouteList().get(0);
                     Leg leg = route.getLegList().get(0);
                     ArrayList<LatLng> pointList = leg.getDirectionPoint();
-                    PolylineOptions polylineOptions = DirectionConverter.createPolyline(PathActivity.this, pointList, 5, getResources().getColor(R.color.colorPrimary));
+                    PolylineOptions polylineOptions = DirectionConverter.createPolyline(RouteActivity.this, pointList, 5, getResources().getColor(R.color.colorPrimary));
                     gMap.addPolyline(polylineOptions);
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(origin);
@@ -840,7 +837,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void getUserInfo(){
-        RequestQueue queue = Volley.newRequestQueue(PathActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(RouteActivity.this);
         String url = "https://movemate-api.azurewebsites.net/api/students/getstudentinfo?StudentId="+maker_id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -849,7 +846,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         try {
                             JSONObject json = new JSONObject(response);
-                            Intent intent = new Intent(PathActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(RouteActivity.this, ProfileActivity.class);
                             intent.putExtra("info",json.toString());
                             startActivity(intent);
                         } catch (JSONException e) {
