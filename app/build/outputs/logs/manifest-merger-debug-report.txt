@@ -171,14 +171,14 @@ ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\And
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:47:13-44
 	android:name
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:44:13-43
-activity#app.movemate.PathActivity
+activity#app.movemate.RouteActivity
 ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:48:9-51:47
 	android:screenOrientation
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:50:13-49
 	android:theme
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:51:13-44
 	android:name
-		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:49:13-41
+		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:49:13-42
 activity#app.movemate.CreateActivity
 ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:52:9-55:47
 	android:screenOrientation
@@ -295,7 +295,7 @@ MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\Edoardo\.an
 MERGED from [com.android.support:support-compat:25.2.0] C:\Users\Edoardo\.android\build-cache\9aa76b51dd142f6b85f210b7f4b0443fda0cc1a6\output\AndroidManifest.xml:21:5-23:58
 MERGED from [jp.wasabeef:glide-transformations:2.0.2] C:\Users\Edoardo\.android\build-cache\da8cca6c011b8a704e3180df5e5b8989f0802897\output\AndroidManifest.xml:8:5-10:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Edoardo\.android\build-cache\c485f98860756b4e8eb8e2562cb86dbe593587aa\output\AndroidManifest.xml:5:5-7:41
-MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.6] C:\Users\Edoardo\.android\build-cache\1a3c865df2a40b2afc9914c9f8933e11df828f19\output\AndroidManifest.xml:7:5-9:41
+MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.7] C:\Users\Edoardo\.android\build-cache\1a907b2f648fe9fba09c8b08b38468b74b1b80dd\output\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:25.2.0] C:\Users\Edoardo\.android\build-cache\3435cbce575ac4133f4152f96e62c6783b456edd\output\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion

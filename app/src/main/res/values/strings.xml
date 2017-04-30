@@ -34,7 +34,7 @@
     <string name="insert_email">Inserisci Email Universitaria</string>
     <string name="verify">Verifica</string>
     <string name="create_to_venue">Sede Di Destinazione</string>
-    <string name="create_from_venue">Sede Di Arrivo</string>
+    <string name="create_from_venue">Sede Di Partenza</string>
     <string name="from">DA:</string>
     <string name="to">A:</string>
     <string name="choose_to">verso università</string>
@@ -115,4 +115,5 @@
     <string name="ms_no_routes_main">Non fai parte di nessun percorso!\nCercane uno o crealo tu stesso.</string>
     <string name="ms_no_routes_find">Nessun percorso disponibile per la tua ricerca</string>
     <string name="no_filter_venues">Qualunque sede</string>
+    <string name="closed">Chiuso</string>
 </resources>

@@ -370,12 +370,12 @@ public final class R {
         public static final int error_center_x = 0x7f0200c7;
         public static final int error_circle = 0x7f0200c8;
         public static final int gray_button_background = 0x7f0200cc;
-        public static final int ic_launcher = 0x7f020104;
-        public static final int red_button_background = 0x7f0201e0;
-        public static final int success_bow = 0x7f0201ef;
-        public static final int success_circle = 0x7f0201f0;
-        public static final int warning_circle = 0x7f0201f3;
-        public static final int warning_sigh = 0x7f0201f4;
+        public static final int ic_launcher = 0x7f020105;
+        public static final int red_button_background = 0x7f0201e1;
+        public static final int success_bow = 0x7f0201f0;
+        public static final int success_circle = 0x7f0201f1;
+        public static final int warning_circle = 0x7f0201f4;
+        public static final int warning_sigh = 0x7f0201f5;
     }
     public static final class id {
         public static final int action_bar = 0x7f0f00c4;
@@ -503,9 +503,9 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f080010;
         public static final int abc_shareactionprovider_share_with_application = 0x7f080011;
         public static final int app_name = 0x7f08009f;
-        public static final int dialog_cancel = 0x7f0800c7;
-        public static final int dialog_default_title = 0x7f0800c8;
-        public static final int dialog_ok = 0x7f0800c9;
+        public static final int dialog_cancel = 0x7f0800c8;
+        public static final int dialog_default_title = 0x7f0800c9;
+        public static final int dialog_ok = 0x7f0800ca;
     }
     public static final class style {
         public static final int Base_TextAppearance_AppCompat = 0x7f0a0044;

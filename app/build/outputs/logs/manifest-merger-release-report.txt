@@ -36,7 +36,7 @@ application
 ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:8:5-74:19
 MERGED from [com.android.support:design:25.2.0] C:\Users\Edoardo\.android\build-cache\3435cbce575ac4133f4152f96e62c6783b456edd\output\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:transition:25.2.0] C:\Users\Edoardo\.android\build-cache\4006d952562f04b1836676f5af32d530c2e9e3f5\output\AndroidManifest.xml:22:5-20
-MERGED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:28:5-48:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:28:5-48:19
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\Edoardo\.android\build-cache\1a98f07e89acd9f40f38c26ae2fa91178f455d07\output\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:customtabs:25.0.0] C:\Users\Edoardo\.android\build-cache\77ba99dc1b54021e2b34df2d1135dd7ec08b5dc9\output\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services:10.2.0] C:\Users\Edoardo\.android\build-cache\c6f4d39af47f14151c9be887afc5a922e2c625d8\output\AndroidManifest.xml:5:5-20
@@ -171,14 +171,14 @@ ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\And
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:47:13-44
 	android:name
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:44:13-43
-activity#app.movemate.PathActivity
+activity#app.movemate.RouteActivity
 ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:48:9-51:47
 	android:screenOrientation
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:50:13-49
 	android:theme
 		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:51:13-44
 	android:name
-		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:49:13-41
+		ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:49:13-42
 activity#app.movemate.CreateActivity
 ADDED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml:52:9-55:47
 	android:screenOrientation
@@ -224,7 +224,7 @@ INJECTED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\
 MERGED from [com.android.support:design:25.2.0] C:\Users\Edoardo\.android\build-cache\3435cbce575ac4133f4152f96e62c6783b456edd\output\AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:transition:25.2.0] C:\Users\Edoardo\.android\build-cache\4006d952562f04b1836676f5af32d530c2e9e3f5\output\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:25.2.0] C:\Users\Edoardo\.android\build-cache\14bf81ddfc74e295b84c50c26ead16b35cca5df9\output\AndroidManifest.xml:20:5-43
-MERGED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:24:5-26:41
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\Edoardo\.android\build-cache\1a98f07e89acd9f40f38c26ae2fa91178f455d07\output\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:customtabs:25.0.0] C:\Users\Edoardo\.android\build-cache\77ba99dc1b54021e2b34df2d1135dd7ec08b5dc9\output\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services:10.2.0] C:\Users\Edoardo\.android\build-cache\c6f4d39af47f14151c9be887afc5a922e2c625d8\output\AndroidManifest.xml:4:5-43
@@ -295,7 +295,7 @@ MERGED from [com.android.support:support-core-utils:25.2.0] C:\Users\Edoardo\.an
 MERGED from [com.android.support:support-compat:25.2.0] C:\Users\Edoardo\.android\build-cache\9aa76b51dd142f6b85f210b7f4b0443fda0cc1a6\output\AndroidManifest.xml:21:5-23:58
 MERGED from [jp.wasabeef:glide-transformations:2.0.2] C:\Users\Edoardo\.android\build-cache\da8cca6c011b8a704e3180df5e5b8989f0802897\output\AndroidManifest.xml:8:5-10:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Edoardo\.android\build-cache\c485f98860756b4e8eb8e2562cb86dbe593587aa\output\AndroidManifest.xml:5:5-7:41
-MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.6] C:\Users\Edoardo\.android\build-cache\1a3c865df2a40b2afc9914c9f8933e11df828f19\output\AndroidManifest.xml:7:5-9:41
+MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.7] C:\Users\Edoardo\.android\build-cache\1a907b2f648fe9fba09c8b08b38468b74b1b80dd\output\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:25.2.0] C:\Users\Edoardo\.android\build-cache\3435cbce575ac4133f4152f96e62c6783b456edd\output\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
@@ -305,25 +305,25 @@ MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.6] C:\Users\Edoardo\.
 		INJECTED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Edoardo\Documents\Android\Progetti\MoveMate\app\src\main\AndroidManifest.xml
 activity#com.facebook.FacebookActivity
-ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:29:9-32:66
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:29:9-32:66
 	android:configChanges
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:31:13-96
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:31:13-96
 	android:theme
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:32:13-63
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:30:13-57
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:30:13-57
 activity#com.facebook.CustomTabMainActivity
-ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:33:9-71
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:33:9-71
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:33:19-68
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:33:19-68
 provider#com.facebook.internal.FacebookInitProvider
-ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:44:9-47:40
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:44:9-47:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:46:13-72
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:46:13-72
 	android:exported
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:47:13-37
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:47:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.21.1] C:\Users\Edoardo\.android\build-cache\62e55cb8bb47cfc1ce487761daf5cb542fb49340\output\AndroidManifest.xml:45:13-70
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.0] C:\Users\Edoardo\.android\build-cache\5840a3669acdca098351e65bbd7b4825a1a93441\output\AndroidManifest.xml:45:13-70
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-ads-lite:10.2.0] C:\Users\Edoardo\.android\build-cache\e5a563261f6a82fa76c53b5c6b3f8bd757443390\output\AndroidManifest.xml:20:5-78
 MERGED from [com.google.android.gms:play-services-analytics:10.2.0] C:\Users\Edoardo\.android\build-cache\4e1a771e6dceaa3785486819714de98b770fefea\output\AndroidManifest.xml:21:5-78

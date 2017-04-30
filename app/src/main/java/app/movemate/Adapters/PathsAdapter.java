@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akexorcist.googledirection.model.Line;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -66,6 +68,7 @@ public class PathsAdapter extends ArrayAdapter {
             pathHolder.imv= (ImageView) row.findViewById(R.id.icon);
             pathHolder.tx_d= (TextView) row.findViewById(R.id.d);
             pathHolder.tx_p= (TextView) row.findViewById(R.id.p);
+            pathHolder.close= (LinearLayout) row.findViewById(R.id.close);
 
             row.setTag(pathHolder);
 
@@ -79,6 +82,9 @@ public class PathsAdapter extends ArrayAdapter {
             pathHolder.tx_fa.setText(path.path.getString("StartAddress"));
             pathHolder.tx_ta.setText(path.path.getString("DestinationAddress"));
             pathHolder.tx_d.setText(path.path.getString("Date"));
+            if (!path.path.getBoolean("Open")){
+                pathHolder.close.setVisibility(View.VISIBLE);
+            }
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -198,6 +204,7 @@ public class PathsAdapter extends ArrayAdapter {
         TextView tx_p;
         TextView tx_d;
         ImageView imv;
+        LinearLayout close;
 
     }
 }

@@ -9,7 +9,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_smart_device_dialog_fragment.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\com_facebook_smart_device_dialog_fragment.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\com_facebook_smart_device_dialog_fragment.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\activity_personal_profile.xml",
@@ -21,19 +21,19 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_round.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_white_round.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_white_round.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_large.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_white_large.xml"
-    },
-    {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\place_autocomplete_item_prediction.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8977cdc9c4d3de56305f9adf29567527e0c9b426\\output\\res\\layout\\place_autocomplete_item_prediction.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_white_large.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\navigation_view.xml",
         "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\layout\\navigation_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\place_autocomplete_item_prediction.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8977cdc9c4d3de56305f9adf29567527e0c9b426\\output\\res\\layout\\place_autocomplete_item_prediction.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\activity_login.xml",
@@ -57,15 +57,15 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_small.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_white_small.xml"
-    },
-    {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_white_small.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
         "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\activity_profile.xml",
@@ -92,20 +92,20 @@
         "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\place_autocomplete_item_powered_by_google.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8977cdc9c4d3de56305f9adf29567527e0c9b426\\output\\res\\layout\\place_autocomplete_item_powered_by_google.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_login_fragment.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\com_facebook_login_fragment.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_separator.xml",
         "source": "C:\\Users\\Edoardo\\.android\\build-cache\\3435cbce575ac4133f4152f96e62c6783b456edd\\output\\res\\layout\\design_navigation_item_separator.xml"
     },
     {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_login_fragment.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\com_facebook_login_fragment.xml"
-    },
-    {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\place_autocomplete_item_powered_by_google.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8977cdc9c4d3de56305f9adf29567527e0c9b426\\output\\res\\layout\\place_autocomplete_item_powered_by_google.xml"
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\53a590ba6bebb4e973bc27cec55d5cbeb9a3f4fd\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
@@ -128,12 +128,12 @@
         "source": "C:\\Users\\Edoardo\\.android\\build-cache\\4fead0aa0db55746d7b901bc6be33ff7f2cc3db2\\output\\res\\layout\\mdtp_time_header_label.xml"
     },
     {
-        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\fragment_create_info.xml",
-        "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\layout\\fragment_create_info.xml"
-    },
-    {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\cast_tracks_chooser_dialog_layout.xml",
         "source": "C:\\Users\\Edoardo\\.android\\build-cache\\8d4fd7d9420a356aa2f72c0140e685af9a65762d\\output\\res\\layout\\cast_tracks_chooser_dialog_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\fragment_create_info.xml",
+        "source": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\src\\main\\res\\layout\\fragment_create_info.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\mdtp_date_picker_header_view.xml",
@@ -169,7 +169,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_device_auth_dialog_fragment.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\com_facebook_device_auth_dialog_fragment.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\com_facebook_device_auth_dialog_fragment.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\cast_help_text.xml",
@@ -197,7 +197,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_small.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_blue_small.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_blue_small.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar.xml",
@@ -229,7 +229,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_round.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_blue_round.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_blue_round.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\fragment_find.xml",
@@ -317,7 +317,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_activity_layout.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\com_facebook_activity_layout.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\com_facebook_activity_layout.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\design_bottom_navigation_item.xml",
@@ -413,7 +413,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_large.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\messenger_button_send_blue_large.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\messenger_button_send_blue_large.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\dialog_user_rate.xml",
@@ -449,7 +449,7 @@
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_tooltip_bubble.xml",
-        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\62e55cb8bb47cfc1ce487761daf5cb542fb49340\\output\\res\\layout\\com_facebook_tooltip_bubble.xml"
+        "source": "C:\\Users\\Edoardo\\.android\\build-cache\\5840a3669acdca098351e65bbd7b4825a1a93441\\output\\res\\layout\\com_facebook_tooltip_bubble.xml"
     },
     {
         "merged": "C:\\Users\\Edoardo\\Documents\\Android\\Progetti\\MoveMate\\app\\build\\intermediates\\res\\merged\\release\\layout\\path_list_layout.xml",

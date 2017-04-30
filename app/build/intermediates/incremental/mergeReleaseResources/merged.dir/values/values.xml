@@ -1467,6 +1467,7 @@
     <string name="close">TERMINA</string>
     <string name="close_confirm">Terminare il percorso?</string>
     <string name="close_text">Gli altri mates potranno ancora inviare il feedback.</string>
+    <string name="closed">Chiuso</string>
     <string name="code_spec">Riceverai un SMS con un codice per verificare il tuo numero di telefono.</string>
     <string name="com_facebook_device_auth_instructions">Visit &lt;b>facebook.com/device&lt;/b> and enter the code shown above.</string>
     <string name="com_facebook_image_download_unknown_error">Unexpected error while downloading an image.</string>
@@ -1517,7 +1518,7 @@
     <string name="create_create">Crea</string>
     <string name="create_desc">Inserisci Descrizione</string>
     <string name="create_from_address">Destinazione</string>
-    <string name="create_from_venue">Sede Di Arrivo</string>
+    <string name="create_from_venue">Sede Di Partenza</string>
     <string name="create_helmet">Casco Disponibile</string>
     <string name="create_moto">Moto</string>
     <string name="create_price">Scegli Prezzo</string>
